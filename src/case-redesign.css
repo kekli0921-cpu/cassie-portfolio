@@ -1,0 +1,676 @@
+/*
+ * Research dossier — a case-study system designed to sit beside the home and
+ * About pages without borrowing the previous case-study layout.
+ */
+.case-redesign {
+  --dossier-paper: #fdf5ec;
+  --dossier-ink: #1f201c;
+  --dossier-muted: #6f6d67;
+  --dossier-line: rgba(31, 32, 28, 0.18);
+  --dossier-violet: #76629d;
+  --dossier-orange: #e67046;
+  --dossier-soft: #f1e8db;
+  min-height: 100vh;
+  overflow: clip;
+  background: var(--dossier-paper);
+  color: var(--dossier-ink);
+  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
+}
+
+/* Header — same scale and restraint as the portfolio navigation. */
+.case-redesign .case-nav {
+  height: 62px;
+  padding: 0 4vw;
+  border-bottom: 1px solid var(--dossier-line);
+  background: rgba(253, 245, 236, 0.94);
+  backdrop-filter: blur(12px);
+}
+
+.case-redesign .case-back,
+.case-redesign .case-nav-btn {
+  font: 500 10px / 1 "DM Mono", monospace;
+  letter-spacing: 0.035em;
+}
+
+.case-redesign .case-back {
+  gap: 8px;
+}
+
+.case-redesign .case-nav-btn {
+  margin-left: 8px;
+  padding: 9px 13px;
+  border: 1px solid var(--dossier-line);
+  border-radius: 999px;
+}
+
+.case-redesign .case-nav-primary {
+  border-color: var(--dossier-violet);
+  background: var(--dossier-violet);
+  color: var(--dossier-paper);
+}
+
+/* Hero — large editorial title, compact abstract, one dominant visual. */
+.case-redesign .case-hero {
+  position: relative;
+  display: block;
+  width: min(100%, 1540px);
+  max-width: none;
+  margin: 0 auto;
+  padding: clamp(80px, 9vw, 138px) 7vw clamp(96px, 10vw, 150px);
+}
+
+.case-redesign .case-hero::before {
+  content: "01";
+  position: absolute;
+  top: clamp(68px, 7.6vw, 116px);
+  right: 7vw;
+  color: rgba(118, 98, 157, 0.13);
+  font: 600 clamp(92px, 14vw, 220px) / 0.8 "Outfit", sans-serif;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+}
+
+.case-redesign .case-hero > h1 {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1100px);
+  max-width: 13ch;
+  margin: 0 0 clamp(64px, 8vw, 118px);
+  font: 550 clamp(58px, 7.6vw, 118px) / 0.88 "Outfit", sans-serif;
+  letter-spacing: -0.075em;
+}
+
+.case-redesign .case-hero > h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin-top: 34px;
+  background: var(--dossier-orange);
+}
+
+.case-redesign .case-hero-lower {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.68fr) minmax(520px, 1.32fr);
+  gap: clamp(50px, 7vw, 112px);
+  align-items: stretch;
+}
+
+.case-redesign .case-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.case-redesign .case-hero-copy::before {
+  content: "RESEARCH ABSTRACT";
+  margin-bottom: 22px;
+  color: var(--dossier-violet);
+  font: 500 10px / 1 "DM Mono", monospace;
+  letter-spacing: 0.12em;
+}
+
+.case-redesign .case-hero-copy > p:not(.eyebrow),
+.case-redesign .case-intro {
+  max-width: 31rem;
+  margin: 0 0 14px;
+  color: var(--dossier-muted);
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.58;
+  text-align: left;
+}
+
+.case-redesign .case-hero .case-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 34px;
+}
+
+.case-redesign .case-hero .case-tags span {
+  padding: 6px 10px;
+  border: 1px solid rgba(118, 98, 157, 0.38);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--dossier-violet);
+  font: 500 clamp(9px, 0.75vw, 11px) / 1.2 "DM Mono", monospace;
+}
+
+.case-redesign .case-hero-graphic,
+.case-redesign .case-image.case-hero-graphic {
+  align-self: stretch;
+  width: 100%;
+  min-height: 0 !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: 0 24px 70px rgba(31, 32, 28, 0.1);
+  overflow: hidden;
+}
+
+.case-redesign .case-hero-graphic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+
+/*
+ * Sections use a stable dossier grid: the chapter marker forms a quiet left
+ * rail while all reading content occupies the right column.
+ */
+.case-redesign .case-section {
+  display: grid;
+  grid-template-columns: clamp(140px, 15vw, 230px) minmax(0, 1fr);
+  column-gap: clamp(36px, 6vw, 96px);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(92px, 9vw, 142px) 7vw;
+  border-top: 1px solid var(--dossier-line);
+  background: var(--dossier-paper);
+}
+
+.case-redesign .case-soft {
+  background: var(--dossier-soft);
+}
+
+.case-redesign .case-section-label {
+  grid-column: 1;
+  grid-row: 1 / span 30;
+  align-self: start;
+  position: sticky;
+  top: 96px;
+  display: block !important;
+  max-width: 12rem;
+  margin: 0;
+  color: var(--dossier-violet) !important;
+  font: 500 10px / 1.55 "DM Mono", monospace;
+  letter-spacing: 0.09em;
+}
+
+.case-redesign .case-section-label::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin-bottom: 18px;
+  background: var(--dossier-orange);
+}
+
+.case-redesign .case-section > *:not(.case-section-label),
+.case-redesign .problem-section .case-two-col {
+  grid-column: 2;
+  width: 100%;
+  max-width: 1040px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.case-redesign .case-section h2,
+.case-redesign .problem-section .case-two-col h2 {
+  width: min(100%, 820px);
+  max-width: none;
+  margin: 0 0 30px;
+  color: var(--dossier-ink);
+  font: 550 clamp(30px, 3.35vw, 52px) / 1.02 "Outfit", sans-serif;
+  letter-spacing: -0.052em;
+  text-align: left;
+  white-space: normal;
+}
+
+.case-redesign .case-section > h2:not(:first-of-type) {
+  margin-top: clamp(84px, 8vw, 124px);
+}
+
+.case-redesign .case-section p,
+.case-redesign .case-section li,
+.case-redesign .case-section .case-lede {
+  color: var(--dossier-muted);
+  font-size: clamp(16px, 1.2vw, 18px) !important;
+  line-height: 1.72 !important;
+  text-align: left !important;
+}
+
+.case-redesign .case-section > p,
+.case-redesign .case-section > .case-lede,
+.case-redesign .problem-section .case-two-col > div {
+  width: min(100%, 760px) !important;
+  max-width: none;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.case-redesign .case-section p {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.case-redesign .case-lede {
+  margin-bottom: 44px !important;
+}
+
+.case-redesign .problem-section .case-two-col {
+  display: block;
+}
+
+/* Pull quotes become the purple editorial moments used across the portfolio. */
+.case-redesign .problem-section blockquote,
+.case-redesign .framework-quote,
+.case-redesign .results-quote {
+  position: relative;
+  width: min(100%, 920px);
+  max-width: none;
+  margin: clamp(54px, 6vw, 84px) 0 0 !important;
+  padding: clamp(46px, 5vw, 72px) clamp(38px, 6vw, 86px) !important;
+  border: 0 !important;
+  border-radius: 3px !important;
+  background: var(--dossier-violet) !important;
+  color: #fff8ef !important;
+  font: 400 clamp(20px, 1.8vw, 26px) / 1.5 "Avenir Next", Avenir, sans-serif !important;
+  text-align: left;
+  box-shadow: none;
+}
+
+.case-redesign .problem-section .quote-mark,
+.case-redesign .framework-quote::before,
+.case-redesign .results-quote::before {
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  color: #fff8ef;
+  font: 58px / 1 Georgia, serif;
+  opacity: 0.78;
+}
+
+/* Reusable evidence modules. */
+.case-redesign .dimension-grid,
+.case-redesign .condition-grid,
+.case-redesign .process-grid,
+.case-redesign .model-grid,
+.case-redesign .chart-grid {
+  width: 100%;
+  max-width: 1040px;
+  margin: clamp(44px, 5vw, 72px) 0;
+  gap: 16px;
+}
+
+.case-redesign .dimension-grid,
+.case-redesign .condition-grid,
+.case-redesign .process-grid {
+  align-items: stretch;
+}
+
+.case-redesign .dimension-grid article,
+.case-redesign .condition-grid article,
+.case-redesign .process-grid article {
+  min-height: 0;
+  padding: clamp(22px, 2.4vw, 32px);
+  border: 1px solid var(--dossier-line);
+  border-radius: 3px;
+  background: rgba(253, 245, 236, 0.5);
+}
+
+.case-redesign .case-section:not(.case-soft) .dimension-grid article,
+.case-redesign .case-section:not(.case-soft) .condition-grid article,
+.case-redesign .case-section:not(.case-soft) .process-grid article {
+  background: rgba(255, 255, 255, 0.36);
+}
+
+.case-redesign .dimension-grid span,
+.case-redesign .process-grid span,
+.case-redesign .condition-grid > article > span {
+  color: var(--dossier-orange);
+  font: 500 10px / 1.3 "DM Mono", monospace;
+  letter-spacing: 0.07em;
+}
+
+.case-redesign .dimension-grid h3,
+.case-redesign .process-grid h3 {
+  margin: 30px 0 12px;
+  color: var(--dossier-ink);
+  font: 550 clamp(21px, 1.9vw, 28px) / 1.05 "Outfit", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.case-redesign .dimension-grid p,
+.case-redesign .condition-grid p,
+.case-redesign .process-grid p {
+  color: var(--dossier-muted);
+  font-size: 14px !important;
+  line-height: 1.58 !important;
+}
+
+.case-redesign .dimension-grid small,
+.case-redesign .condition-grid small,
+.case-redesign .process-grid small {
+  margin-top: 24px;
+  color: var(--dossier-muted);
+  font: italic 10px / 1.5 "DM Mono", monospace !important;
+  opacity: 0.68;
+}
+
+.case-redesign .condition-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-redesign .condition-grid .condition-b,
+.case-redesign .case-section:not(.case-soft) .condition-grid article.condition-b {
+  border-color: var(--dossier-violet);
+  background: var(--dossier-violet) !important;
+  color: #fff8ef !important;
+}
+
+.case-redesign .condition-grid article p {
+  margin-top: 30px;
+  color: var(--dossier-ink);
+  font: 500 clamp(18px, 1.55vw, 22px) / 1.42 "Outfit", sans-serif !important;
+}
+
+.case-redesign .condition-grid .condition-b p,
+.case-redesign .condition-grid .condition-b small {
+  color: #fff8ef !important;
+}
+
+.case-redesign .condition-grid .condition-b > span {
+  color: var(--dossier-orange) !important;
+}
+
+.case-redesign .process-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.case-redesign .model-grid,
+.case-redesign .chart-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Images are treated as evidence, not decoration. */
+.case-redesign .case-image {
+  min-height: 0;
+  margin: 0;
+  padding: clamp(18px, 2vw, 28px);
+  border: 1px solid var(--dossier-line);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.48);
+  overflow: hidden;
+}
+
+.case-redesign .case-image figcaption {
+  margin: 0 0 20px;
+  color: #706d67;
+  font: 600 clamp(15px, 1.25vw, 18px) / 1.35 "Avenir Next", Avenir, sans-serif;
+}
+
+.case-redesign .case-image figcaption em {
+  display: block;
+  margin-top: 4px;
+  color: #928d85;
+  font: italic 400 11px / 1.5 "DM Mono", monospace;
+}
+
+.case-redesign .case-image img,
+.case-redesign .case-table-placeholder img,
+.case-redesign .case-table-placeholder:has(img[src*="7.png"]) img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.case-redesign .case-table-placeholder {
+  width: 100%;
+  max-width: 1040px;
+  margin: clamp(46px, 5vw, 72px) 0;
+}
+
+.case-redesign .results-quote:hover {
+  background: var(--dossier-violet) !important;
+}
+
+/* Application closes the story with the same violet used by the home CTA. */
+.case-redesign .case-application {
+  background: var(--dossier-violet);
+  color: #fff8ef;
+}
+
+.case-redesign .case-application::before {
+  display: none;
+}
+
+.case-redesign .case-application .case-section-label {
+  color: var(--dossier-orange) !important;
+}
+
+.case-redesign .case-application .case-section-label::before {
+  background: var(--dossier-orange);
+}
+
+.case-redesign .case-application ul {
+  display: block;
+  width: min(100%, 860px) !important;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0;
+  list-style: none;
+}
+
+.case-redesign .case-application li {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 26px 0;
+  border-top: 1px solid rgba(255, 248, 239, 0.28);
+  color: #fff8ef;
+  font-size: clamp(17px, 1.35vw, 20px) !important;
+  line-height: 1.65 !important;
+}
+
+.case-redesign .case-application li:last-child {
+  border-bottom: 1px solid rgba(255, 248, 239, 0.28);
+}
+
+.case-redesign .case-footer {
+  height: 62px;
+  padding: 0 4vw;
+  border-color: var(--dossier-line);
+  background: var(--dossier-paper);
+  color: var(--dossier-ink);
+}
+
+/* Project entry points. */
+.project-card:first-child .project-title h3 {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.project-card:first-child .project-title h3:hover {
+  color: var(--yellow);
+}
+
+/* Compact reading rail — dots only, no moving labels. */
+.case-toc {
+  position: fixed;
+  right: 1.7vw;
+  top: 50%;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.case-toc-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.case-toc button {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(31, 32, 28, 0.25);
+  color: transparent;
+  transform: none !important;
+  transition: width 0.22s ease, height 0.22s ease, background 0.22s ease, opacity 0.22s ease;
+}
+
+.case-toc button:nth-child(1) { opacity: 0.9; }
+.case-toc button:nth-child(2) { opacity: 0.74; }
+.case-toc button:nth-child(3) { opacity: 0.6; }
+.case-toc button:nth-child(4) { opacity: 0.48; }
+.case-toc button:nth-child(5) { opacity: 0.36; }
+.case-toc button:nth-child(6) { opacity: 0.24; }
+
+.case-toc button.active {
+  width: 13px;
+  height: 13px;
+  background: var(--dossier-violet, #76629d);
+  opacity: 1;
+}
+
+.case-toc button:hover {
+  transform: none !important;
+}
+
+@media (max-width: 1000px) {
+  .case-redesign .case-hero {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .case-redesign .case-hero-lower {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .case-redesign .case-hero-copy > p:not(.eyebrow),
+  .case-redesign .case-intro {
+    max-width: 42rem;
+  }
+
+  .case-redesign .case-hero .case-tags {
+    margin-top: 10px;
+  }
+
+  .case-redesign .case-section {
+    grid-template-columns: 120px minmax(0, 1fr);
+    column-gap: 38px;
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .case-redesign .process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .case-redesign .case-nav {
+    height: 58px;
+    padding: 0 5vw;
+  }
+
+  .case-redesign .case-nav-btn:first-child {
+    display: none;
+  }
+
+  .case-redesign .case-hero {
+    padding: 62px 5vw 76px;
+  }
+
+  .case-redesign .case-hero::before {
+    top: 48px;
+    right: 5vw;
+    font-size: 112px;
+  }
+
+  .case-redesign .case-hero > h1 {
+    max-width: 12ch;
+    margin-bottom: 52px;
+    font-size: clamp(46px, 14vw, 70px);
+    line-height: 0.94;
+  }
+
+  .case-redesign .case-hero > h1::after {
+    width: 44px;
+    height: 3px;
+    margin-top: 24px;
+  }
+
+  .case-redesign .case-hero-copy > p:not(.eyebrow),
+  .case-redesign .case-intro {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .case-redesign .case-section {
+    display: block;
+    padding: 68px 5vw;
+  }
+
+  .case-redesign .case-section-label {
+    position: static;
+    max-width: none;
+    margin-bottom: 34px;
+    font-size: 9px;
+  }
+
+  .case-redesign .case-section-label::before {
+    width: 24px;
+    margin-bottom: 13px;
+  }
+
+  .case-redesign .case-section h2,
+  .case-redesign .problem-section .case-two-col h2 {
+    font-size: 30px;
+  }
+
+  .case-redesign .case-section p,
+  .case-redesign .case-section li,
+  .case-redesign .case-section .case-lede {
+    font-size: 16px !important;
+    line-height: 1.66 !important;
+  }
+
+  .case-redesign .dimension-grid,
+  .case-redesign .condition-grid,
+  .case-redesign .process-grid,
+  .case-redesign .model-grid,
+  .case-redesign .chart-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .case-redesign .problem-section blockquote,
+  .case-redesign .framework-quote,
+  .case-redesign .results-quote {
+    padding: 50px 24px 30px !important;
+    font-size: 17px !important;
+  }
+
+  .case-redesign .case-image {
+    padding: 14px;
+  }
+
+  .case-redesign .case-footer {
+    height: auto;
+    padding: 20px 5vw;
+  }
+
+  .case-toc {
+    display: none;
+  }
+}
