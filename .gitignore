@@ -4,3 +4,4 @@ dist/
 outputs/
 .DS_Store
 .vercel/
+tmp/

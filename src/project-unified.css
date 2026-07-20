@@ -1,0 +1,608 @@
+/*
+ * Shared reading system for the four non-LLM case studies.
+ * Project colours and useful interactions remain project-specific; typography,
+ * spacing and content containers follow the quieter LLM editorial system.
+ */
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) {
+  --project-accent: var(--dossier-violet);
+  --case-section-space: 96px;
+  --case-module-space: 40px;
+  --case-card-space: 24px;
+  --case-copy-gap: 10px;
+  --case-title-gap: 12px;
+}
+
+.calmo-page { --project-accent: var(--calmo-orange); }
+.readalong-page { --project-accent: var(--ra-green); }
+.bodycodes-page { --project-accent: var(--bc-green); }
+.human-factors-page { --project-accent: var(--hf-violet); }
+
+/* One quiet background and no oversized decorative project numbers. */
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-soft {
+  background: var(--dossier-paper) !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero::before,
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero > h1::after,
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section-label::before {
+  display: none !important;
+}
+
+/* Hero: the same title scale, 50/50 story/visual split and readable abstract. */
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero {
+  display: block !important;
+  width: 100%;
+  padding: clamp(54px, 7vh, 84px) 7vw clamp(48px, 6vh, 72px);
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero > h1 {
+  width: 100%;
+  max-width: 22ch;
+  margin: 0 0 10px !important;
+  font-size: clamp(42px, 4.35vw, 66px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  :is(.calmo-hero-subtitle, .ra-hero-subtitle, .bc-hero-subtitle, .hf-hero-subtitle) {
+  width: auto;
+  margin: 0 0 clamp(30px, 4vh, 44px) !important;
+  font-size: clamp(18px, 1.55vw, 22px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-lower,
+.calmo-page .calmo-hero .case-hero-lower,
+.readalong-page .ra-hero .case-hero-lower,
+.bodycodes-page .bc-hero .case-hero-lower,
+.human-factors-page .hf-hero .case-hero-lower {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(34px, 4vw, 62px);
+  align-items: stretch;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-copy {
+  padding-top: 0;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-copy::before {
+  margin-bottom: 18px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-copy > p {
+  max-width: 34rem;
+  margin: 0 0 10px !important;
+  color: #53524d !important;
+  font-size: 17px !important;
+  font-weight: 300;
+  line-height: 1.6 !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero .case-tags {
+  gap: 8px;
+  padding-top: 24px;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero .case-tags span {
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 38%, transparent);
+  border-radius: 0;
+  color: var(--project-accent);
+  background: transparent;
+  font-size: 12px !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  :is(.case-hero-graphic, .case-image.case-hero-graphic, .ra-image.case-hero-graphic, .hf-image.case-hero-graphic) {
+  min-height: clamp(300px, 34vw, 480px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* CALMO and BodyCodes facts are information, so keep them as a plain rail. */
+:is(.calmo-hero-facts, .bc-hero-facts) {
+  gap: 0;
+  margin-top: 30px;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  border-bottom: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+:is(.calmo-hero-facts, .bc-hero-facts) div {
+  min-height: 76px;
+  padding: 16px 18px;
+  border-right: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+:is(.calmo-hero-facts, .bc-hero-facts) div:last-child { border-right: 0; }
+:is(.calmo-hero-facts, .bc-hero-facts) strong { margin-top: 10px; font-weight: 400; }
+
+/* Shared chapter rail and reading width. */
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section {
+  grid-template-columns: clamp(150px, 15vw, 220px) minmax(0, 1fr);
+  column-gap: clamp(42px, 6vw, 92px);
+  padding: var(--case-section-space) 7vw;
+  background: var(--dossier-paper) !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section-label {
+  max-width: 13rem;
+  color: var(--project-accent) !important;
+  font-family: "Outfit", sans-serif;
+  font-size: 14px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  .case-section > *:not(.case-section-label) {
+  max-width: 1040px;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section h2 {
+  width: min(100%, 860px);
+  margin: 0 0 16px;
+  font-size: 30px !important;
+  font-weight: 400;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section h3 {
+  margin: 0 0 10px;
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 1.2 !important;
+  letter-spacing: -.02em !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  .case-section :is(p, li, .case-lede) {
+  color: #575650 !important;
+  font-size: 17px !important;
+  font-weight: 300 !important;
+  line-height: 1.6 !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  .case-section > :is(p, .case-lede) {
+  width: min(100%, 860px) !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-lede {
+  margin-bottom: var(--case-module-space) !important;
+}
+
+/* Images sit directly in the reading flow; captions provide the boundary. */
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  :is(.calmo-image, .bc-image, .hf-image, .ra-image) {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+:is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+  :is(.calmo-image, .bc-image, .hf-image, .ra-image) figcaption {
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid var(--dossier-line);
+  color: var(--dossier-muted);
+  font-size: 12px !important;
+  font-weight: 400;
+  line-height: 1.5 !important;
+}
+
+/* Repeated cards become editorial lists: one rule, one heading, one paragraph. */
+:is(
+  .calmo-methods, .calmo-gap-grid, .calmo-layers, .calmo-findings,
+  .calmo-modules, .calmo-responsibility, .calmo-reflection-grid,
+  .bc-reason-grid, .bc-stakeholders, .bc-principles, .bc-service-steps,
+  .bc-rollout-grid, .bc-reflection-grid, .hf-evidence-grid, .hf-contrast,
+  .hf-principle-grid
+) {
+  gap: clamp(22px, 2.5vw, 34px) !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+:is(
+  .calmo-methods, .calmo-gap-grid, .calmo-layers, .calmo-findings,
+  .calmo-modules, .calmo-responsibility, .calmo-reflection-grid,
+  .bc-reason-grid, .bc-stakeholders, .bc-principles, .bc-service-steps,
+  .bc-rollout-grid, .bc-reflection-grid, .hf-evidence-grid, .hf-contrast,
+  .hf-principle-grid
+) > article {
+  min-height: 0 !important;
+  padding: 24px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--dossier-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+:is(
+  .calmo-methods, .calmo-gap-grid, .calmo-layers, .calmo-findings,
+  .calmo-modules, .calmo-responsibility, .calmo-reflection-grid,
+  .bc-reason-grid, .bc-stakeholders, .bc-principles, .bc-service-steps,
+  .bc-rollout-grid, .bc-reflection-grid, .hf-evidence-grid, .hf-contrast,
+  .hf-principle-grid
+) h3 {
+  min-height: 0 !important;
+  margin: 18px 0 10px !important;
+}
+
+:is(.calmo-page, .bodycodes-page, .human-factors-page)
+  :is(
+    .calmo-methods, .calmo-gap-grid, .calmo-layers, .calmo-findings,
+    .calmo-modules, .calmo-responsibility, .calmo-reflection-grid,
+    .bc-reason-grid, .bc-stakeholders, .bc-principles, .bc-service-steps,
+    .bc-rollout-grid, .bc-reflection-grid, .hf-evidence-grid, .hf-contrast,
+    .hf-principle-grid
+  ) p {
+  width: 100% !important;
+  margin: 0 !important;
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+}
+
+/* Questions and conclusions use one vertical accent, not filled decoration. */
+:is(.calmo-overview-grid aside, .bc-overview-grid aside, .hf-premise-grid blockquote) {
+  align-self: start;
+  margin: 0 !important;
+  padding: 0 0 0 28px !important;
+  border: 0 !important;
+  border-left: 2px solid var(--project-accent) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--dossier-ink) !important;
+  box-shadow: none !important;
+}
+
+.hf-premise-grid blockquote {
+  font-size: 21px !important;
+  font-weight: 400 !important;
+  line-height: 1.42 !important;
+}
+
+:is(.calmo-insight, .bc-insight, .hf-finding, .hf-synthesis-quote) {
+  display: block;
+  margin-top: var(--case-module-space) !important;
+  padding: 0 0 0 28px !important;
+  border: 0 !important;
+  border-left: 2px solid var(--project-accent) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--dossier-ink) !important;
+  box-shadow: none !important;
+}
+
+:is(.calmo-insight, .bc-insight, .hf-finding, .hf-synthesis-quote) > span {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--project-accent) !important;
+}
+
+:is(.calmo-insight, .bc-insight, .hf-finding) > strong {
+  display: block;
+  max-width: 860px;
+  margin: 0 0 14px;
+  color: var(--dossier-ink);
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(21px, 1.8vw, 26px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -.02em;
+}
+
+.human-factors-page .hf-finding p {
+  width: min(100%, 860px) !important;
+  color: #575650 !important;
+}
+
+.hf-synthesis-quote {
+  max-width: 860px;
+  font: 400 21px / 1.45 "Outfit", sans-serif !important;
+}
+
+.bodycodes-page .bc-decision {
+  margin-top: var(--case-module-space) !important;
+  padding: 0 0 0 28px !important;
+  border-left: 2px solid var(--bc-green) !important;
+  background: transparent !important;
+  color: var(--dossier-ink) !important;
+  font-size: clamp(21px, 1.8vw, 26px) !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+}
+
+.bodycodes-page .bc-decision span { color: var(--bc-green); }
+
+/* Process diagrams remain diagrams, but lose ornamental fills and corners. */
+:is(.calmo-boundary, .bc-boundary, .bc-future) > div,
+.calmo-before-after > div,
+.hf-reading-result > div,
+.bc-current-flow article {
+  min-height: 0;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  border-radius: 0;
+  background: transparent !important;
+}
+
+:is(.calmo-boundary, .bc-boundary, .bc-future) strong,
+.calmo-before-after strong,
+.bc-metrics strong {
+  margin-top: 22px;
+  font-weight: 400;
+}
+
+/* Human Factors index and evidence tables use the same restrained list logic. */
+.hf-study-index {
+  gap: clamp(22px, 2.5vw, 34px);
+}
+
+.hf-study-index button {
+  min-height: 0;
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  border-radius: 0;
+  background: transparent;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.hf-study-index button:hover,
+.hf-study-index button:focus-visible {
+  border-color: var(--hf-violet);
+  background: transparent;
+  transform: none;
+}
+
+.hf-study-index h3 {
+  min-height: 0;
+  margin: 18px 0 22px;
+  font-size: 22px !important;
+  font-weight: 400;
+}
+
+.hf-method-strip {
+  gap: 0;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  border-bottom: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.hf-method-strip div,
+.case-soft .hf-method-strip div {
+  min-height: 0;
+  padding: 18px;
+  border-right: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.hf-method-strip div:last-child { border-right: 0; }
+
+.hf-reading-statement {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.hf-synthesis-table > div {
+  padding: 22px 0;
+}
+
+.human-factors-page .hf-synthesis-table p {
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+}
+
+/* BodyCodes keeps the calculator and disclosures functional but visually quiet. */
+.bc-cost-model {
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.bc-cost-heading { padding-top: 28px; }
+
+.bc-cost-results {
+  border: 0;
+  background: transparent;
+}
+
+.bc-cost-results div {
+  min-height: 110px;
+  border-top: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.bc-disclosure details {
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  border-bottom: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.bc-metrics {
+  gap: clamp(22px, 2.5vw, 34px);
+  border: 0;
+  background: transparent;
+}
+
+.bc-metrics div {
+  min-height: 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.bodycodes-page .bc-target-note {
+  padding: 0 0 0 22px;
+  border-left: 2px solid var(--bc-green);
+  background: transparent;
+  font-size: 15px !important;
+}
+
+/* Read Along retains its diagnostic flip, but removes the extra card family. */
+.ra-friction-overview article {
+  padding-top: 20px;
+  border-top: 1px solid var(--dossier-line);
+}
+
+.ra-friction-overview li {
+  padding: 10px 0;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+.ra-friction-focus,
+.ra-solution-reveal {
+  border: 1px solid var(--dossier-line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.ra-friction-focus { border-top: 2px solid var(--ra-coral); }
+.ra-solution-reveal { border-top: 2px solid var(--ra-green); }
+
+.readalong-page .ra-friction-focus > p,
+.readalong-page .ra-solution-main > p,
+.readalong-page .ra-solution-reveal aside p {
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+}
+
+/* Media and prototypes are content, not decorative cards. */
+.calmo-prototype-block {
+  margin-top: var(--case-section-space);
+  padding: 32px 0;
+  border-top: 1px solid var(--dossier-line);
+  border-bottom: 1px solid var(--dossier-line);
+  background: transparent;
+  color: var(--dossier-ink);
+}
+
+.calmo-page .calmo-prototype-block p { color: #575650 !important; }
+.calmo-prototype-block h3 { color: var(--dossier-ink); }
+
+.calmo-prototype-block > div button,
+.calmo-prototype-block > div a {
+  border-radius: 0;
+  border-color: var(--dossier-line);
+  color: var(--dossier-ink);
+}
+
+.calmo-prototype-block > div button {
+  border-color: var(--calmo-orange);
+  color: var(--dossier-paper);
+}
+
+.calmo-film {
+  margin-top: var(--case-module-space);
+  padding: 32px 0 0;
+  border: 0;
+  border-top: 1px solid var(--dossier-line);
+  background: transparent;
+}
+
+@media (min-width: 981px) {
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero {
+    min-height: calc(100svh - 62px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1100px) {
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-lower,
+  .calmo-page .calmo-hero .case-hero-lower,
+  .readalong-page .ra-hero .case-hero-lower,
+  .bodycodes-page .bc-hero .case-hero-lower,
+  .human-factors-page .hf-hero .case-hero-lower {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) {
+    --case-section-space: 56px;
+    --case-module-space: 28px;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero {
+    min-height: 0;
+    padding: 30px 5vw 48px;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero > h1 {
+    max-width: none;
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+    :is(.calmo-hero-subtitle, .ra-hero-subtitle, .bc-hero-subtitle, .hf-hero-subtitle) {
+    margin-bottom: 28px !important;
+    font-size: 16px;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-copy > p {
+    font-size: 16px !important;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section {
+    display: block;
+    padding: var(--case-section-space) 5vw;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section-label {
+    position: static;
+    margin-bottom: 28px;
+    font-size: 13px !important;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-section h2 {
+    font-size: 27px !important;
+  }
+
+  :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page)
+    .case-section :is(p, li, .case-lede) {
+    font-size: 16px !important;
+  }
+
+  :is(.calmo-hero-facts, .bc-hero-facts) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  :is(.calmo-hero-facts, .bc-hero-facts) div:nth-child(2n) { border-right: 0; }
+
+  :is(.calmo-overview-grid aside, .bc-overview-grid aside, .hf-premise-grid blockquote),
+  :is(.calmo-insight, .bc-insight, .hf-finding, .hf-synthesis-quote),
+  .bodycodes-page .bc-decision {
+    padding-left: 20px !important;
+  }
+
+  .ra-flip-card { height: auto; }
+  .ra-friction-focus,
+  .ra-solution-reveal { min-height: 0; }
+}

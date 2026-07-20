@@ -14,7 +14,7 @@
   overflow: clip;
   background: var(--dossier-paper);
   color: var(--dossier-ink);
-  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 /* Header — same scale and restraint as the portfolio navigation. */
@@ -274,7 +274,7 @@
   border-radius: 3px !important;
   background: var(--dossier-violet) !important;
   color: #fff8ef !important;
-  font: 400 clamp(20px, 1.8vw, 26px) / 1.5 "Avenir Next", Avenir, sans-serif !important;
+  font: 400 clamp(20px, 1.8vw, 26px) / 1.5 "Outfit", sans-serif !important;
   text-align: left;
   box-shadow: none;
 }
@@ -286,7 +286,7 @@
   top: 16px;
   left: 22px;
   color: #fff8ef;
-  font: 58px / 1 Georgia, serif;
+  font: 58px / 1 "Instrument Serif", serif;
   opacity: 0.78;
 }
 
@@ -406,7 +406,7 @@
 .case-redesign .case-image figcaption {
   margin: 0 0 20px;
   color: #706d67;
-  font: 600 clamp(15px, 1.25vw, 18px) / 1.35 "Avenir Next", Avenir, sans-serif;
+  font: 600 clamp(15px, 1.25vw, 18px) / 1.35 "Outfit", sans-serif;
 }
 
 .case-redesign .case-image figcaption em {
@@ -486,16 +486,6 @@
   color: var(--dossier-ink);
 }
 
-/* Project entry points. */
-.project-card:first-child .project-title h3 {
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.project-card:first-child .project-title h3:hover {
-  color: var(--yellow);
-}
-
 /* Compact reading rail — dots only, no moving labels. */
 .case-toc {
   position: fixed;
@@ -537,12 +527,75 @@
 .case-toc button.active {
   width: 13px;
   height: 13px;
-  background: var(--dossier-violet, #76629d);
+  background: var(--case-toc-accent, var(--dossier-violet, #76629d));
   opacity: 1;
 }
 
 .case-toc button:hover {
   transform: none !important;
+}
+
+/* Shared case-study chrome: mirrors the portfolio header and footer. */
+.case-redesign .case-site-nav {
+  height: 62px;
+  padding: 0 4vw;
+  border-bottom: 1px solid var(--dossier-line);
+  background: rgba(253, 245, 236, 0.95);
+}
+
+.case-redesign .case-site-nav .case-back,
+.case-redesign .case-site-nav .case-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--dossier-ink);
+  font: 400 12px / 1 "Outfit", sans-serif;
+  letter-spacing: 0;
+}
+
+.case-redesign .case-site-nav .case-back:hover,
+.case-redesign .case-site-nav .case-contact:hover,
+.case-redesign .case-site-nav .case-back:focus-visible,
+.case-redesign .case-site-nav .case-contact:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.case-redesign .case-hero::before {
+  content: none !important;
+  display: none !important;
+}
+
+.case-redesign .case-project-footer {
+  height: 62px;
+  padding: 0 4vw;
+  flex-direction: row;
+  align-items: center;
+  background: var(--dossier-paper);
+}
+
+.case-redesign .case-project-footer .case-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 400 12px / 1 "Outfit", sans-serif;
+}
+
+.case-redesign .case-project-footer .case-next:hover,
+.case-redesign .case-project-footer .case-next:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Every case uses the same active-dot scale; page palettes may set its colour. */
+.case-page + .case-toc button.active {
+  width: 13px !important;
+  height: 13px !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 0 4px rgba(253, 245, 236, 0.9);
 }
 
 @media (max-width: 1000px) {
@@ -668,6 +721,17 @@
   .case-redesign .case-footer {
     height: auto;
     padding: 20px 5vw;
+  }
+
+  .case-redesign .case-site-nav {
+    height: 58px;
+    padding: 0 6vw;
+  }
+
+  .case-redesign .case-project-footer {
+    height: 58px;
+    padding: 0 6vw;
+    flex-direction: row;
   }
 
   .case-toc {

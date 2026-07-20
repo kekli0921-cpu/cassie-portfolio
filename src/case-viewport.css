@@ -1,0 +1,872 @@
+/*
+ * Shared project-hero refinements.
+ * Keep the original project imagery and content grid intact; only tighten the
+ * title area and use the same readable type scale as the case-study body.
+ */
+@media (min-width: 761px) {
+  .case-redesign .case-hero {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 35px 7vw;
+    overflow: visible;
+  }
+
+  .case-redesign .case-hero::before {
+    top: 35px;
+    font-size: clamp(76px, 10vw, 154px);
+  }
+
+  .case-redesign .case-hero > h1,
+  .readalong-page .ra-hero > h1,
+  .calmo-page .calmo-hero > h1,
+  .bodycodes-page .bc-hero > h1,
+  .human-factors-page .hf-hero > h1 {
+    width: 100%;
+    max-width: 18ch;
+    margin: 0 0 10px !important;
+    font-size: clamp(42px, 4.7vw, 72px);
+    line-height: .95;
+    letter-spacing: -.055em;
+  }
+
+  /* Keep 35px on both sides of the divider: hero content → divider, then
+     divider → first project chapter. */
+  .case-redesign .case-hero + .case-section {
+    padding-top: 35px;
+  }
+
+  /* The subtitle follows the title directly; the former rule added a large
+     decorative gap between them. */
+  .case-redesign .case-hero > h1::after {
+    display: none;
+  }
+
+  .case-project-subtitle,
+  .calmo-hero-subtitle,
+  .ra-hero-subtitle,
+  .bc-hero-subtitle,
+  .hf-hero-subtitle {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: fit-content;
+    margin: 0 0 clamp(14px, 2.1vh, 20px) !important;
+    color: var(--dossier-muted);
+    font: 400 clamp(18px, 1.8vw, 27px) / 1.16 "Outfit", sans-serif;
+    letter-spacing: -.025em;
+    text-align: left;
+  }
+
+  .human-factors-page .hf-hero > h1 {
+    max-width: 20ch;
+    font-size: clamp(40px, 4.2vw, 64px);
+  }
+
+  .case-redesign .case-hero-lower,
+  .readalong-page .ra-hero .case-hero-lower,
+  .calmo-page .calmo-hero .case-hero-lower,
+  .bodycodes-page .bc-hero .case-hero-lower,
+  .human-factors-page .hf-hero .case-hero-lower {
+    grid-template-columns: minmax(280px, .72fr) minmax(520px, 1.28fr);
+    gap: clamp(36px, 5vw, 78px);
+    min-height: 0;
+    align-items: stretch;
+  }
+
+  .case-redesign .case-hero-copy {
+    min-height: 0;
+    padding-top: 4px;
+  }
+
+  .case-redesign .case-hero-copy::before {
+    margin-bottom: 18px;
+    font-size: 10px;
+  }
+
+  .case-redesign .case-hero-copy > p:not(.eyebrow),
+  .case-redesign .case-intro {
+    max-width: 31rem;
+    margin: 0 0 14px;
+    font-size: clamp(16px, 1.2vw, 18px);
+    line-height: 1.58;
+  }
+
+  .case-redesign .case-hero .case-tags {
+    gap: 7px;
+    margin-top: auto;
+    padding-top: 24px;
+  }
+
+  .case-redesign .case-hero .case-tags span {
+    padding: 6px 10px;
+    font-size: clamp(9px, .75vw, 11px);
+  }
+
+  /* CALMO and BodyCodes add a fact rail below the main visual. Keep it compact
+     without changing the size or aspect ratio of the project image. */
+  .calmo-hero-facts,
+  .bc-hero-facts {
+    margin-top: clamp(18px, 2.5vh, 28px);
+  }
+
+  .calmo-hero-facts div,
+  .bc-hero-facts div {
+    min-height: 72px;
+    padding: 12px 15px;
+  }
+
+  .calmo-hero-facts strong,
+  .bc-hero-facts strong {
+    margin-top: 10px;
+    font-size: clamp(13px, 1vw, 16px);
+  }
+
+  .case-redesign .problem-section blockquote,
+  .case-redesign .framework-quote,
+  .case-redesign .results-quote,
+  .human-factors-page .hf-premise-grid blockquote,
+  .human-factors-page .hf-synthesis-quote {
+    font-size: clamp(16px, 1.2vw, 18px) !important;
+    line-height: 1.72 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .case-redesign .case-hero {
+    height: auto;
+    max-height: none;
+    padding: 28px 5vw 46px;
+    overflow: visible;
+  }
+
+  .case-redesign .case-hero::before {
+    top: 24px;
+    font-size: 82px;
+  }
+
+  .case-redesign .case-hero > h1,
+  .readalong-page .ra-hero > h1,
+  .calmo-page .calmo-hero > h1,
+  .bodycodes-page .bc-hero > h1,
+  .human-factors-page .hf-hero > h1 {
+    max-width: none;
+    margin: 0 0 10px !important;
+    font-size: clamp(30px, 9vw, 42px);
+    line-height: .98;
+  }
+
+  .case-redesign .case-hero > h1::after {
+    display: none;
+  }
+
+  .case-project-subtitle,
+  .calmo-hero-subtitle,
+  .ra-hero-subtitle,
+  .bc-hero-subtitle,
+  .hf-hero-subtitle {
+    display: block;
+    width: fit-content;
+    margin: 0 0 24px !important;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .case-redesign .case-hero-copy > p:not(.eyebrow),
+  .case-redesign .case-intro {
+    font-size: 15px;
+    line-height: 1.58;
+  }
+
+  .case-redesign .problem-section blockquote,
+  .case-redesign .framework-quote,
+  .case-redesign .results-quote,
+  .human-factors-page .hf-premise-grid blockquote,
+  .human-factors-page .hf-synthesis-quote {
+    font-size: 16px !important;
+    line-height: 1.66 !important;
+  }
+
+  .case-redesign .case-hero-lower {
+    gap: 26px;
+  }
+
+  .calmo-hero-facts,
+  .bc-hero-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 22px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Shared project-page rhythm and type hierarchy
+
+   All five case studies use this final layer. Page-specific colour, layout and
+   imagery remain intact; only the reading rhythm and closely related text
+   sizes are consolidated here.
+   -------------------------------------------------------------------------- */
+.case-redesign {
+  --case-section-space: clamp(80px, 7vw, 108px);
+  --case-module-space: clamp(32px, 3.2vw, 44px);
+  --case-card-space: clamp(22px, 2.2vw, 30px);
+  --case-copy-gap: 10px;
+  --case-title-gap: 12px;
+}
+
+/* A small, deliberate set of text levels: H1, subtitle, H2, H3, body,
+   image title, and 12px supporting information. */
+.case-redesign .case-section h3 {
+  margin-top: 0;
+  margin-bottom: var(--case-title-gap);
+  font-size: clamp(20px, 1.8vw, 28px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.case-redesign .case-section p,
+.case-redesign .case-section li,
+.case-redesign .case-section .case-lede {
+  font-size: clamp(16px, 1.2vw, 18px) !important;
+  line-height: 1.68 !important;
+}
+
+.case-redesign .case-section p {
+  margin-top: 0 !important;
+  margin-bottom: var(--case-copy-gap) !important;
+}
+
+.case-redesign .case-section p:last-child,
+.case-redesign .case-section li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Never allow labels, chapter markers, captions, table copy or controls to
+   fall below 12px. */
+.case-redesign .case-section-label,
+.case-redesign .case-hero-copy::before,
+.case-redesign .case-hero .case-tags span,
+.case-redesign .case-section span,
+.case-redesign .case-section small,
+.case-redesign .case-section dt,
+.case-redesign .case-section dd,
+.case-redesign .case-section th,
+.case-redesign .case-section td,
+.case-redesign .case-section summary,
+.case-redesign .case-section button,
+.case-redesign .case-section a,
+.case-redesign .case-nav button,
+.case-redesign .case-footer button,
+.calmo-hero-facts span,
+.bc-hero-facts span,
+.hf-study-index button b,
+.bc-rollout-grid b,
+.bc-access-table strong {
+  font-size: 12px !important;
+}
+
+/* These spans are card headings rather than metadata. */
+.case-redesign .condition-grid article > span {
+  font-size: clamp(20px, 1.8vw, 28px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.case-redesign .case-image figcaption,
+.case-redesign figure > figcaption {
+  margin-bottom: 16px !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+}
+
+.case-redesign .case-image figcaption em,
+.case-redesign figure > figcaption em {
+  margin-top: 4px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* One shared section rhythm across all five projects. */
+.case-redesign .case-section {
+  padding-top: var(--case-section-space);
+  padding-bottom: var(--case-section-space);
+}
+
+.case-redesign .case-hero + .case-section {
+  padding-top: 35px;
+}
+
+.case-redesign .case-section h2,
+.case-redesign .problem-section .case-two-col h2 {
+  margin-bottom: 24px;
+  font-size: clamp(26px, 2.35vw, 38px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.case-redesign .case-section > h2:not(:first-of-type) {
+  margin-top: var(--case-section-space);
+}
+
+.case-redesign .case-lede {
+  margin-bottom: var(--case-module-space) !important;
+}
+
+/* Common content modules share the same distance from the copy above them. */
+.case-redesign :is(
+  .dimension-grid,
+  .condition-grid,
+  .process-grid,
+  .model-grid,
+  .chart-grid,
+  .case-table-placeholder,
+  .ra-overview-grid,
+  .ra-map-stack,
+  .ra-friction-overview,
+  .ra-solution-reveal,
+  .calmo-methods,
+  .calmo-gap-grid,
+  .calmo-layers,
+  .calmo-findings,
+  .calmo-modules,
+  .calmo-responsibility,
+  .calmo-reflection-grid,
+  .bc-reason-grid,
+  .bc-current-flow,
+  .bc-stakeholders,
+  .bc-principles,
+  .bc-service-steps,
+  .bc-access-wrap,
+  .bc-cost-model,
+  .bc-rollout-grid,
+  .bc-reflection-grid,
+  .hf-study-index,
+  .hf-method-strip,
+  .hf-evidence-grid,
+  .hf-visual-pair,
+  .hf-contrast,
+  .hf-visual-grid,
+  .hf-reading-result,
+  .hf-reading-comparison,
+  .hf-synthesis-table,
+  .hf-principle-grid
+) {
+  margin-top: var(--case-module-space) !important;
+  margin-bottom: 0 !important;
+}
+
+.case-redesign :is(
+  .problem-section blockquote,
+  .framework-quote,
+  .results-quote,
+  .hf-premise-grid blockquote,
+  .hf-synthesis-quote,
+  .calmo-insight,
+  .bc-insight,
+  .hf-finding
+) {
+  margin-top: var(--case-module-space) !important;
+  margin-bottom: 0 !important;
+  padding: clamp(30px, 3.5vw, 48px) !important;
+}
+
+/* Standardise card interiors while retaining every page's grid and colour. */
+.case-redesign :is(
+  .dimension-grid,
+  .condition-grid,
+  .process-grid,
+  .calmo-methods,
+  .calmo-gap-grid,
+  .calmo-layers,
+  .calmo-findings,
+  .calmo-modules,
+  .calmo-responsibility,
+  .calmo-reflection-grid,
+  .bc-reason-grid,
+  .bc-stakeholders,
+  .bc-principles,
+  .bc-service-steps,
+  .bc-rollout-grid,
+  .bc-reflection-grid,
+  .hf-evidence-grid,
+  .hf-contrast,
+  .hf-principle-grid
+) > article {
+  padding: var(--case-card-space) !important;
+}
+
+.case-redesign :is(
+  .dimension-grid,
+  .process-grid,
+  .calmo-methods,
+  .calmo-gap-grid,
+  .calmo-layers,
+  .calmo-findings,
+  .calmo-modules,
+  .bc-reason-grid,
+  .bc-stakeholders,
+  .bc-principles,
+  .bc-service-steps,
+  .bc-rollout-grid,
+  .hf-evidence-grid,
+  .hf-contrast,
+  .hf-principle-grid
+) h3 {
+  margin-top: 28px !important;
+  margin-bottom: var(--case-title-gap) !important;
+}
+
+/* Images use the same inset and caption spacing without changing their size
+   or aspect ratio. */
+.case-redesign :is(.case-image, .calmo-image, .bc-image, .hf-image) {
+  padding: clamp(16px, 1.6vw, 22px);
+}
+
+/* LLM case study: a quieter, more balanced hero and lighter reading texture. */
+.llm-case-page .case-hero-copy > p,
+.llm-case-page .case-section p,
+.llm-case-page .case-section li,
+.llm-case-page .case-section .case-lede {
+  color: #5b5a55 !important;
+  font-weight: 400 !important;
+}
+
+.llm-case-page .case-section :is(p, li) strong {
+  font-weight: 500;
+}
+
+.llm-case-page .case-hero .case-tags span {
+  cursor: default;
+  transition: color 180ms ease, background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.llm-case-page .case-hero .case-tags span:hover,
+.llm-case-page .case-hero .case-tags span:focus-visible {
+  color: var(--dossier-paper);
+  background: var(--dossier-ink);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.llm-case-page .llm-research-question {
+  align-self: start;
+  margin-top: 0;
+  padding: clamp(26px, 3vw, 42px);
+  border-radius: 18px;
+  background: #e8e1ef;
+}
+
+.llm-case-page .llm-research-question h3 {
+  margin-bottom: var(--case-title-gap) !important;
+}
+
+.llm-case-page .llm-research-question p {
+  max-width: none;
+}
+
+.llm-case-page .llm-theory-group {
+  --llm-module-gap: clamp(22px, 2vw, 30px);
+}
+
+.llm-case-page .llm-theory-group + .llm-theory-group {
+  margin-top: var(--case-section-space);
+}
+
+.llm-case-page .llm-theory-group .case-lede {
+  margin-bottom: 0 !important;
+}
+
+.llm-case-page .llm-theory-group :is(.dimension-grid, .model-grid) {
+  margin-top: var(--llm-module-gap) !important;
+}
+
+.llm-case-page .llm-group-summary {
+  margin-top: var(--llm-module-gap) !important;
+}
+
+.llm-case-page .dimension-grid h3 {
+  margin-top: 0 !important;
+}
+
+.llm-case-page .llm-model-group .model-grid {
+  margin-top: var(--llm-module-gap) !important;
+}
+
+.llm-case-page .framework-quote p {
+  color: inherit !important;
+  margin-bottom: var(--case-copy-gap) !important;
+}
+
+.llm-case-page .framework-quote p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.llm-case-page .framework-quote strong {
+  font-weight: 600;
+}
+
+.llm-case-page .condition-grid article > span {
+  font-size: clamp(14px, 1.1vw, 17px) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.case-redesign.llm-case-page .case-section:not(.case-soft) .condition-grid article.condition-b {
+  color: var(--dossier-ink) !important;
+  background: rgba(255, 255, 255, 0.36) !important;
+  border-color: var(--dossier-line) !important;
+  transition: color 220ms ease, background-color 220ms ease,
+    border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.case-redesign.llm-case-page .condition-grid article p {
+  font-weight: 400 !important;
+}
+
+.llm-case-page .condition-grid .condition-b > span {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 10px;
+  color: #fff !important;
+  background: var(--dossier-violet);
+}
+
+.llm-case-page .condition-grid .condition-b :is(p, small) {
+  color: var(--dossier-ink) !important;
+}
+
+.case-redesign.llm-case-page .condition-grid .condition-b strong {
+  font-weight: 600 !important;
+}
+
+.case-redesign.llm-case-page .case-section:not(.case-soft) .condition-grid article.condition-b:hover,
+.case-redesign.llm-case-page .case-section:not(.case-soft) .condition-grid article.condition-b:focus-within {
+  color: var(--dossier-paper) !important;
+  background: var(--dossier-ink) !important;
+  border-color: var(--dossier-ink) !important;
+  box-shadow: 0 18px 36px rgba(31, 32, 28, 0.16);
+  transform: translateY(-5px);
+}
+
+.llm-case-page .condition-grid .condition-b:hover :is(p, small),
+.llm-case-page .condition-grid .condition-b:focus-within :is(p, small) {
+  color: inherit !important;
+}
+
+.llm-case-page .process-grid article p {
+  line-height: 1.48 !important;
+}
+
+/* Simplified LLM dossier system: one background, one reading column and only
+   two high-emphasis card types (comparison and findings). */
+.case-redesign.llm-case-page {
+  --case-section-space: 96px;
+  --case-module-space: 40px;
+  --case-copy-gap: 10px;
+}
+
+.case-redesign.llm-case-page .case-soft,
+.case-redesign.llm-case-page .case-application {
+  background: var(--dossier-paper) !important;
+  color: var(--dossier-ink) !important;
+}
+
+.case-redesign.llm-case-page .case-section {
+  padding-top: var(--case-section-space);
+  padding-bottom: var(--case-section-space);
+}
+
+.case-redesign.llm-case-page .case-section h2,
+.case-redesign.llm-case-page .problem-section .case-two-col h2 {
+  margin-bottom: 16px;
+  font-size: 30px !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.case-redesign.llm-case-page .case-section h3 {
+  font-size: 20px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.case-redesign.llm-case-page .case-section :is(p, li, .case-lede) {
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+}
+
+.case-redesign.llm-case-page .case-section > p,
+.case-redesign.llm-case-page .case-section > .case-lede,
+.case-redesign.llm-case-page .llm-theory-group > p,
+.case-redesign.llm-case-page .llm-result-block > p {
+  width: min(100%, 860px) !important;
+}
+
+/* Three dimensions become a scan-friendly information list rather than a
+   second family of cards. */
+.case-redesign.llm-case-page .dimension-grid {
+  display: grid;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  margin-top: 28px !important;
+}
+
+.case-redesign.llm-case-page .dimension-grid article {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.8fr) minmax(0, 1.35fr) minmax(170px, 0.65fr);
+  gap: clamp(24px, 3vw, 46px);
+  align-items: start;
+  min-height: 0;
+  padding: 24px 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--dossier-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.case-redesign.llm-case-page .dimension-grid article:last-child {
+  border-bottom: 1px solid var(--dossier-line) !important;
+}
+
+.case-redesign.llm-case-page .dimension-grid h3,
+.case-redesign.llm-case-page .dimension-grid p,
+.case-redesign.llm-case-page .dimension-grid small {
+  margin: 0 !important;
+}
+
+.case-redesign.llm-case-page .dimension-grid small {
+  justify-self: end;
+  text-align: right;
+}
+
+.case-redesign.llm-case-page .llm-group-summary {
+  margin-top: 28px !important;
+}
+
+/* Pair each theoretical model with its own visual so readers never need to
+   cross-reference two paragraphs against two side-by-side images. */
+.case-redesign.llm-case-page .llm-model-group {
+  display: grid;
+  gap: 0;
+}
+
+.case-redesign.llm-case-page .llm-model-intro {
+  margin-bottom: 24px !important;
+}
+
+.case-redesign.llm-case-page .llm-model-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--dossier-line);
+}
+
+.case-redesign.llm-case-page .llm-model-row:last-child {
+  border-bottom: 1px solid var(--dossier-line);
+}
+
+.case-redesign.llm-case-page .llm-model-row p {
+  margin: 0 !important;
+}
+
+.case-redesign.llm-case-page .llm-model-row .case-image {
+  margin: 0 !important;
+}
+
+/* Four-stage evaluation reads as one continuous process instead of four
+   independent cards. */
+.case-redesign.llm-case-page .process-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 !important;
+}
+
+.case-redesign.llm-case-page .process-grid article {
+  padding: 26px clamp(14px, 2vw, 26px) 0 !important;
+  border: 0 !important;
+  border-top: 2px solid var(--dossier-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.case-redesign.llm-case-page .process-grid article:first-child {
+  padding-left: 0 !important;
+}
+
+.case-redesign.llm-case-page .process-grid article:last-child {
+  padding-right: 0 !important;
+}
+
+.case-redesign.llm-case-page .process-grid h3 {
+  margin: 14px 0 10px !important;
+}
+
+.case-redesign.llm-case-page .process-grid small {
+  margin-top: 16px !important;
+}
+
+/* Results repeat one predictable rhythm: heading, evidence, visual and
+   explanation. */
+.case-redesign.llm-case-page .llm-result-block {
+  width: 100%;
+}
+
+.case-redesign.llm-case-page .llm-result-block + .llm-result-block {
+  margin-top: 72px;
+  padding-top: 72px;
+  border-top: 1px solid var(--dossier-line);
+}
+
+.case-redesign.llm-case-page .llm-result-block h2 {
+  width: min(100%, 860px);
+}
+
+.case-redesign.llm-case-page .llm-result-block :is(.chart-grid, .case-table-placeholder) {
+  margin-top: 32px !important;
+}
+
+.case-redesign.llm-case-page .llm-result-block > p + .case-table-placeholder,
+.case-redesign.llm-case-page .llm-result-block > .case-table-placeholder + p {
+  margin-top: 32px !important;
+}
+
+.case-redesign.llm-case-page .results-quote,
+.case-redesign.llm-case-page .framework-quote {
+  margin-top: 48px !important;
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+}
+
+/* UX implications remain a simple vertical reading list. */
+.case-redesign.llm-case-page .case-application .case-section-label {
+  color: var(--dossier-violet) !important;
+}
+
+.case-redesign.llm-case-page .case-application ul {
+  display: grid;
+  grid-template-columns: 1fr !important;
+  gap: 0;
+  width: min(100%, 860px) !important;
+  margin: 0 !important;
+}
+
+.case-redesign.llm-case-page .case-application li {
+  padding: 24px 0;
+  border-top: 1px solid var(--dossier-line);
+  color: #5b5a55 !important;
+}
+
+.case-redesign.llm-case-page .case-application li:last-child {
+  border-bottom: 1px solid var(--dossier-line);
+}
+
+@media (min-width: 761px) {
+  .llm-case-page .case-hero > h1 {
+    max-width: 18ch;
+    font-size: clamp(42px, 3.7vw, 52px);
+    font-weight: 400;
+    letter-spacing: -0.045em;
+  }
+
+  .llm-case-page .case-project-subtitle {
+    font-size: 22px;
+    margin-bottom: clamp(34px, 4vh, 44px) !important;
+  }
+
+  .llm-case-page .case-hero-lower {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(30px, 4vw, 60px);
+  }
+
+  .llm-case-page .case-hero-copy > p,
+  .llm-case-page .case-intro {
+    max-width: none;
+  }
+
+  .llm-case-page .case-hero-graphic {
+    width: 100%;
+  }
+
+  .llm-case-page .problem-section .case-two-col {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: clamp(36px, 5vw, 76px);
+    align-items: start;
+  }
+
+  .llm-case-page .problem-section .case-two-col > div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .case-redesign {
+    --case-section-space: 56px;
+    --case-module-space: 28px;
+    --case-card-space: 20px;
+  }
+
+  .case-redesign .case-section {
+    padding-top: var(--case-section-space);
+    padding-bottom: var(--case-section-space);
+  }
+
+  .case-redesign .case-hero + .case-section {
+    padding-top: 35px;
+  }
+
+  .case-redesign .case-section h3,
+  .case-redesign .condition-grid article > span {
+    font-size: 20px !important;
+  }
+
+  .case-redesign .case-section p,
+  .case-redesign .case-section li,
+  .case-redesign .case-section .case-lede {
+    font-size: 16px !important;
+  }
+
+  .llm-case-page .case-hero > h1 {
+    font-weight: 400;
+  }
+
+  .llm-case-page .case-project-subtitle {
+    margin-bottom: 30px !important;
+  }
+
+  .llm-case-page .llm-research-question {
+    margin-top: var(--case-module-space);
+  }
+
+  .case-redesign.llm-case-page .dimension-grid article,
+  .case-redesign.llm-case-page .llm-model-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .case-redesign.llm-case-page .dimension-grid small {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .case-redesign.llm-case-page .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-redesign.llm-case-page .process-grid article,
+  .case-redesign.llm-case-page .process-grid article:first-child,
+  .case-redesign.llm-case-page .process-grid article:last-child {
+    padding: 22px 0 !important;
+    border-top: 1px solid var(--dossier-line) !important;
+  }
+
+  .case-redesign.llm-case-page .llm-result-block + .llm-result-block {
+    margin-top: 52px;
+    padding-top: 52px;
+  }
+}

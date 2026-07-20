@@ -6,15 +6,6 @@
   --ra-yellow: #d9a622;
 }
 
-.project-card:nth-child(3) .project-title h3 {
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.project-card:nth-child(3) .project-title h3:hover {
-  color: var(--yellow);
-}
-
 .readalong-page .ra-hero::before {
   content: "03";
   color: rgba(47, 155, 112, 0.13);
@@ -368,8 +359,10 @@
 
 .ra-solution-reveal aside em {
   color: var(--dossier-ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
   font-weight: 600;
+  letter-spacing: .035em;
 }
 
 .ra-solution-main {

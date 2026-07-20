@@ -1,0 +1,534 @@
+/* Final mobile layout layer. Desktop styles remain untouched. */
+@media (max-width: 760px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img,
+  svg,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  /* Shared site chrome */
+  .topbar,
+  .case-site-nav {
+    height: 58px;
+    padding-inline: 5vw !important;
+  }
+
+  .mobile-nav {
+    top: 57px;
+    padding: 24px 5vw;
+  }
+
+  .mobile-nav button {
+    min-height: 38px;
+    font-size: 22px;
+  }
+
+  /* Home: retain the composition but reduce visual crowding. */
+  .hero {
+    min-height: auto;
+    padding: 42px 5vw 30px;
+  }
+
+  .hero-copy > .eyebrow,
+  .hero-copy > h1 {
+    transform: none;
+  }
+
+  .hero .eyebrow {
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  .hero h1 {
+    font-size: clamp(45px, 13vw, 56px);
+    line-height: .92;
+  }
+
+  .hero-sub {
+    margin: 48px 0 20px;
+    font-size: clamp(22px, 6.5vw, 27px);
+    line-height: 1.08;
+  }
+
+  .intro {
+    max-width: 34rem;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .hero-tags {
+    left: 0;
+    width: 100%;
+    height: 270px;
+    margin-top: 12px;
+  }
+
+  .hero-select {
+    right: 0;
+    bottom: 2px;
+  }
+
+  .section {
+    padding: 62px 5vw;
+  }
+
+  .project-head {
+    margin-bottom: 24px;
+  }
+
+  .project-main {
+    grid-template-columns: minmax(0, 1fr) 20px;
+    gap: 8px;
+    padding: 18px 0;
+  }
+
+  .project-title h3 {
+    overflow-wrap: anywhere;
+    font-size: clamp(21px, 6.4vw, 26px);
+    line-height: 1.04;
+  }
+
+  .project-title > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px 8px;
+    margin-top: 9px;
+    text-align: right;
+  }
+
+  .project-title p,
+  .project-title small {
+    margin: 0;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .project-detail {
+    display: block;
+    padding: 2px 0 26px;
+  }
+
+  .project-detail p {
+    max-width: none;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .project-detail .tag {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  .home-info-layout {
+    grid-template-columns: 1fr;
+    gap: 46px;
+    min-height: 0;
+    margin-top: 30px;
+  }
+
+  .home-info-primary {
+    min-height: 0;
+    gap: 32px;
+  }
+
+  .home-info-primary > div {
+    max-width: none;
+    margin-top: 0;
+  }
+
+  .about-info-layout .skill-grid {
+    margin: 0;
+  }
+
+  .skill-panel-intro > p:last-child {
+    font-size: 14px;
+  }
+
+  .skill-groups h3 {
+    font-size: 14px;
+  }
+
+  .skill-tag {
+    font-size: 10px;
+  }
+
+  .experience-info-layout .award-grid {
+    gap: 10px;
+  }
+
+  .project-detail .view-more {
+    margin-top: 18px;
+    margin-right: 0;
+  }
+
+  .about h2,
+  .experience h2 {
+    font-size: clamp(40px, 12vw, 52px);
+  }
+
+  .award-grid {
+    gap: 10px;
+  }
+
+  .award-card,
+  .award-grid article {
+    min-height: 150px;
+  }
+
+  .contact {
+    min-height: 440px;
+    padding: 62px 5vw 30px;
+  }
+
+  .contact h2,
+  .talk-more.contact h2 {
+    font-size: clamp(46px, 14vw, 58px);
+    line-height: .9;
+  }
+
+  /* About */
+  .about-hero {
+    gap: 38px;
+    min-height: auto;
+    padding: 48px 5vw 64px;
+  }
+
+  .about-hero-copy {
+    height: auto;
+  }
+
+  .about-hero-copy .about-lede {
+    margin-top: 30px;
+  }
+
+  .about-hero-actions {
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .about-project-btn,
+  .about-talk-link {
+    min-height: 44px;
+  }
+
+  .about-portrait-wrap {
+    height: min(112vw, 440px);
+  }
+
+  .about-portrait-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 43% 82%;
+  }
+
+  .about-tags {
+    right: 3%;
+    top: 26%;
+  }
+
+  .education-timeline strong,
+  .education-timeline strong small {
+    text-align: left;
+  }
+
+  .experience-tags span {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  /* All case-study pages */
+  .case-page {
+    overflow-x: hidden;
+  }
+
+  .case-redesign .case-hero,
+  .case-page .case-hero {
+    padding: 48px 5vw 58px;
+  }
+
+  .case-redesign .case-hero > h1,
+  .case-page .case-hero > h1 {
+    max-width: none;
+    margin: 0 0 40px;
+    font-size: clamp(38px, 11.5vw, 50px);
+    line-height: .96;
+    overflow-wrap: anywhere;
+  }
+
+  .case-page .case-hero-subtitle,
+  .case-page .calmo-hero-subtitle,
+  .case-page .ra-hero-subtitle,
+  .case-page .bc-hero-subtitle,
+  .case-page .hf-hero-subtitle {
+    margin: -24px 0 38px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .case-redesign .case-hero-lower,
+  .case-page .case-hero-lower {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 32px;
+  }
+
+  .case-page .case-hero-copy > p:not(.eyebrow),
+  .case-page .case-intro {
+    width: 100%;
+    max-width: none;
+    font-size: 15px;
+    line-height: 1.62;
+  }
+
+  .case-page .case-hero .case-tags {
+    margin-top: 18px;
+    gap: 6px;
+  }
+
+  .case-page .case-hero .case-tags span {
+    font-size: 9px;
+    line-height: 1.25;
+    padding: 5px 8px;
+  }
+
+  .case-page .case-hero-graphic,
+  .case-page .calmo-hero-visual,
+  .case-page .bc-hero-visual,
+  .case-page .hf-hero .case-hero-graphic,
+  .case-page .ra-hero .ra-image {
+    width: 100%;
+    min-height: 0 !important;
+    margin: 0;
+  }
+
+  .case-redesign .case-section,
+  .case-page .case-section {
+    display: block;
+    padding: 56px 5vw;
+  }
+
+  .case-page .case-section-label {
+    margin-bottom: 30px;
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .case-page .case-section h2,
+  .case-redesign .problem-section .case-two-col h2 {
+    max-width: none;
+    font-size: clamp(27px, 8.5vw, 34px);
+    line-height: 1.05;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .case-page .case-section h3 {
+    font-size: clamp(20px, 6.4vw, 27px);
+    line-height: 1.12;
+  }
+
+  .case-page .case-section > p,
+  .case-page .case-section .case-two-col > div,
+  .case-page .case-section p,
+  .case-page .case-section li,
+  .case-page .case-section .case-lede {
+    width: 100% !important;
+    max-width: none !important;
+    font-size: 15px !important;
+    line-height: 1.62 !important;
+    text-align: left;
+  }
+
+  .case-page .case-two-col,
+  .case-page .dimension-grid,
+  .case-page .condition-grid,
+  .case-page .process-grid,
+  .case-page .model-grid,
+  .case-page .chart-grid,
+  .case-page .case-application ul,
+  .calmo-page .calmo-overview-grid,
+  .bodycodes-page .bc-overview-grid,
+  .human-factors-page .hf-premise-grid,
+  .human-factors-page .hf-study-head {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .case-page figure,
+  .case-page .case-image,
+  .case-page .ra-image,
+  .case-page .calmo-image,
+  .case-page .bc-image,
+  .case-page .hf-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .case-page figure img,
+  .case-page .case-image img,
+  .case-page .ra-image img,
+  .case-page .calmo-image img,
+  .case-page .bc-image img,
+  .case-page .hf-image img,
+  .case-page .case-table-placeholder img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+
+  .case-page figcaption,
+  .case-page .case-image figcaption,
+  .case-page .ra-image figcaption,
+  .case-page .calmo-image figcaption,
+  .case-page .bc-image figcaption,
+  .case-page .hf-image figcaption {
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .case-page .problem-section blockquote,
+  .case-page .framework-quote,
+  .case-page .results-quote,
+  .case-page .hf-synthesis-quote {
+    width: 100%;
+    margin-top: 28px !important;
+    padding: 46px 22px 24px !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+
+  .case-page .results-table,
+  .case-page .bc-access-table,
+  .case-page .bc-current-flow {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    padding: 0 0 10px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bodycodes-page .bc-current-flow {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  .case-page .case-project-footer {
+    height: 58px;
+    padding: 0 5vw;
+  }
+
+  .case-project-footer .brand,
+  .case-project-footer .case-next {
+    font-size: 10px;
+  }
+
+  /* Read Along: keep the flip interaction, remove desktop-only fixed height. */
+  .readalong-page .ra-friction-tabs {
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .readalong-page .ra-friction-tabs button {
+    flex-basis: min(72vw, 260px);
+    min-height: 54px;
+  }
+
+  .readalong-page .ra-friction-focus,
+  .readalong-page .ra-solution-reveal {
+    min-height: 0;
+    height: auto;
+    padding: 20px 16px;
+  }
+
+  .readalong-page .ra-flip-card {
+    height: auto;
+    min-height: 0;
+  }
+
+  .readalong-page .ra-solution-reveal {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .readalong-page .ra-solution-reveal aside {
+    padding: 20px 0 0;
+  }
+
+  .readalong-page .ra-friction-focus::after {
+    content: "Tap to view solution";
+    align-self: flex-start;
+    margin-top: 16px;
+    color: var(--ra-green);
+    font: 500 9px / 1.2 "DM Mono", monospace;
+  }
+
+  /* CALMO embeds and Human Factors dense metrics */
+  .calmo-page .calmo-video-frame,
+  .calmo-page .calmo-video-frame iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .calmo-page .calmo-prototype-preview {
+    min-height: 230px;
+  }
+
+  .human-factors-page .hf-reading-result,
+  .human-factors-page .hf-method-strip,
+  .human-factors-page .hf-contrast,
+  .human-factors-page .hf-visual-pair,
+  .human-factors-page .hf-visual-grid,
+  .human-factors-page .hf-reading-comparison,
+  .human-factors-page .hf-principle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .human-factors-page .hf-reading-statement {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .float-tag,
+  .hero-icon,
+  .hero-select,
+  .about-tags span {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .float-tag:hover {
+    padding: 8px 9px;
+    background: rgba(253, 245, 236, .86);
+    border-color: rgba(31, 32, 28, .6);
+    color: var(--ink);
+    font-size: 10px;
+  }
+
+  .float-tag:hover::after {
+    content: none;
+  }
+}
