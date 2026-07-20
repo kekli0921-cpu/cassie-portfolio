@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { ArrowRight, Expand, X } from 'lucide-react'
 import './bodycodes.css'
-import { CaseFooter, CaseHeader } from './case-chrome.jsx'
+import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
 
 const money = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -98,25 +98,24 @@ export default function BodyCodesPage({ onHome, onContact, onNext }) {
     <CaseHeader onHome={onHome} onContact={onContact}/>
 
     <main>
-      <section className="case-hero bc-hero">
-        <h1>BodyCodes</h1>
-        <p className="bc-hero-subtitle">Industry expansion strategy design, From Sizing Tool to Fit-Data Infrastructure</p>
-        <div className="case-hero-lower">
-          <div className="case-hero-copy">
-            <p>BodyCodes turns a short questionnaire into a reusable fit identity. It does not require body scanning, photos, or new hardware.</p>
-            <p>I explored how this consumer sizing idea could become an operational service for corporate uniforms — connecting employees, procurement teams and manufacturers without exposing personal body answers.</p>
-            <p>The outcome is a B2B2C service model, implementation pathway, governance structure and validation plan for a real enterprise pilot.</p>
-            <div className="case-tags"><span>Service Design</span><span>System Mapping</span><span>Business Strategy</span><span>Service Blueprinting</span></div>
-          </div>
-          <figure className="case-hero-graphic bc-hero-visual"><img src="/projects/bodycodes.png" alt="BodyCodes corporate uniform procurement ecosystem"/></figure>
-        </div>
-        <div className="bc-hero-facts">
-          <div><span>MY FOCUS</span><strong>Corporate uniforms</strong></div>
-          <div><span>INPUT</span><strong>Questionnaire — no scan</strong></div>
-          <div><span>SERVICE MODEL</span><strong>B2B2C infrastructure</strong></div>
-          <div><span>STATUS</span><strong>Concept ready for pilot</strong></div>
-        </div>
-      </section>
+      <EditorialCaseHero
+        rootSelector=".bodycodes-page"
+        eyebrow="CORPORATE UNIFORMS · B2B2C SERVICE · PILOT-READY CONCEPT"
+        title="BodyCodes"
+        subtitle="Industry expansion strategy design, From Sizing Tool to Fit-Data Infrastructure"
+        summary={[
+          'BodyCodes turns a short questionnaire into a reusable fit identity. It does not require body scanning, photos, or new hardware.',
+          'I explored how this consumer sizing idea could become an operational service for corporate uniforms — connecting employees, procurement teams and manufacturers without exposing personal body answers.',
+          'The outcome is a B2B2C service model, implementation pathway, governance structure and validation plan for a real enterprise pilot.'
+        ]}
+        chapters={['Overview & my role', 'Why corporate uniforms', 'Understanding the current system', 'Design strategy', 'Proposed service', 'Making it viable', 'Reflection & next steps']}
+        imageSrc="/projects/bodycodes.png"
+        imageAlt="BodyCodes corporate uniform procurement ecosystem"
+        result="A no-scan sizing tool reframed as enterprise fit-data infrastructure."
+        accent="#287662"
+        accentSoft="#92c2b0"
+        diagram
+      />
 
       <section className="case-section bc-overview">
         <div className="case-section-label">01 / OVERVIEW &amp; MY ROLE</div>

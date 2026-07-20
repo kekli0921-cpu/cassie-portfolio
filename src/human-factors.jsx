@@ -1,6 +1,6 @@
 import React from 'react'
 import './human-factors.css'
-import { CaseFooter, CaseHeader } from './case-chrome.jsx'
+import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
 
 function HFImage({ name, alt, caption, className = '' }) {
   return <figure className={`hf-image ${className}`}>
@@ -53,19 +53,24 @@ export default function HumanFactorsPage({ onHome, onContact, onNext }) {
     <CaseHeader onHome={onHome} onContact={onContact}/>
 
     <main>
-      <section className="case-hero hf-hero">
-        <h1>Improving UX Through Human Factors</h1>
-        <p className="hf-hero-subtitle">Three evidence-based experiments</p>
-        <div className="case-hero-lower">
-          <div className="case-hero-copy">
-            <p>Three lab experiments examined whether physiological signals, observed behaviour, and self-reported experience tell the same story.</p>
-            <p>Combined EMG, ECG, skin temperature, EEG, eye tracking, behavioural observation, comprehension tests, and interviews.</p>
-            <p>The studies reveal where objective signals support users' accounts — and where easier, faster, or more aroused does not necessarily mean a better experience.</p>
-            <div className="case-tags"><span>Multi-biosensor Research</span><span>EEG</span><span>Eye Tracking</span><span>EMG</span></div>
-          </div>
-          <HFImage name="hero.png" alt="Participant wearing biosensors during a racing game, with gameplay and EMG evidence" className="case-hero-graphic" />
-        </div>
-      </section>
+      <EditorialCaseHero
+        rootSelector=".human-factors-page"
+        eyebrow="MULTIMODAL RESEARCH · THREE LAB EXPERIMENTS"
+        title="Improving UX Through Human Factors"
+        subtitle="Three evidence-based experiments"
+        summary={[
+          'Three lab experiments examined whether physiological signals, observed behaviour, and self-reported experience tell the same story.',
+          'Combined EMG, ECG, skin temperature, EEG, eye tracking, behavioural observation, comprehension tests, and interviews.',
+          "The studies reveal where objective signals support users' accounts — and where easier, faster, or more aroused does not necessarily mean a better experience."
+        ]}
+        chapters={['Research premise', 'Study overview', 'Experiment 01', 'Experiment 02', 'Experiment 03', 'Cross-study synthesis', 'UX principles & reflection']}
+        imageSrc="/human-factors/hero.png"
+        imageAlt="Participant wearing biosensors during a racing game, with gameplay and EMG evidence"
+        result="Objective signals become useful when interpreted beside behaviour and self-report."
+        accent="#76629d"
+        accentSoft="#d7c9ec"
+        longTitle
+      />
 
       <section className="case-section hf-premise">
         <div className="case-section-label">01 / RESEARCH PREMISE</div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ArrowRight, Expand, ExternalLink, Play, X } from 'lucide-react'
 import './calmo.css'
-import { CaseFooter, CaseHeader } from './case-chrome.jsx'
+import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
 
 const prototypeUrl = 'https://tall-pony-86222120.figma.site'
 const vimeoUrl = 'https://player.vimeo.com/video/1177305647?title=0&byline=0&portrait=0&dnt=1'
@@ -65,25 +65,23 @@ export default function CalmoPage({ onHome, onContact, onNext }) {
     <CaseHeader onHome={onHome} onContact={onContact}/>
 
     <main>
-      <section className="case-hero calmo-hero">
-        <h1>CALMO</h1>
-        <p className="calmo-hero-subtitle">A Transition Support System for Retired Police Dogs</p>
-        <div className="case-hero-lower">
-          <div className="case-hero-copy">
-            <p>Retired police dogs move from a highly structured working life into a domestic environment, yet the emotional transition is often treated as an adoption event rather than a gradual process.</p>
-            <p>CALMO combines a non-contact smart pod, a companion app and professional guidance to help adopters understand behavioural signals, respond with confidence and support each dog at its own pace.</p>
-            <p>The concept evolved through research, usability testing and a professional trainer interview — from a universal calming product into a personalised transition system.</p>
-            <div className="case-tags"><span>Double Diamond</span><span>UX Research</span><span>System Design</span><span>Product + UI</span></div>
-          </div>
-          <figure className="case-hero-graphic calmo-hero-visual"><img src="/projects/calmo.png" alt="CALMO smart pod supporting a retired police dog at home"/></figure>
-        </div>
-        <div className="calmo-hero-facts">
-          <div><span>YEAR</span><strong>2026</strong></div>
-          <div><span>PROCESS</span><strong>Double Diamond</strong></div>
-          <div><span>OUTCOME</span><strong>Pod + companion app</strong></div>
-          <div><span>RECOGNITION</span><strong>UX Design Award nominee</strong></div>
-        </div>
-      </section>
+      <EditorialCaseHero
+        rootSelector=".calmo-page"
+        eyebrow="2026 · TRANSITION SYSTEM · UX DESIGN AWARD NOMINEE"
+        title="CALMO"
+        subtitle="A Transition Support System for Retired Police Dogs"
+        summary={[
+          'Retired police dogs move from a highly structured working life into a domestic environment, yet the emotional transition is often treated as an adoption event rather than a gradual process.',
+          'CALMO combines a non-contact smart pod, a companion app and professional guidance to help adopters understand behavioural signals, respond with confidence and support each dog at its own pace.',
+          'The concept evolved through research, usability testing and a professional trainer interview — from a universal calming product into a personalised transition system.'
+        ]}
+        chapters={['Overview', 'Discovering the gap', 'Defining the transition', 'Designing the system', 'Testing & iteration', 'Final design & prototype', 'Responsibility & reflection']}
+        imageSrc="/projects/calmo.png"
+        imageAlt="CALMO smart pod supporting a retired police dog at home"
+        result="A transition service that supports both the dog and the adopter."
+        accent="#d88143"
+        accentSoft="#e9b48c"
+      />
 
       <section className="case-section calmo-overview">
         <div className="case-section-label">01 / OVERVIEW</div>

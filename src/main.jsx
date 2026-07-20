@@ -7,7 +7,7 @@ import './read-along.css'
 import HumanFactorsPage from './human-factors.jsx'
 import BodyCodesPage from './bodycodes.jsx'
 import CalmoPage from './calmo.jsx'
-import { CaseFooter, CaseHeader } from './case-chrome.jsx'
+import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
 import './mobile.css'
 import './case-viewport.css'
 import './llm-case.css'
@@ -338,7 +338,24 @@ function ReadAlongCasePage({ onHome, onContact, onNext }) {
   return <div className="case-page case-redesign readalong-page">
     <CaseHeader onHome={onHome} onContact={onContact}/>
     <main>
-      <section className="case-hero ra-hero"><h1>Google Read Along</h1><p className="ra-hero-subtitle">Interaction Analysis and UX Redesign</p><div className="case-hero-lower"><div className="case-hero-copy"><p>Google Read Along is a reading app that uses speech recognition to help children practise independently.</p><p>Classify its current interaction frictions as: how it handles silence, misrecognised words, skipped reading, forced page transitions, and ambiguous manual controls.</p><p>Combined Self-Determination Theory and Grounding Theory , redesigned each interaction so children could self-correct and stay in control, enhancing their confidence and engagement.</p><div className="case-tags"><span>Cognitive Psychology</span><span>Interaction Analysis</span><span>System Mapping</span><span>UX Optimise</span></div></div><ReadAlongImage name="1.png" alt="Google Read Along interaction analysis and system map" className="case-hero-graphic"/></div></section>
+      <EditorialCaseHero
+        rootSelector=".readalong-page"
+        eyebrow="INTERACTION AUDIT · UX REDESIGN"
+        title="Google Read Along"
+        subtitle="Interaction Analysis and UX Redesign"
+        summary={[
+          'Google Read Along is a reading app that uses speech recognition to help children practise independently.',
+          'Classify its current interaction frictions as: how it handles silence, misrecognised words, skipped reading, forced page transitions, and ambiguous manual controls.',
+          'Combined Self-Determination Theory and Grounding Theory , redesigned each interaction so children could self-correct and stay in control, enhancing their confidence and engagement.'
+        ]}
+        chapters={['Overview', 'System mapping', 'Five friction types', 'Solutions']}
+        imageSrc="/read-along/1.png"
+        imageAlt="Google Read Along interaction analysis and system map"
+        result="Five interaction frictions mapped to five autonomy-preserving solutions."
+        accent="#278a68"
+        accentSoft="#91c8b2"
+        diagram
+      />
 
       <section className="case-section ra-overview"><div className="case-section-label">01 / OVERVIEW</div><div className="ra-overview-grid"><div className="ra-overview-copy"><h2>Overview</h2><p>Google Read Along is a voice-interactive reading app designed for children learning a second language. Users read stories aloud to collect stars while the system tracks completion and provides real-time phonetic feedback.</p><p>This project reverse-engineered the app's full interaction logic before evaluating it, classifying exactly where its error-handling system breaks down for young second-language learners.</p><p>Shift from correcting errors to understanding learners, delivering context-aware, developmentally adaptive, and minimally disruptive support that preserves both learning effectiveness and children's autonomy.</p></div><div className="ra-overview-points">{[
         ['01','Full interaction-flow documentation','System-level, single-story, and user-initiated behaviour documented in complete flow charts before any redesign began.'],
