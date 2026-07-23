@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2050" viewBox="0 0 3840 3900">
+  <defs>
+    <clipPath id="pageClip"><rect x="36" y="30" width="3768" height="3838" rx="34"/></clipPath>
+    <filter id="calmoPalette" color-interpolation-filters="sRGB">
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0 0.05 0.16 0.36 0.72 0.914"/>
+        <feFuncG type="table" tableValues="0 0.06 0.18 0.39 0.74 0.922"/>
+        <feFuncB type="table" tableValues="0 0.10 0.30 0.55 0.86 0.980"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="3840" height="3900" fill="#E9EBFA"/>
+  <g clip-path="url(#pageClip)">
+    <rect x="36" y="30" width="3768" height="3838" fill="#E9EBFA"/>
+    <image href="competitive-analysis-v2.png" x="0" y="-66" width="3840" height="4028" filter="url(#calmoPalette)" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+  <rect x="36" y="30" width="3768" height="3838" rx="34" fill="none" stroke="#9298D0" stroke-width="5"/>
+</svg>

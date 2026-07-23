@@ -206,27 +206,29 @@
   top: 106px;
   align-self: start;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
   color: var(--llm-violet);
 }
 
 .llm-editorial-page .llm-section-marker span {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(44px, 4.4vw, 70px);
+  font-size: 14px !important;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0;
-  line-height: .85;
+  line-height: 1.35;
 }
 
 .llm-editorial-page .llm-section-marker small {
   font-family: 'Outfit', sans-serif;
-  font-size: 12px;
+  font-size: 14px !important;
   font-weight: 400;
   line-height: 1.35;
   letter-spacing: 0;
-  color: var(--llm-muted);
+  color: var(--llm-violet);
+  text-transform: uppercase;
 }
 
 .llm-editorial-page .llm-section-content {
@@ -850,8 +852,9 @@
     grid-column: 1 !important;
   }
 
-  .llm-editorial-page .llm-section-marker span {
-    font-size: 42px;
+  .llm-editorial-page .llm-section-marker span,
+  .llm-editorial-page .llm-section-marker small {
+    font-size: 13px !important;
   }
 
   .llm-editorial-page .llm-section-content > h2 {

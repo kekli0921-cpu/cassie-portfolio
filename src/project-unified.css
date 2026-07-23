@@ -426,6 +426,64 @@
   line-height: 1.5 !important;
 }
 
+/* CALMO dog pod: keep the product caption and architecture link on one clean line. */
+.calmo-page .calmo-dog-pod .calmo-image {
+  display:grid !important;
+  grid-template-columns:minmax(0, 1fr) auto !important;
+  align-items:center;
+  column-gap:18px;
+  row-gap:12px;
+}
+.calmo-page .calmo-dog-pod .calmo-image > button:first-child {
+  grid-column:1 / -1;
+  cursor:pointer;
+}
+.calmo-page .calmo-dog-pod .calmo-image > button:first-child > span {
+  display:none !important;
+}
+.calmo-page .calmo-dog-pod .calmo-image figcaption {
+  grid-column:1;
+  margin:0 !important;
+  padding:0 !important;
+  border-top:0 !important;
+  text-align:left;
+}
+.calmo-page .calmo-dog-pod .calmo-product-architecture-link {
+  position:relative;
+  grid-column:2;
+  justify-self:end;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--calmo-orange);
+  font:500 12px/1.2 "Outfit",sans-serif;
+  cursor:pointer;
+}
+.calmo-page .calmo-dog-pod .calmo-product-architecture-link::after {
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:-4px;
+  left:0;
+  height:1px;
+  background:currentColor;
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .2s ease;
+}
+.calmo-page .calmo-dog-pod .calmo-product-architecture-link:hover::after,
+.calmo-page .calmo-dog-pod .calmo-product-architecture-link:focus-visible::after {
+  transform:scaleX(1);
+}
+.calmo-page .calmo-dog-pod .calmo-product-architecture-link:focus-visible { outline:none; }
+
+@media (max-width:760px) {
+  .calmo-page .calmo-dog-pod .calmo-image { grid-template-columns:1fr !important; }
+  .calmo-page .calmo-dog-pod .calmo-image figcaption,
+  .calmo-page .calmo-dog-pod .calmo-product-architecture-link { grid-column:1; justify-self:end; }
+}
+
 /* Repeated cards become editorial lists: one rule, one heading, one paragraph. */
 :is(
   .calmo-methods, .calmo-gap-grid, .calmo-layers, .calmo-findings,
@@ -498,7 +556,7 @@
   line-height: 1.42 !important;
 }
 
-:is(.calmo-insight, .bc-insight, .hf-finding, .hf-synthesis-quote) {
+:is(.calmo-insight, .calmo-insights, .bc-insight, .hf-finding, .hf-synthesis-quote) {
   display: block;
   margin-top: var(--case-module-space) !important;
   padding: 0 0 0 28px !important;
@@ -510,7 +568,7 @@
   box-shadow: none !important;
 }
 
-:is(.calmo-insight, .bc-insight, .hf-finding, .hf-synthesis-quote) > span {
+:is(.calmo-insight, .calmo-insights, .bc-insight, .hf-finding, .hf-synthesis-quote) > span {
   display: block;
   margin-bottom: 14px;
   color: var(--project-accent) !important;
@@ -526,6 +584,48 @@
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: -.02em;
+}
+
+.calmo-insights .calmo-gap-grid {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+
+.calmo-insights .calmo-gap-grid article {
+  min-height: 0;
+  padding: 26px 0 !important;
+  border: 0;
+  background: transparent;
+}
+
+.calmo-insights .calmo-gap-grid article:first-child { padding-top: 0 !important; }
+.calmo-insights .calmo-gap-grid article:last-child { padding-bottom: 0 !important; }
+
+.calmo-insights .calmo-gap-grid h3 {
+  display: block;
+  max-width: 860px;
+  margin: 0 0 14px !important;
+  color: var(--dossier-ink) !important;
+  font-family: "Outfit", sans-serif !important;
+  font-size: clamp(21px, 1.8vw, 26px) !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -.02em !important;
+}
+
+.calmo-insights .calmo-gap-grid h3 span {
+  color: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid p {
+  width: min(100%, 860px) !important;
+  margin: 0 !important;
+  color: #575650 !important;
 }
 
 .human-factors-page .hf-finding p {
@@ -752,6 +852,91 @@
   }
 }
 
+/* CALMO: final-page overrides. These intentionally live after the shared
+   project rules so the compact insight and film treatment cannot be reset by
+   legacy case-study styles. */
+.calmo-page .calmo-insights {
+  gap: 16px !important;
+  margin-top: 28px !important;
+  padding: 0 0 0 18px !important;
+  border: 0 !important;
+  border-left: 2px solid var(--calmo-orange) !important;
+  background: transparent !important;
+}
+
+.calmo-page .calmo-insights > .calmo-insights-label {
+  margin: 0 0 9px !important;
+  color: var(--calmo-orange) !important;
+  font: 500 12px / 1 "DM Mono", monospace !important;
+  letter-spacing: .1em !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid {
+  gap: 0 !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid article,
+.calmo-page .calmo-insights .calmo-gap-grid article:first-child,
+.calmo-page .calmo-insights .calmo-gap-grid article:last-child {
+  min-height: 0 !important;
+  padding: 17px 0 !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  background: transparent !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid article:first-child {
+  padding-top: 0 !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid article:last-child {
+  padding-bottom: 0 !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid h3 {
+  margin: 0 0 8px !important;
+  font-size: clamp(18px, 1.45vw, 22px) !important;
+  line-height: 1.18 !important;
+}
+
+.calmo-page .calmo-insights .calmo-gap-grid p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+.calmo-page .calmo-hero-film {
+  margin-top: 35px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  background: transparent !important;
+}
+
+.calmo-page .calmo-film-heading {
+  margin: 0 0 18px !important;
+  color: var(--dossier-ink) !important;
+  font: 400 12px / 1 "Outfit", sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .calmo-page .calmo-insights {
+    gap: 10px !important;
+    margin-top: 22px !important;
+    padding-left: 14px !important;
+  }
+
+  .calmo-page .calmo-insights .calmo-gap-grid article,
+  .calmo-page .calmo-insights .calmo-gap-grid article:first-child,
+  .calmo-page .calmo-insights .calmo-gap-grid article:last-child {
+    padding: 14px 0 !important;
+  }
+
+  .calmo-page .calmo-insights .calmo-gap-grid article:first-child { padding-top: 0 !important; }
+  .calmo-page .calmo-insights .calmo-gap-grid article:last-child { padding-bottom: 0 !important; }
+}
+
 @media (max-width: 1100px) {
   :is(.calmo-page, .readalong-page, .bodycodes-page, .human-factors-page) .case-hero-lower,
   .calmo-page .calmo-hero .case-hero-lower,
@@ -815,7 +1000,7 @@
   :is(.calmo-hero-facts, .bc-hero-facts) div:nth-child(2n) { border-right: 0; }
 
   :is(.calmo-overview-grid aside, .bc-overview-grid aside, .hf-premise-grid blockquote),
-  :is(.calmo-insight, .bc-insight, .hf-finding, .hf-synthesis-quote),
+  :is(.calmo-insight, .calmo-insights, .bc-insight, .hf-finding, .hf-synthesis-quote),
   .bodycodes-page .bc-decision {
     padding-left: 20px !important;
   }
@@ -845,5 +1030,132 @@
     padding: 0 !important;
     display: grid !important;
     grid-template-columns: 1fr;
+  }
+}
+
+/* Keep CALMO's compact mobile insight inset after the shared mobile rules. */
+@media (max-width: 760px) {
+  .calmo-page .calmo-insights { padding-left: 14px !important; }
+}
+
+/* The design-question lead is a heading, not metadata. This selector must stay
+   more specific than the shared rule that reduces case-section spans to 12px. */
+.calmo-page .calmo-overview-grid aside blockquote > span.calmo-question-lead {
+  display: block;
+  margin: 0 0 16px;
+  color: var(--dossier-ink) !important;
+  font-family: "Outfit", sans-serif !important;
+  font-size: 30px !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em !important;
+}
+
+/* The overview reads as two matched columns: label, heading, then body. */
+.calmo-page .calmo-overview-grid {
+  align-items: start;
+}
+
+.calmo-page .calmo-overview-brief > .calmo-kicker,
+.calmo-page .calmo-design-question > span {
+  margin: 0 !important;
+}
+
+.calmo-page .calmo-overview-brief > h2 {
+  margin: 18px 0 16px !important;
+}
+
+.calmo-page .calmo-design-question blockquote {
+  margin: 18px 0 0 !important;
+}
+
+.calmo-page .calmo-overview-grid aside blockquote > .calmo-question-lead {
+  margin: 0 !important;
+}
+
+.calmo-page .calmo-overview-copy > p,
+.calmo-page .calmo-design-question .calmo-question-copy {
+  font-family: "Outfit", sans-serif !important;
+  font-size: clamp(15px, 1.15vw, 17px) !important;
+  font-weight: 400 !important;
+  line-height: 1.65 !important;
+  letter-spacing: 0 !important;
+}
+
+.calmo-page .calmo-design-question .calmo-question-copy {
+  display: block;
+  margin-top: 16px;
+  color: var(--dossier-ink) !important;
+}
+
+/* Lock the two overview columns onto the same three reading rows. */
+.calmo-page .calmo-overview-grid > .calmo-overview-brief,
+.calmo-page .calmo-overview-grid > .calmo-design-question {
+  display: grid !important;
+  grid-template-rows: 18px 34px auto;
+  row-gap: 16px;
+  align-content: start;
+}
+
+.calmo-page .calmo-overview-grid > .calmo-design-question {
+  align-self: start !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  transform: none !important;
+}
+
+.calmo-page .calmo-overview-brief > .calmo-kicker,
+.calmo-page .calmo-design-question > span:first-child {
+  grid-row: 1;
+  align-self: start;
+}
+
+.calmo-page .calmo-overview-brief > h2,
+.calmo-page .calmo-design-question > .calmo-question-lead {
+  grid-row: 2;
+  align-self: start;
+  margin: 0 !important;
+}
+
+.calmo-page .calmo-design-question > .calmo-question-lead {
+  display: block;
+  color: var(--dossier-ink) !important;
+  font-family: "Outfit", sans-serif !important;
+  font-size: 30px !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em !important;
+}
+
+.calmo-page .calmo-overview-copy,
+.calmo-page .calmo-design-question > .calmo-question-copy {
+  grid-row: 3;
+  align-self: start;
+  margin: 0 !important;
+}
+
+.calmo-page .calmo-design-question > .calmo-question-copy {
+  font-weight: 400 !important;
+}
+
+@media (max-width: 1100px) {
+  .calmo-page .calmo-overview-grid > .calmo-overview-brief,
+  .calmo-page .calmo-overview-grid > .calmo-design-question {
+    display: block !important;
+  }
+
+  .calmo-page .calmo-overview-brief > h2,
+  .calmo-page .calmo-design-question > .calmo-question-lead {
+    margin: 18px 0 16px !important;
+  }
+
+  .calmo-page .calmo-design-question > .calmo-question-copy {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .calmo-page .calmo-overview-grid aside blockquote > span.calmo-question-lead {
+    font-size: 27px !important;
   }
 }

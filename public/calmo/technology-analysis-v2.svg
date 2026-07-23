@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080">
+  <defs>
+    <clipPath id="tableClip"><rect x="70" y="60" width="1460" height="960" rx="18"/></clipPath>
+    <style>
+      .text { font-family: Arial, Helvetica, sans-serif; fill: #171717; font-size: 24px; }
+      .head { font-family: Arial, Helvetica, sans-serif; fill: #171717; font-size: 27px; font-weight: 700; }
+      .label { font-family: Arial, Helvetica, sans-serif; fill: #171717; font-size: 27px; font-weight: 700; }
+      .grid { stroke: #9298D0; stroke-width: 2; stroke-opacity: .72; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1080" fill="#E9EBFA"/>
+  <g clip-path="url(#tableClip)">
+    <rect x="70" y="60" width="1460" height="960" fill="#E9EBFA"/>
+    <rect x="70" y="60" width="1460" height="100" fill="#9298D0"/>
+
+    <rect x="70" y="160" width="250" height="390" fill="#DFE3FA"/>
+    <rect x="320" y="160" width="1280" height="215" fill="#E9EBFA"/>
+    <rect x="320" y="375" width="1280" height="175" fill="#DFE3FA"/>
+    <rect x="70" y="550" width="1460" height="260" fill="#E9EBFA"/>
+    <rect x="70" y="810" width="1460" height="210" fill="#DFE3FA"/>
+
+    <line class="grid" x1="320" y1="60" x2="320" y2="1020"/>
+    <line class="grid" x1="660" y1="60" x2="660" y2="1020"/>
+    <line class="grid" x1="1050" y1="60" x2="1050" y2="1020"/>
+    <line class="grid" x1="70" y1="160" x2="1530" y2="160"/>
+    <line class="grid" x1="320" y1="375" x2="1530" y2="375"/>
+    <line class="grid" x1="70" y1="550" x2="1530" y2="550"/>
+    <line class="grid" x1="70" y1="810" x2="1530" y2="810"/>
+
+    <text class="head" x="94" y="121">Dimension</text>
+    <text class="head" x="344" y="121">Sub-dimension</text>
+    <text class="head" x="684" y="121">Technology/Tools</text>
+    <text class="head" x="1074" y="121">Key Characteristics</text>
+
+    <text class="label" x="94" y="207">
+      <tspan x="94" dy="0">Physiological</tspan>
+      <tspan x="94" dy="34">Signals</tspan>
+    </text>
+    <text class="text" x="344" y="207">
+      <tspan x="344" dy="0">Heart Rate (HR)</tspan>
+      <tspan x="344" dy="32">Heart Rate Variability</tspan>
+      <tspan x="344" dy="32">(HRV), Respiration</tspan>
+    </text>
+    <text class="text" x="684" y="207">
+      <tspan x="684" dy="0">UWB Radar</tspan>
+      <tspan x="684" dy="38">24GHz CW Radar</tspan>
+      <tspan x="684" dy="38">Wearable ECG/PPG</tspan>
+    </text>
+    <text class="text" x="1074" y="207">
+      <tspan x="1074" dy="0">Non-contact monitoring reduces</tspan>
+      <tspan x="1074" dy="32">stress-induced behaviors caused by</tspan>
+      <tspan x="1074" dy="32">equipment interference.</tspan>
+    </text>
+
+    <text class="text" x="344" y="421">
+      <tspan x="344" dy="0">Cortisol &amp;</tspan>
+      <tspan x="344" dy="32">Adrenocorticotropic</tspan>
+      <tspan x="344" dy="32">Hormone (ACTH)</tspan>
+    </text>
+    <text class="text" x="684" y="421">
+      <tspan x="684" dy="0">Saliva analysis</tspan>
+      <tspan x="684" dy="38">Blood test</tspan>
+    </text>
+    <text class="text" x="1074" y="421">
+      <tspan x="1074" dy="0">Not suitable for</tspan>
+      <tspan x="1074" dy="32">self-testing/monitoring by adopters</tspan>
+      <tspan x="1074" dy="32">(invasive).</tspan>
+    </text>
+
+    <text class="label" x="94" y="602">
+      <tspan x="94" dy="0">Behavior &amp;</tspan>
+      <tspan x="94" dy="34">Posture</tspan>
+    </text>
+    <text class="text" x="344" y="596">
+      <tspan x="344" dy="0">Lying down, Ear</tspan>
+      <tspan x="344" dy="30">position, Mouth</tspan>
+      <tspan x="344" dy="30">opening, Nose</tspan>
+      <tspan x="344" dy="30">licking, Tail wagging,</tspan>
+      <tspan x="344" dy="30">Attack/Defensive</tspan>
+      <tspan x="344" dy="30">posture, Body</tspan>
+      <tspan x="344" dy="30">shivering</tspan>
+    </text>
+    <text class="text" x="684" y="596">
+      <tspan x="684" dy="0">Depth Camera</tspan>
+      <tspan x="684" dy="38">Vision algorithms</tspan>
+      <tspan x="684" dy="38">Wearable Accelerometer</tspan>
+      <tspan x="684" dy="38">Gyroscope</tspan>
+    </text>
+    <text class="text" x="1074" y="596">
+      <tspan x="1074" dy="0">Capable of precisely capturing</tspan>
+      <tspan x="1074" dy="32">subtle changes in ear position and</tspan>
+      <tspan x="1074" dy="32">mouth movements, as well as</tspan>
+      <tspan x="1074" dy="32">tail-wagging details and posture</tspan>
+      <tspan x="1074" dy="32">analysis.</tspan>
+    </text>
+
+    <text class="label" x="94" y="862">
+      <tspan x="94" dy="0">Acoustic</tspan>
+      <tspan x="94" dy="34">Environment</tspan>
+    </text>
+    <text class="text" x="344" y="862">
+      <tspan x="344" dy="0">Whining, Barking,</tspan>
+      <tspan x="344" dy="32">Panting, etc</tspan>
+    </text>
+    <text class="text" x="684" y="862">
+      <tspan x="684" dy="0">Microphone</tspan>
+      <tspan x="684" dy="38">Noise sensors</tspan>
+      <tspan x="684" dy="38">Audio feature extraction</tspan>
+      <tspan x="684" dy="32">algorithms</tspan>
+    </text>
+    <text class="text" x="1074" y="862">
+      <tspan x="1074" dy="0">Non-contact monitoring, real-time</tspan>
+      <tspan x="1074" dy="32">identification of abnormal frequency</tspan>
+      <tspan x="1074" dy="32">points, and rapid early warning.</tspan>
+    </text>
+  </g>
+  <rect x="70" y="60" width="1460" height="960" rx="18" fill="none" stroke="#9298D0" stroke-width="3"/>
+</svg>

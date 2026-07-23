@@ -115,7 +115,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-context" className="case-section llm-editorial-section problem-section">
-        <div className="llm-section-marker"><span>01</span><small>Context</small></div>
+        <div className="llm-section-marker"><span>01 /</span><small>Context</small></div>
         <div className="llm-section-content">
           <div className="llm-context-grid">
             <div className="llm-reading-copy">
@@ -133,7 +133,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-experiment" className="case-section llm-editorial-section">
-        <div className="llm-section-marker"><span>02</span><small>Experiment setting</small></div>
+        <div className="llm-section-marker"><span>02 /</span><small>Experiment setting</small></div>
         <div className="llm-section-content">
           <h2>A single-variable A/B comparison</h2>
           <p className="llm-editorial-lede">20 real academic transcript excerpts (tutorials, lectures, group discussions) were each run under both conditions on the same model and platform, producing 20 per condition.</p>
@@ -153,7 +153,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-process" className="case-section llm-editorial-section">
-        <div className="llm-section-marker"><span>03</span><small>Process</small></div>
+        <div className="llm-section-marker"><span>03 /</span><small>Process</small></div>
         <div className="llm-section-content">
           <h2>Four-stage blind evaluation</h2>
           <p className="llm-editorial-lede">To keep evaluation unbiased, the process ran in four stages.</p>
@@ -164,7 +164,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-framework" className="case-section llm-editorial-section">
-        <div className="llm-section-marker"><span>04</span><small>Theory framework</small></div>
+        <div className="llm-section-marker"><span>04 /</span><small>Theory framework</small></div>
         <div className="llm-section-content">
           <h2>Three dimensions, one causal chain</h2>
           <div className="llm-framework-intro">
@@ -200,7 +200,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-evidence" className="case-section llm-editorial-section llm-evidence-section">
-        <div className="llm-section-marker"><span>05</span><small>Analysis result</small></div>
+        <div className="llm-section-marker"><span>05 /</span><small>Analysis result</small></div>
         <div className="llm-section-content">
           <h2>Data Analysis and Results</h2>
           <p className="llm-key-finding">Expert-persona prompts produced their clearest improvement in <strong>actionability</strong>.</p>
@@ -233,7 +233,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-implications" className="case-section llm-editorial-section llm-implications-section">
-        <div className="llm-section-marker"><span>06</span><small>UX implications</small></div>
+        <div className="llm-section-marker"><span>06 /</span><small>UX implications</small></div>
         <div className="llm-section-content">
           <ol className="llm-implication-list">
             <li><span>01</span><p>The <em>persona prefix</em> is a low-cost, flexible approach for improving AI-assisted workflows, worth treating as a genuine <em>UX design decision</em>.</p></li>
@@ -440,10 +440,10 @@ function App() {
 
   if (page === 'about') return <AboutPage go={go} onHome={() => { setPage('home'); window.scrollTo(0, 0) }} />
   if (page === 'case-study') return <CaseStudyPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('calmo')} />
-  if (page === 'calmo') return <><CalmoPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('read-along')} /><CaseToc rootSelector=".calmo-page" accent="#d88143" items={['01 / OVERVIEW', '02 / DISCOVERING THE GAP', '03 / DEFINING THE TRANSITION', '04 / DESIGNING THE SYSTEM', '05 / TESTING & ITERATION', '06 / FINAL DESIGN & PROTOTYPE', '07 / RESPONSIBILITY & REFLECTION']} /></>
-  if (page === 'read-along') return <><ReadAlongCasePage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('bodycodes')} /><CaseToc rootSelector=".readalong-page" accent="#278a68" items={['01 / OVERVIEW', '02 / SYSTEM MAPPING', '03 / FIVE FRICTION TYPES', '04 / SOLUTIONS']} /></>
-  if (page === 'bodycodes') return <><BodyCodesPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('human-factors')} /><CaseToc rootSelector=".bodycodes-page" accent="#287662" items={['01 / OVERVIEW & MY ROLE', '02 / WHY CORPORATE UNIFORMS', '03 / UNDERSTANDING THE CURRENT SYSTEM', '04 / DESIGN STRATEGY', '05 / PROPOSED SERVICE', '06 / MAKING IT VIABLE', '07 / REFLECTION & NEXT STEPS']} /></>
-  if (page === 'human-factors') return <><HumanFactorsPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('case-study')} /><CaseToc rootSelector=".human-factors-page" accent="#76629d" items={['01 / RESEARCH PREMISE', '02 / STUDY OVERVIEW', '03 / EXPERIMENT 01', '04 / EXPERIMENT 02', '05 / EXPERIMENT 03', '06 / CROSS-STUDY SYNTHESIS', '07 / UX PRINCIPLES & REFLECTION']} /></>
+  if (page === 'calmo') return <CalmoPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('read-along')} />
+  if (page === 'read-along') return <ReadAlongCasePage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('bodycodes')} />
+  if (page === 'bodycodes') return <BodyCodesPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('human-factors')} />
+  if (page === 'human-factors') return <HumanFactorsPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('case-study')} />
 
   return <main className="home-page">
     <SiteHeader onHome={() => go('top')} onNavigate={go} />
