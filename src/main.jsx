@@ -43,6 +43,15 @@ const skillSets = {
       ['Product & UX', ['Usability Diagnosis', 'Competitive Analysis', 'PRD & Functional Requirements', 'Constraint-led Decisions']],
       ['Interface & narrative', ['Figma Prototyping', 'Design Systems', 'AI-assisted Design Workflows', 'Bilingual Content & Localisation', 'Case Study Storytelling']]
     ]
+  },
+  build: {
+    label: 'BUILD',
+    line: 'From Idea To testable experience',
+    intro: 'I use AI-assisted and low-code workflows to turn validated ideas into functional prototypes, making concepts tangible early and easier to test.',
+    groups: [
+      ['Prototype & build', ['AI-assisted Prototyping', 'Vibe Coding', 'Low-code Development', 'Functional Prototypes']],
+      ['Delivery workflow', ['Rapid Iteration', 'Design-to-build Collaboration']]
+    ]
   }
 }
 
@@ -272,7 +281,7 @@ const readAlongSolutions = [
     frictionCopy: 'The system triggers the ‘Read this aloud’ prompt after 5 seconds of silence, treating it as a binary ‘failure’ rather than a meaningful ‘signal’ — misclassifying children’s cognitive processing (thinking, hesitation, or anxiety) simply as ‘no input.’',
     solution: 'Positive responds while silence',
     solutionCopy: <>The redesign responds the same way to all of them: with encouragement, never with ‘wrong’.<br/><br/>According to the silence time, from soft prompt to reading together reminder to syllable guide. A short buffer window enable children response gradually, keeps the system from reacting too fast to intervene thinking pauses.</>,
-    theory: <><p><em>Piaget (1952) — Stages of Cognitive Development.</em> Children aged 2–7 need dual visual+auditory stimulation and extended wait times; children aged 7–11 need step-by-step structured rules, but the original system treated them identically. This redesign differentiates support by pacing rather than age directly.</p><p><em>Krashen (1982) — Affective Filter Hypothesis.</em> Removing blame from the feedback keeps a young learner's affective filter low and their willingness to keep trying intact.</p></>,
+    theory: <><p><em>Piaget (1952) — Stages of Cognitive Development.</em> Children aged 2–7 need dual visual+auditory stimulation and extended wait times; children aged 7–11 need step-by-step structured rules. This redesign differentiates support by pacing rather than age directly.</p><p><em>Krashen (1982) — Affective Filter Hypothesis.</em> Removing blame from the feedback keeps a young learner's affective filter low and their willingness to keep trying intact.</p></>,
   },
   {
     no: '02',
@@ -308,33 +317,117 @@ const readAlongSolutions = [
   },
 ]
 
-function ReadAlongImage({ name, alt, caption, className = '', onClick }) {
+const readAlongMaps = [
+  {
+    no: '01',
+    title: 'Story-to-reward loop',
+    label: 'Whole experience',
+    image: '2.png',
+    alt: 'Read Along system overview',
+    intro: 'This flowchart provides a high-level overview of the entire page experience. Read Along is a voice-interactive system designed around the goal of reading individual stories to collect stars. The system monitors the user’s reading completion rate and provides various feedback or rewards based on performance.',
+    className: 'ra-map-scale-80',
+  },
+  {
+    no: '02',
+    title: 'Recognition flow',
+    label: 'System response',
+    image: '3.png',
+    alt: 'System interaction logic and classification',
+    intro: 'This flowchart illustrates a detailed breakdown of all interactions observed within the system. Divided interaction behaviours into three types: Right Input (Green), No Input (Yellow), Error And Correction (Red).',
+  },
+  {
+    no: '03',
+    title: 'User-led controls',
+    label: 'Active interaction',
+    image: '4.png',
+    alt: 'User active interaction',
+    intro: 'In addition to the visual and auditory feedback provided by the system, users can also engage in autonomous reading interactions. For example, clicking on a word triggers a pronunciation hint, or interacting with the mute notification icon at the bottom of the screen.',
+    className: 'ra-map-scale-60',
+  },
+]
+
+const readAlongBreakdownGroups = [
+  {
+    no: '01–04',
+    title: 'System-triggered interactions',
+    label: 'Four friction points',
+    image: '5.png',
+    alt: 'System-triggered reading frictions one to four',
+    summary: 'Automatic recognition treats hesitation, mistakes, skipped reading and correction as fixed system states, leaving little room for the learner to pause, self-correct or stay in control.',
+    issues: ['Reading stagnation', 'Detected reading error', 'Skip-reading', 'Error correction'],
+  },
+  {
+    no: '05',
+    title: 'User-led interactions',
+    label: 'One friction point',
+    image: '6.png',
+    alt: 'User-led interaction and implicit controls',
+    summary: 'Manual controls exist, but their state and consequences are not clearly communicated, making user-led actions difficult to predict.',
+    issues: ['Implicit controls'],
+  },
+]
+
+function ReadAlongImage({ name, alt, caption, intro, className = '', onClick, eager = false }) {
   const activate = (event) => {
     if (!onClick) return
     event.stopPropagation()
     onClick()
   }
-  return <figure className={`ra-image ${className}`} onClick={activate} onKeyDown={(event) => { if (onClick && (event.key === 'Enter' || event.key === ' ')) activate(event) }} role={onClick ? 'button' : undefined} tabIndex={onClick ? 0 : undefined}><img src={`/read-along/${name}`} alt={alt}/>{caption && <figcaption>{caption}</figcaption>}</figure>
+  return <figure
+    className={`ra-image ${className}`}
+    onClick={activate}
+    onKeyDown={(event) => {
+      if (!onClick || (event.key !== 'Enter' && event.key !== ' ')) return
+      event.preventDefault()
+      activate(event)
+    }}
+    role={onClick ? 'button' : undefined}
+    tabIndex={onClick ? 0 : undefined}
+    aria-label={onClick ? `Expand ${alt}` : undefined}
+  >
+    {intro && <p className="ra-image-intro">{intro}</p>}
+    <img src={`/read-along/${name}`} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async"/>
+    {caption && <figcaption>{typeof caption === 'string' ? <strong>{caption}</strong> : caption}</figcaption>}
+  </figure>
 }
 
 function ReadAlongCasePage({ onHome, onContact, onNext }) {
   const [activeSolution, setActiveSolution] = useState(0)
   const [solutionVisible, setSolutionVisible] = useState(false)
+  const [activeMap, setActiveMap] = useState(0)
+  const [activeBreakdown, setActiveBreakdown] = useState(0)
   const [lightbox, setLightbox] = useState(null)
-  const solutionCursor = useRef(null)
+  const lightboxCloseRef = useRef(null)
+  const previousFocusRef = useRef(null)
   const active = readAlongSolutions[activeSolution]
+  const activeSolutionImage = activeSolution >= 3
+    ? `solution-${activeSolution + 1}.svg`
+    : `solution-${activeSolution + 1}.png`
+  const map = readAlongMaps[activeMap]
+  const breakdown = readAlongBreakdownGroups[activeBreakdown]
   const chooseSolution = (index) => {
     setActiveSolution(index)
     setSolutionVisible(false)
   }
-  const moveSolutionCursor = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    if (!solutionCursor.current) return
-    solutionCursor.current.style.left = `${event.clientX - rect.left}px`
-    solutionCursor.current.style.top = `${event.clientY - rect.top}px`
-    solutionCursor.current.classList.add('is-visible')
-  }
-  const hideSolutionCursor = () => solutionCursor.current?.classList.remove('is-visible')
+
+  useEffect(() => {
+    if (!lightbox) return undefined
+    previousFocusRef.current = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const focusFrame = requestAnimationFrame(() => lightboxCloseRef.current?.focus())
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setLightbox(null)
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      cancelAnimationFrame(focusFrame)
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', closeOnEscape)
+      previousFocusRef.current?.focus?.()
+    }
+  }, [lightbox])
+
   return <div className="case-page case-redesign readalong-page">
     <CaseHeader onHome={onHome} onContact={onContact}/>
     <main>
@@ -357,20 +450,159 @@ function ReadAlongCasePage({ onHome, onContact, onNext }) {
         diagram
       />
 
-      <section className="case-section ra-overview"><div className="case-section-label">01 / OVERVIEW</div><div className="ra-overview-grid"><div className="ra-overview-copy"><h2>Overview</h2><p>Google Read Along is a voice-interactive reading app designed for children learning a second language. Users read stories aloud to collect stars while the system tracks completion and provides real-time phonetic feedback.</p><p>This project reverse-engineered the app's full interaction logic before evaluating it, classifying exactly where its error-handling system breaks down for young second-language learners.</p><p>Shift from correcting errors to understanding learners, delivering context-aware, developmentally adaptive, and minimally disruptive support that preserves both learning effectiveness and children's autonomy.</p></div><div className="ra-overview-points">{[
-        ['01','Full interaction-flow documentation','System-level, single-story, and user-initiated behaviour documented in complete flow charts before any redesign began.'],
-        ['02','Five-part error taxonomy','Each error type observed during testing: stagnation, system-detected errors, skip-reading, correction failures, and implicit controls.'],
-        ['03','Five scoped redesign solutions','Progressive guidance, toast feedback, coverage checking, layered correction, and explicit state controls — each matched 1:1 to an error type.'],
-        ['04','Theoretical grounding','Piaget, Krashen, Nielsen, Ryan & Deci, Clark & Brennan — applied throughout to justify specific design decisions.']
-      ].map(([no,title,copy]) => <article key={no}><span>{no}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div></div></section>
+      <section className="case-section ra-overview" id="readalong-context">
+        <div className="case-section-label">01 / CONTEXT &amp; GOAL</div>
+        <div className="ra-section-head">
+          <h2>Understand the system before redesigning it.</h2>
+          <p>Google Read Along is a voice-interactive reading app designed for children learning a second language. Users read stories aloud to collect stars while the system tracks completion and provides real-time phonetic feedback.</p>
+        </div>
+        <div className="ra-overview-grid">
+          <div className="ra-overview-copy">
+            <p>This project reverse-engineered the app's full interaction logic before evaluating it, classifying exactly where its error-handling system breaks down for young second-language learners.</p>
+            <p>The design goal shifted from simply correcting errors to understanding learners: provide context-aware, developmentally adaptive and minimally disruptive support while preserving children's autonomy.</p>
+          </div>
+          <div className="ra-overview-points">{[
+            ['01', 'Map', 'Document system, story and user-initiated interaction flows before proposing changes.'],
+            ['02', 'Diagnose', 'Group breakdowns into five distinct friction types rather than treating every error alike.'],
+            ['03', 'Redesign', 'Match each friction to one focused interaction response and an explicit theoretical rationale.'],
+          ].map(([no, title, copy]) => <article key={no}><span>{no}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
+        </div>
+      </section>
 
-      <section className="case-section case-soft ra-mapping"><div className="case-section-label">02 / SYSTEM MAPPING</div><h2>System Mapping</h2><div className="ra-map-stack"><ReadAlongImage name="2.png" alt="Read Along system overview" caption={<><strong>Read Along System Overview: story selection → reading → star rewards</strong><span>This flowchart provides a high-level overview of the entire page experience. Read Along is a voice-interactive system designed around the goal of reading individual stories to collect stars. The system monitors the user’s reading completion rate and provides various feedback or rewards based on performance.</span></>}/><ReadAlongImage name="3.png" alt="System interaction logic and classification" caption={<><strong>System Interaction logic and classification</strong><span>This flowchart illustrates a detailed breakdown of all interactions observed within the system. Divided interaction behaviours into three types: Right Input(Green),No Input(Yellow), Error And Correction(Red).</span></>}/><ReadAlongImage name="4.png" alt="User active interaction" caption={<><strong>User Active Interaction</strong><span>In addition to the visual and auditory feedback provided by the system, users can also engage in autonomous reading interactions. For example, clicking on a word triggers a pronunciation hint, or interacting with the mute notification icon at the bottom of the screen.</span></>}/></div></section>
+      <section className="case-section case-soft ra-mapping" id="readalong-mapping">
+        <div className="case-section-label">02 / HOW IT WORKS</div>
+        <div className="ra-section-head">
+          <h2>Three levels of the same reading experience.</h2>
+          <p>Move from the whole story loop to the system's recognition logic and, finally, to the controls initiated by the child.</p>
+        </div>
+        <div className="ra-control-tabs" role="tablist" aria-label="System mapping views">
+          {readAlongMaps.map((item, index) => <button
+            key={item.no}
+            id={`ra-map-tab-${index}`}
+            role="tab"
+            aria-selected={activeMap === index}
+            aria-controls="ra-map-panel"
+            className={activeMap === index ? 'active' : ''}
+            onClick={() => setActiveMap(index)}
+          ><span>{item.no}</span><strong>{item.title}</strong><small>{item.label}</small></button>)}
+        </div>
+        <div id="ra-map-panel" className="ra-map-panel" role="tabpanel" aria-labelledby={`ra-map-tab-${activeMap}`} key={map.no}>
+          <ReadAlongImage name={map.image} alt={map.alt} className={map.className} intro={map.intro}/>
+        </div>
+      </section>
 
-      <section className="case-section ra-frictions"><div className="case-section-label">03 / FIVE FRICTION TYPES</div><h2>Five Friction Types</h2><p className="case-lede">Interaction testing surfaced five distinct classes of system friction: 4 triggered automatically by the system during single-story interaction, and 1 arising from the system's passive response to user-initiated actions. Each mapped with its own flow chart and theoretical grounding.</p><div className="ra-friction-overview"><div><article><h3>Triggered within the system's automatic recognition flow</h3><ol><li><span>01</span><strong>Reading Stagnation / Hesitation</strong></li><li><span>02</span><strong>System-Detected Reading Error</strong></li><li><span>03</span><strong>Skip-reading</strong></li><li><span>04</span><strong>Error Correction</strong></li></ol></article><ReadAlongImage name="5.png" alt="Four frictions triggered within the system's automatic recognition flow"/></div><div><article><h3>User Lead Interaction, where the system's unclear UI causes user confusion</h3><ol><li><span>05</span><strong>User-initiated actions</strong></li></ol></article><ReadAlongImage name="6.png" alt="User-led interaction friction"/></div></div></section>
+      <section className="case-section ra-frictions" id="readalong-frictions">
+        <div className="case-section-label">03 / WHERE IT BREAKS</div>
+        <div className="ra-section-head">
+          <h2>Two sources of friction, not five disconnected problems.</h2>
+          <p>The audit groups four issues inside automatic recognition and one inside user-led controls. This makes the diagnosis clear before the five redesign decisions that follow.</p>
+        </div>
+        <div className="ra-friction-index ra-breakdown-index" role="tablist" aria-label="Interaction friction groups">
+          {readAlongBreakdownGroups.map((item, index) => <button
+            key={item.no}
+            id={`ra-breakdown-tab-${index}`}
+            role="tab"
+            aria-selected={activeBreakdown === index}
+            aria-controls="ra-breakdown-panel"
+            className={activeBreakdown === index ? 'active' : ''}
+            onClick={() => setActiveBreakdown(index)}
+          ><span>{item.no}</span><strong>{item.title}</strong><small>{item.label}</small></button>)}
+        </div>
+        <div id="ra-breakdown-panel" className="ra-friction-preview ra-breakdown-preview" role="tabpanel" aria-labelledby={`ra-breakdown-tab-${activeBreakdown}`} key={breakdown.no}>
+          <div>
+            <span>{breakdown.label}</span>
+            <h3>{breakdown.title}</h3>
+            <p>{breakdown.summary}</p>
+            <div className="ra-friction-coverage" aria-label="Issues in this group">
+              {breakdown.issues.map(issue => <span key={issue}>{issue}</span>)}
+            </div>
+          </div>
+          <ReadAlongImage name={breakdown.image} alt={breakdown.alt}/>
+        </div>
+      </section>
 
-      <section className="case-section case-soft ra-solutions"><div className="case-section-label">04 / SOLUTIONS</div><h2>Solutions</h2><p className="case-lede">Interaction testing surfaced five distinct classes of system friction: 4 triggered automatically by the system during single-story interaction, and 1 arising from the system's passive response to user-initiated actions. Each mapped with its own flow chart and theoretical grounding.</p><div className="ra-diagnostic"><div className="ra-friction-tabs" role="tablist" aria-label="Five friction types">{readAlongSolutions.map((item, index) => <button key={item.no} role="tab" aria-label={`${item.no} ${item.friction}`} aria-selected={activeSolution === index} className={activeSolution === index ? 'active' : ''} onClick={() => chooseSolution(index)}><span>{item.no} / {item.friction}</span></button>)}</div><div className={`ra-flip-shell${solutionVisible ? ' is-flipped' : ''}`}><div className="ra-flip-card"><article className="ra-friction-focus" onClick={() => setSolutionVisible(true)} onMouseMove={moveSolutionCursor} onMouseLeave={hideSolutionCursor}><div className="ra-card-meta">FRICTION #{active.no}</div><h3>{active.friction}</h3><p>{active.frictionCopy}</p><ReadAlongImage name={`friction-${activeSolution + 1}.png`} alt={`${active.friction} flow chart`}/><span ref={solutionCursor} className="ra-card-cursor" aria-hidden="true">View solution ↗</span></article><article className="ra-solution-reveal" aria-hidden={!solutionVisible} onClick={() => setSolutionVisible(false)}><div className={`ra-solution-main${activeSolution === 1 || activeSolution === 2 ? ' ra-solution-main-fill' : ''}`}><div className="ra-card-meta">SOLUTION #{active.no}</div><h3>{active.solution}</h3><p>{active.solutionCopy}</p><ReadAlongImage name={`solution-${activeSolution + 1}.png`} alt={`${active.solution} solution flow chart`} className={`ra-zoom-image${activeSolution === 1 || activeSolution === 2 ? ' ra-solution-image-fill' : ''}`} onClick={() => setLightbox({ name: `solution-${activeSolution + 1}.png`, alt: `${active.solution} solution flow chart` })}/></div><aside><span>THEORETICAL GROUNDING</span>{active.theory}</aside></article></div></div></div></section>
+      <section className="case-section case-soft ra-solutions" id="readalong-solutions">
+        <div className="case-section-label">04 / REDESIGN DECISIONS</div>
+        <div className="ra-section-head">
+          <h2>One friction. One response. One reason.</h2>
+          <p>Select a friction, then open the card to see how the redesigned interaction preserves clarity and learner control.</p>
+        </div>
+        <div className="ra-diagnostic">
+          <div className="ra-friction-tabs" role="tablist" aria-label="Five redesign decisions">
+            {readAlongSolutions.map((item, index) => <button
+              key={item.no}
+              id={`ra-solution-tab-${index}`}
+              role="tab"
+              aria-selected={activeSolution === index}
+              aria-controls="ra-solution-panel"
+              className={activeSolution === index ? 'active' : ''}
+              onClick={() => chooseSolution(index)}
+            ><span>{item.no}</span><strong>{item.friction}</strong></button>)}
+          </div>
+          <div id="ra-solution-panel" className={`ra-flip-shell${solutionVisible ? ' is-flipped' : ''}`} role="tabpanel" aria-labelledby={`ra-solution-tab-${activeSolution}`}>
+            <div className="ra-flip-card">
+              <article
+                className="ra-friction-focus"
+                role="button"
+                tabIndex={solutionVisible ? -1 : 0}
+                aria-hidden={solutionVisible}
+                aria-label={`View solution for ${active.friction}`}
+                onClick={() => setSolutionVisible(true)}
+                onKeyDown={(event) => {
+                  if (event.key !== 'Enter' && event.key !== ' ') return
+                  event.preventDefault()
+                  setSolutionVisible(true)
+                }}
+              >
+                <div className="ra-card-meta">FRICTION {active.no}</div>
+                <h3>{active.friction}</h3>
+                <p>{active.frictionCopy}</p>
+                <ReadAlongImage name={`friction-${activeSolution + 1}.png`} alt={`${active.friction} flow chart`}/>
+                <span className="ra-flip-action" aria-hidden="true">View solution <span>→</span></span>
+              </article>
+              <article className="ra-solution-reveal" aria-hidden={!solutionVisible}>
+                <div className={`ra-solution-main${activeSolution === 1 || activeSolution === 2 ? ' ra-solution-main-fill' : ''}`}>
+                  <div className="ra-card-meta">SOLUTION {active.no}</div>
+                  <h3>{active.solution}</h3>
+                  <p>{active.solutionCopy}</p>
+                  <ReadAlongImage
+                      name={activeSolutionImage}
+                      alt={`${active.solution} solution flow chart`}
+                      className={`ra-zoom-image${activeSolution === 1 || activeSolution === 2 ? ' ra-solution-image-fill' : ''}`}
+                      onClick={solutionVisible
+                        ? () => setLightbox({ name: activeSolutionImage, alt: `${active.solution} solution flow chart` })
+                        : undefined}
+                  />
+                </div>
+                <aside><span>THEORETICAL GROUNDING</span>{active.theory}<button type="button" tabIndex={solutionVisible ? 0 : -1} onClick={() => setSolutionVisible(false)}>Back to friction <span>↩</span></button></aside>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="case-section ra-validation" id="readalong-validation">
+        <div className="case-section-label">05 / VALIDATION &amp; LIMITATIONS</div>
+        <div className="ra-section-head">
+          <h2>A structured proposal, not a claim of proven impact.</h2>
+          <p>The interaction logic is now testable. Learning outcomes, emotional response and recognition performance still need evidence from children using the redesigned flows.</p>
+        </div>
+        <div className="ra-validation-grid">
+          <article><span>ESTABLISHED</span><h3>What this work makes clear</h3><p>It connects five observed friction patterns to five explicit recovery paths across silence, misrecognition, skipping, correction and listening state.</p></article>
+          <article><span>UNPROVEN</span><h3>What the design cannot claim yet</h3><p>Recognition accuracy, comprehension, emotional response and long-term engagement were not validated with children in this study.</p></article>
+          <article><span>NEXT</span><h3>How I would test it</h3><p>Run moderated story-reading tasks with children and guardians; compare completion, error recovery, unnecessary intervention and perceived control.</p></article>
+        </div>
+      </section>
+
+      <section className="case-section case-soft ra-reflection" id="readalong-reflection">
+        <div className="case-section-label">06 / REFLECTION</div>
+        <div className="ra-reflection-grid">
+          <h2>Design the recovery path, not only the happy path.</h2>
+          <p>In a speech-led learning experience, silence, uncertainty and misrecognition are not edge cases; they are the experience. The redesign therefore makes system state legible, explains what happened and preserves the child's choice to continue, correct or pause.</p>
+        </div>
+      </section>
     </main>
-    {lightbox && <div className="ra-lightbox" role="dialog" aria-modal="true" aria-label="Expanded solution diagram" onClick={() => setLightbox(null)}><button onClick={() => setLightbox(null)} aria-label="Close expanded image">Close ×</button><img src={`/read-along/${lightbox.name}`} alt={lightbox.alt} onClick={(event) => event.stopPropagation()}/></div>}
+    {lightbox && <div className="ra-lightbox" role="dialog" aria-modal="true" aria-label="Expanded solution diagram" onClick={() => setLightbox(null)}><button ref={lightboxCloseRef} onClick={() => setLightbox(null)} aria-label="Close expanded image">Close ×</button><img src={`/read-along/${lightbox.name}`} alt={lightbox.alt} onClick={(event) => event.stopPropagation()}/></div>}
     <CaseFooter onHome={onHome} onNext={onNext}/>
   </div>
 }
@@ -478,12 +710,12 @@ function App() {
     <section id="about" className="about section">
       <div className="section-kicker home-reveal">ABOUT ME</div>
       <div className="home-info-layout about-info-layout">
-        <div className="about-content home-info-primary home-reveal"><h2>Research-led.<br/><em>human-centric.</em><br/>Always curious.</h2><div><p className="body-copy">I think in systems, communicate with stakeholders at every level, and translate research findings into decisions that stick. My background spans UX engineering, furniture engineering, HR management and academic editing — giving me a broad perspective on how people interact with systems across very different contexts.</p><button className="text-link" onClick={() => go('about')}>Learn more about me <ArrowDownRight size={17}/></button></div></div>
+        <div className="about-content home-info-primary home-reveal"><h2>Research-led.<br/><em>human-centric.</em><br/>End-to-End.</h2><div><p className="body-copy">I think in systems, communicate with stakeholders at every level, and translate research findings into decisions that stick. My background spans UX engineering, furniture engineering, HR management and academic editing — giving me a broad perspective on how people interact with systems across very different contexts.</p><button className="text-link" onClick={() => go('about')}>Learn more about me <ArrowDownRight size={17}/></button></div></div>
         <div className="skill-explorer home-info-side home-reveal" data-area={activeSkills}>
           <div className="skill-switch" role="tablist" aria-label="Skills">
-            {Object.entries(skillSets).map(([key, set]) => <button key={key} className={activeSkills === key ? 'active' : ''} onClick={() => setActiveSkills(key)} role="tab" aria-selected={activeSkills === key}>{set.label}</button>)}
+            {Object.entries(skillSets).map(([key, set]) => <button key={key} id={`skill-tab-${key}`} className={activeSkills === key ? 'active' : ''} onClick={() => setActiveSkills(key)} role="tab" type="button" aria-selected={activeSkills === key} aria-controls={`skill-panel-${key}`}>{set.label}</button>)}
           </div>
-          <div className="skill-panel" key={activeSkills} role="tabpanel">
+          <div className="skill-panel" id={`skill-panel-${activeSkills}`} key={activeSkills} role="tabpanel" aria-labelledby={`skill-tab-${activeSkills}`}>
             <div className="skill-panel-intro"><p className="skill-panel-line">{skillSets[activeSkills].line}</p><p>{skillSets[activeSkills].intro}</p></div>
             <div className="skill-groups">{skillSets[activeSkills].groups.map(([group, tags]) => <article key={group}><h3>{group}</h3><div>{tags.map((tag, index) => <span className="skill-tag" style={{ '--tag-index': index }} key={tag}>{tag}</span>)}</div></article>)}</div>
           </div>

@@ -216,19 +216,22 @@
 }
 .skill-switch{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(3,minmax(0,1fr));
   border-bottom:1px solid var(--line);
 }
 .skill-switch button{
   position:relative;
+  min-height:44px;
   padding:0 0 15px;
   color:rgba(31,32,28,.42);
   font:500 11px/1 'DM Mono',monospace;
   letter-spacing:.1em;
   text-align:left;
-  transition:color .28s ease;
+  transition:color .28s ease,opacity .28s ease;
 }
 .skill-switch button+button{padding-left:18px}
+.skill-switch button:hover:not(.active){color:rgba(31,32,28,.72)}
+.skill-switch button:focus-visible{outline:2px solid var(--violet);outline-offset:4px}
 .skill-switch button::after{
   content:'';
   position:absolute;
@@ -243,6 +246,7 @@
 }
 .skill-switch button.active{color:var(--violet)}
 .skill-explorer[data-area='design'] .skill-switch button.active{color:var(--orange)}
+.skill-explorer[data-area='build'] .skill-switch button.active{color:var(--ink)}
 .skill-switch button.active::after{transform:scaleX(1)}
 .skill-panel{padding:24px 0 12px;animation:skill-panel-in .38s cubic-bezier(.22,1,.36,1) both}
 .skill-panel-intro{padding-bottom:22px;border-bottom:1px solid var(--line)}
@@ -253,6 +257,7 @@
   letter-spacing:0;
 }
 .skill-explorer[data-area='design'] .skill-panel-line{color:var(--orange)}
+.skill-explorer[data-area='build'] .skill-panel-line{color:var(--ink)}
 .skill-panel-intro>p:last-child{max-width:560px;margin:0;font-size:15px;line-height:1.55}
 .skill-groups article{padding:18px 0;border-bottom:1px solid var(--line)}
 .skill-groups article:last-child{border-bottom:0}
@@ -271,6 +276,7 @@
   animation-delay:calc(var(--tag-index) * 38ms + 80ms);
 }
 .skill-explorer[data-area='design'] .skill-tag{border-color:rgba(230,112,70,.42);color:var(--orange)}
+.skill-explorer[data-area='build'] .skill-tag{border-color:rgba(31,32,28,.36);color:var(--ink)}
 @keyframes skill-panel-in{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes skill-tag-in{from{opacity:0;transform:translate3d(0,6px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.skill-panel,.skill-tag{animation:none!important}}

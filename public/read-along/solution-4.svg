@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Repair without breaking the story</title>
+  <desc id="desc">A three-stage error recovery concept for Google Read Along: immediate cue, page-end checkpoint, and optional story-end collection.</desc>
+  <defs>
+    <linearGradient id="warmBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf3"/>
+      <stop offset="1" stop-color="#f8f2e9"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#8b7c69" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" rx="36" fill="url(#warmBg)"/>
+
+  <text x="80" y="74" fill="#e9832f" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.5">SOLUTION 04 · ERROR RECOVERY</text>
+  <text x="80" y="145" fill="#18211d" font-family="Arial, sans-serif" font-size="54" font-weight="700">Repair without breaking the story</text>
+  <text x="80" y="190" fill="#68716c" font-family="Arial, sans-serif" font-size="24">Three chances to self-correct—without forcing repetition or interrupting the child’s flow.</text>
+
+  <path d="M260 252 H1340" fill="none" stroke="#d9d4ca" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="270" cy="252" r="12" fill="#f29a38"/>
+  <circle cx="800" cy="252" r="12" fill="#f29a38"/>
+  <circle cx="1330" cy="252" r="12" fill="#f29a38"/>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="285" width="420" height="395" rx="28" fill="#fff" stroke="#eee6da" stroke-width="2"/>
+    <rect x="590" y="285" width="420" height="395" rx="28" fill="#fff" stroke="#eee6da" stroke-width="2"/>
+    <rect x="1110" y="285" width="420" height="395" rx="28" fill="#fff" stroke="#eee6da" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <text x="105" y="335" fill="#e9832f" font-size="17" font-weight="700" letter-spacing="1.5">01 · IMMEDIATE CUE</text>
+    <text x="105" y="382" fill="#18211d" font-size="31" font-weight="700">Guide the first repair</text>
+    <text x="105" y="422" fill="#68716c" font-size="20">The first missed word receives a</text>
+    <text x="105" y="450" fill="#68716c" font-size="20">gentle visual and audio prompt.</text>
+
+    <rect x="105" y="492" width="350" height="108" rx="18" fill="#f8f6f1"/>
+    <text x="134" y="535" fill="#808985" font-size="18">The fox ran into the</text>
+    <text x="322" y="535" fill="#ed5f60" font-size="22" font-weight="700">forest</text>
+    <path d="M322 544 H380" stroke="#ed5f60" stroke-width="4" stroke-linecap="round"/>
+    <rect x="134" y="561" width="128" height="28" rx="14" fill="#fff1e4"/>
+    <text x="151" y="581" fill="#d86f1f" font-size="15" font-weight="700">Read again ↗</text>
+
+    <text x="625" y="335" fill="#e9832f" font-size="17" font-weight="700" letter-spacing="1.5">02 · PAGE-END CHECKPOINT</text>
+    <text x="625" y="382" fill="#18211d" font-size="31" font-weight="700">Pause, don’t punish</text>
+    <text x="625" y="422" fill="#68716c" font-size="20">At the end of the page, hold the</text>
+    <text x="625" y="450" fill="#68716c" font-size="20">automatic turn and offer a choice.</text>
+
+    <rect x="625" y="492" width="350" height="108" rx="18" fill="#f8f6f1"/>
+    <circle cx="681" cy="546" r="25" fill="#fff1e4"/>
+    <rect x="674" y="533" width="5" height="26" rx="2.5" fill="#e9832f"/>
+    <rect x="684" y="533" width="5" height="26" rx="2.5" fill="#e9832f"/>
+    <text x="724" y="535" fill="#18211d" font-size="18" font-weight="700">One word needs another try</text>
+    <text x="724" y="566" fill="#68716c" font-size="16">Correct now</text>
+    <text x="851" y="566" fill="#68716c" font-size="16">or continue →</text>
+
+    <text x="1145" y="335" fill="#e9832f" font-size="17" font-weight="700" letter-spacing="1.5">03 · STORY-END COLLECTION</text>
+    <text x="1145" y="382" fill="#18211d" font-size="31" font-weight="700">Return without pressure</text>
+    <text x="1145" y="422" fill="#68716c" font-size="20">Unresolved words return after the</text>
+    <text x="1145" y="450" fill="#68716c" font-size="20">story as an optional stars review.</text>
+
+    <rect x="1145" y="492" width="350" height="108" rx="18" fill="#f8f6f1"/>
+    <text x="1173" y="529" fill="#18211d" font-size="18" font-weight="700">More stars?</text>
+    <text x="1334" y="532" fill="#f2a416" font-size="24">★ ★ ☆</text>
+    <rect x="1173" y="551" width="77" height="30" rx="15" fill="#fff" stroke="#ed5f60"/>
+    <text x="1190" y="572" fill="#ed5f60" font-size="15">forest</text>
+    <rect x="1261" y="551" width="75" height="30" rx="15" fill="#fff" stroke="#d9d4ca"/>
+    <text x="1278" y="572" fill="#68716c" font-size="15">quiet</text>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="250" y="740" width="410" height="80" rx="40" fill="#e9f5ee"/>
+    <circle cx="298" cy="780" r="19" fill="#1fa66b"/>
+    <path d="M288 780 l7 7 14-16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="330" y="772" fill="#18211d" font-size="18" font-weight="700">REPAIR</text>
+    <text x="330" y="798" fill="#68716c" font-size="17">Reward the effort, then continue</text>
+
+    <rect x="940" y="740" width="410" height="80" rx="40" fill="#f1f0ed"/>
+    <circle cx="988" cy="780" r="19" fill="#909793"/>
+    <path d="M980 780 H997 M990 772 L998 780 990 788" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1020" y="772" fill="#18211d" font-size="18" font-weight="700">SKIP</text>
+    <text x="1020" y="798" fill="#68716c" font-size="17">Continue without penalty</text>
+
+    <text x="800" y="860" text-anchor="middle" fill="#18211d" font-size="20" font-weight="700">The child keeps control at every stage.</text>
+  </g>
+</svg>
