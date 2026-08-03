@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ArrowDownRight, ArrowUpRight, Check, ChevronDown, Mail, Menu, Phone, X } from 'lucide-react'
 import './styles.css'
+import { initAnalytics, trackEvent, trackPageView } from './analytics.js'
 import './case-redesign.css'
 import './read-along.css'
 import HumanFactorsPage from './human-factors.jsx'
 import BodyCodesPage from './bodycodes.jsx'
 import CalmoPage from './calmo.jsx'
+import ProcureSmartPage from './procuresmart.jsx'
 import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
 import './mobile.css'
 import './case-viewport.css'
@@ -17,12 +19,23 @@ const projects = [
   { no: '01', title: 'LLM Prompt Design', subtitle: 'Does Giving an AI a Role Change Its Output?', type: 'Research / AI', year: '2026', image: '/projects/ai-role.png', tags: ['A/B Testing', 'Experimental Design', 'Quantitative Analysis', 'AI/LLM Prompt Research'], detail: <>Ran a controlled A/B experiment to test whether prompting an AI with a defined Information Architecture (IA) Expert role improves its response quality.<br/><br/>Collected outputs under both conditions, evaluated outputs across three dimensions, ran Mann-Whitney U tests to analyse results statistically.<br/><br/>Found expert-persona prompts had significantly better-structured outputs, but varied widely among users. Suggest LLMs offer more personalised options, like an appropriate role based on input and task type, to reduce interaction cost and improve efficiency.</> },
   { no: '02', title: 'CALMO', subtitle: 'A Transition Support System for Retired Police Dogs', type: 'Product / UI', year: '2026', image: '/projects/calmo.png', award: 'UX Design Award · Nominated', tags: ['Double Diamond', 'Persona & Journey Mapping', 'Competitive Analysis', 'UI Design'], detail: <>Retired working dogs often struggle emotionally when transitioning into home life, and new adopters failed to read or respond to their stress signals.<br/><br/>Followed a double-diamond design process, through research, problem framing, and prototype iteration, to ultimately design CALMO.<br/><br/>Through a smart pod and companion app, CALMO monitors dogs’ condition in real-time. It helps dogs reduce stress non-invasively by offering dynamic transition progress; builds adopter confidence by explaining dog behaviour; and bridges the gap between working and domestic life for retired police dogs.</> },
   { no: '03', title: 'Google Read Along', subtitle: 'Interaction Analysis and UX Redesign', type: 'UX Redesign', year: '2026', image: '/projects/readalong.png', tags: ['Interaction Analysis', 'Cognitive Psychology', 'System Mapping', 'UX Optimise'], detail: <>Google Read Along is a reading app that uses speech recognition to help children practise independently.<br/><br/>Its current interaction logic creates friction across five categories: silence, misrecognised words, skipped reading, forced page transitions, and ambiguous manual controls.<br/><br/>Combined Self-Determination Theory (user autonomy) and Grounding Theory (shared understanding between user and system), redesigning each interaction so children could self-correct and stay in control, enhancing their confidence and engagement.</> },
-  { no: '04', title: 'BodyCodes', subtitle: 'Industry expansion strategy design, From Sizing Tool to Fit-Data Infrastructure', type: 'Service Design', year: '2026', image: '/projects/bodycodes.png', tags: ['Service Design', 'System Mapping', 'Service Blueprinting', 'Business Strategy'], detail: <>BodyCodes is a questionnaire-based sizing system that creates a reusable fit identity without body scans, photos or new hardware.<br/><br/>I focused on the corporate-uniform sector, mapping the workflow between employees, procurement teams and manufacturers. The research exposed repeated size collection, fragmented order coordination and a missing post-delivery feedback loop.<br/><br/>I repositioned BodyCodes from a consumer sizing tool into privacy-conscious B2B2C fit-data infrastructure, supported by a service blueprint, governance model, staged pilot and transparent validation framework.</> },
-  { no: '05', title: 'Improving UX Through Human Factors', subtitle: 'Three evidence-based experiments', type: 'Research', year: '2025', image: '/projects/human-factors.png', tags: ['Multi-biosensor Research', 'EEG', 'Eye Tracking', 'EMG'], detail: <>Three lab experiments tested whether physiological data actually matches what users say they feel — a core assumption in UX research.<br/><br/>Biosensors (EMG, ECG, skin temperature) during a racing game found background sound did not raise baseline arousal, but amplified emotional intensity at key moments and boosted enjoyment. EEG/ECG comparing meditation with high-arousal music showed meditation produced calmer but slower responses, while music produced faster but less stable ones.<br/><br/>Eye-tracking on Bionic Reading found smoother scan paths and lower effort, but comprehension accuracy dropped, showing that easier reading is not necessarily deeper reading.</> }
+  { no: '04', title: 'BodyCodes', subtitle: 'Industry expansion strategy design, From Sizing Tool to Fit-Data Infrastructure', type: 'Service Design', year: '2026', image: '/projects/bodycodes.png', hiddenHome: true, tags: ['Service Design', 'System Mapping', 'Service Blueprinting', 'Business Strategy'], detail: <>BodyCodes is a questionnaire-based sizing system that creates a reusable fit identity without body scans, photos or new hardware.<br/><br/>I focused on the corporate-uniform sector, mapping the workflow between employees, procurement teams and manufacturers. The research exposed repeated size collection, fragmented order coordination and a missing post-delivery feedback loop.<br/><br/>I repositioned BodyCodes from a consumer sizing tool into privacy-conscious B2B2C fit-data infrastructure, supported by a service blueprint, governance model, staged pilot and transparent validation framework.</> },
+  { no: '05', title: 'Improving UX Through Human Factors', subtitle: 'Three evidence-based experiments', type: 'Research', year: '2025', image: '/projects/human-factors.png', hiddenHome: true, tags: ['Multi-biosensor Research', 'EEG', 'Eye Tracking', 'EMG'], detail: <>Three lab experiments tested whether physiological data actually matches what users say they feel — a core assumption in UX research.<br/><br/>Biosensors (EMG, ECG, skin temperature) during a racing game found background sound did not raise baseline arousal, but amplified emotional intensity at key moments and boosted enjoyment. EEG/ECG comparing meditation with high-arousal music showed meditation produced calmer but slower responses, while music produced faster but less stable ones.<br/><br/>Eye-tracking on Bionic Reading found smoother scan paths and lower effort, but comprehension accuracy dropped, showing that easier reading is not necessarily deeper reading.</> },
+  { no: '06', title: 'ProcureSmart Health', subtitle: 'AI-assisted clinical procurement decision support', type: 'Healthcare UX / AI', year: '2026', image: '/projects/procuresmart-cover.svg', hiddenHome: true, tags: ['Healthcare UX', 'AI Decision Support', 'Information Architecture'], detail: <>ProcureSmart Health helps clinicians turn an ambiguous procurement need into explicit criteria, a focused candidate set and a traceable evidence trail.<br/><br/>Designed as a Blue Garage × Goldsmiths Hackathon concept responding to an NHS procurement brief, the workflow uses AI to structure the search while keeping comparison, evidence verification and final judgement clinician-led.</> }
 ]
 
 const siteNav = [['Projects', 'projects'], ['About', 'about'], ['Contact', 'contact']]
-const projectRoutes = ['case-study', 'calmo', 'read-along', 'bodycodes', 'human-factors']
+const projectRoutes = ['case-study', 'calmo', 'read-along', 'bodycodes', 'human-factors', 'procuresmart']
+const analyticsPages = {
+  home: { title: 'Kexin Li — Portfolio', path: '/' },
+  about: { title: 'About — Kexin Li', path: '/about' },
+  'case-study': { title: 'LLM Prompt Design — Kexin Li', path: '/projects/llm-prompt-design' },
+  calmo: { title: 'CALMO — Kexin Li', path: '/projects/calmo' },
+  'read-along': { title: 'Google Read Along — Kexin Li', path: '/projects/google-read-along' },
+  bodycodes: { title: 'BodyCodes — Kexin Li', path: '/projects/bodycodes' },
+  'human-factors': { title: 'Human Factors — Kexin Li', path: '/projects/human-factors' },
+  procuresmart: { title: 'ProcureSmart Health — Kexin Li', path: '/projects/procuresmart-health' },
+}
 const skillSets = {
   research: {
     label: 'RESEARCH',
@@ -662,7 +675,7 @@ function App() {
     elements.forEach(element => observer.observe(element))
     return () => observer.disconnect()
   }, [page])
-  const go = (id) => { if (id === 'about') { setPage('about'); window.scrollTo(0, 0); return } if (id === 'case-study') { setPage('case-study'); window.scrollTo(0, 0); return } if (id === 'calmo') { setPage('calmo'); window.scrollTo(0, 0); return } if (id === 'read-along') { setPage('read-along'); window.scrollTo(0, 0); return } if (id === 'bodycodes') { setPage('bodycodes'); window.scrollTo(0, 0); return } if (id === 'human-factors') { setPage('human-factors'); window.scrollTo(0, 0); return } setPage('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 0) }
+  const go = (id) => { if (id === 'about') { setPage('about'); window.scrollTo(0, 0); return } if (id === 'case-study') { setPage('case-study'); window.scrollTo(0, 0); return } if (id === 'calmo') { setPage('calmo'); window.scrollTo(0, 0); return } if (id === 'read-along') { setPage('read-along'); window.scrollTo(0, 0); return } if (id === 'bodycodes') { setPage('bodycodes'); window.scrollTo(0, 0); return } if (id === 'human-factors') { setPage('human-factors'); window.scrollTo(0, 0); return } if (id === 'procuresmart') { setPage('procuresmart'); window.scrollTo(0, 0); return } setPage('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 0) }
   const openProjectPage = (index) => go(projectRoutes[index])
   const parallax = (xFactor, yFactor) => ({ '--px': `${cursor.x * xFactor}px`, '--py': `${cursor.y * yFactor}px` })
   const copyEmail = async () => { await navigator.clipboard.writeText('kekli0921@gmail.com'); setCopied(true); setTimeout(() => setCopied(false), 1700) }
@@ -675,7 +688,8 @@ function App() {
   if (page === 'calmo') return <CalmoPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('read-along')} />
   if (page === 'read-along') return <ReadAlongCasePage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('bodycodes')} />
   if (page === 'bodycodes') return <BodyCodesPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('human-factors')} />
-  if (page === 'human-factors') return <HumanFactorsPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('case-study')} />
+  if (page === 'human-factors') return <HumanFactorsPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('procuresmart')} />
+  if (page === 'procuresmart') return <ProcureSmartPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('case-study')} />
 
   return <main className="home-page">
     <SiteHeader onHome={() => go('top')} onNavigate={go} />
@@ -690,14 +704,14 @@ function App() {
       </div>
       <div className="hero-tags home-hero-reveal home-hero-reveal-late" aria-label="UX design disciplines">
         <span className="hero-icon icon-grid" style={parallax(-.71,.52)}>✦</span><span className="hero-icon icon-arrow" style={parallax(.46,-.37)}>↗</span><span className="hero-icon icon-ring" style={parallax(-.58,-.83)}>◌</span><span className="hero-icon icon-star" style={parallax(.78,.36)}>✷</span>
-        <button type="button" className="float-tag tag-a" style={parallax(.87,-.43)} onClick={() => go('case-study')} aria-label="View LLM Prompt Design project">#UX Research</button><button type="button" className="float-tag tag-b" style={parallax(-.52,.71)} onClick={() => go('read-along')} aria-label="View Google Read Along project">#UX Design</button><button type="button" className="float-tag tag-c" style={parallax(.61,.82)} onClick={() => go('bodycodes')} aria-label="View BodyCodes project">#Service Design</button><button type="button" className="float-tag tag-d" style={parallax(-.92,-.51)} onClick={() => go('calmo')} aria-label="View CALMO project">#UI Design</button><button type="button" className="float-tag tag-e" style={parallax(.34,-.92)} onClick={() => go('human-factors')} aria-label="View Human Factors project">#Human Factor</button>
+        <button type="button" className="float-tag tag-a" style={parallax(.87,-.43)} onClick={() => go('case-study')} aria-label="View LLM Prompt Design project">#UX Research</button><button type="button" className="float-tag tag-b" style={parallax(-.52,.71)} onClick={() => go('read-along')} aria-label="View Google Read Along project">#UX Design</button><button type="button" className="float-tag tag-d" style={parallax(-.92,-.51)} onClick={() => go('calmo')} aria-label="View CALMO project">#UI Design</button>
         <p>OPEN TO WORK<br/><span>London · UK</span></p><button className="circle-link hero-select" onClick={() => go('projects')}>Selected<br/>work <ArrowDownRight size={20}/></button>
       </div>
     </section>
 
     <section id="projects" className="projects section">
-      <div className="project-head home-reveal"><div className="section-kicker">SELECTED PROJECTS</div><p>Five investigations in interaction, trust, behaviour and better systems.</p></div>
-      <div className="project-list">{projects.map((p, index) => <article className={`project-card home-reveal${openProject === index ? ' is-open' : ''}`} key={p.title}>
+      <div className="project-head home-reveal"><div className="section-kicker">SELECTED PROJECTS</div><p>Three investigations in interaction, trust, behaviour and better systems.</p></div>
+      <div className="project-list">{projects.map((p, index) => p.hiddenHome ? null : <article className={`project-card home-reveal${openProject === index ? ' is-open' : ''}`} key={p.title}>
         <button className="project-main" onClick={(event) => { if (openProject === index && event.target.closest('.project-title h3')) { openProjectPage(index); return } setOpenProject(openProject === index ? null : index) }} aria-expanded={openProject === index}>
           <div className="project-title"><h3><strong>{p.title}</strong><span className="project-subtitle">{p.subtitle}</span></h3><div><p>{p.type}</p>{p.award && <small>{p.award}</small>}</div></div>
           <img className="project-image" src={p.image} alt={`${p.title.replace('\n', ' ')} project preview`} />
