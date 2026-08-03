@@ -70,11 +70,145 @@
   .talk-contact{margin-top:18px}
 }
 
+/* About hero: keep the narrative high and share the portrait baseline. */
+.about-hero{
+  align-items:center;
+}
+.about-hero-copy{
+  height:600px;
+}
+.about-hero-copy .about-lede{
+  margin-top:clamp(56px,8vh,92px);
+  margin-bottom:0;
+}
+.about-hero-copy .about-hero-actions{
+  margin-top:auto;
+}
+@media(max-width:720px){
+  .about-hero{
+    align-items:stretch;
+  }
+  .about-hero-copy{
+    height:auto;
+  }
+  .about-hero-copy .about-lede{
+    margin-top:35px;
+  }
+  .about-hero-copy .about-hero-actions{
+    margin-top:24px;
+  }
+}
+
 /* Smooth pointer motion: preserve each tag's box so hover never jitters. */
 .float-tag,.hero-icon{transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .24s cubic-bezier(.22,.61,.36,1);will-change:transform;backface-visibility:hidden}
 .float-tag:hover{font-size:13px;background:var(--ink);color:transparent;border-color:var(--ink);padding:11px 20px}
 .float-tag:hover:after{content:'View project';color:var(--paper);font-size:13px;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 @media(max-width:720px){.float-tag:hover{font-size:10px;padding:8px 12px}.float-tag:hover:after{font-size:10px}}
+
+/* Definitive About hero baseline — placed last to override legacy refinements. */
+.about-page .about-hero{
+  align-items:center;
+}
+.about-page .about-hero .about-hero-copy{
+  height:600px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.about-page .about-hero-copy .about-lede{
+  margin-top:auto;
+  margin-bottom:0;
+}
+.about-page .about-hero-copy .about-hero-actions{
+  margin-top:24px;
+}
+@media(max-width:720px){
+  .about-page .about-hero{
+    align-items:stretch;
+  }
+  .about-page .about-hero .about-hero-copy{
+    height:auto;
+  }
+  .about-page .about-hero-copy .about-lede{
+    margin-top:35px;
+  }
+  .about-page .about-hero-copy .about-hero-actions{
+    margin-top:24px;
+  }
+}
+
+/* Separate multi-paragraph experience details with a restrained reading gap. */
+.experience-copy p{margin-bottom:0}
+.experience-copy p+p{margin-top:9px}
+
+/* Homepage Experience: lift the supporting copy while sharing a firm baseline. */
+.experience-info-layout .experience-intro>div{
+  flex:1;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  margin-top:clamp(28px,4vw,58px);
+}
+.experience-info-layout .experience-intro .text-link{
+  align-self:flex-start;
+  margin-top:auto;
+}
+.experience-info-layout .recognition{
+  display:flex;
+  flex-direction:column;
+  margin-top:0;
+}
+.experience-info-layout .recognition .award-grid{
+  flex:1;
+  grid-template-rows:repeat(3,minmax(0,1fr));
+}
+.experience-info-layout .recognition .award-card{
+  min-height:0;
+}
+.experience-section-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(44px,6vw,104px);
+  align-items:center;
+}
+.experience-section-head .label{
+  margin:0;
+}
+@media(max-width:720px){
+  .experience-info-layout .experience-intro>div{
+    display:block;
+    margin-top:0;
+  }
+  .experience-info-layout .experience-intro .text-link{
+    margin-top:0;
+  }
+  .experience-info-layout .recognition{
+    display:block;
+    margin-top:0;
+  }
+  .experience-info-layout .recognition .award-grid{
+    display:grid;
+    grid-template-rows:none;
+  }
+  .experience-info-layout .recognition .award-card{
+    min-height:128px;
+  }
+  .experience-section-head{
+    display:block;
+  }
+  .experience-section-head .label{
+    display:none;
+  }
+  .experience-info-layout .recognition::before{
+    content:'RECOGNITION';
+    display:block;
+    margin-bottom:18px;
+    color:var(--orange);
+    font-family:'DM Mono',monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+  }
+}
 
 /* Homepage project hierarchy */
 .project-title h3{
@@ -570,7 +704,7 @@
 .education-timeline,.experience-timeline{border-top:1px solid var(--line);margin-top:45px}
 .education-timeline:before,.experience-timeline:before{display:none}
 .education-timeline article,.experience-timeline article{padding:27px 0;border:0;border-bottom:1px solid var(--line);background:transparent;transform:none;transition:none}
-.education-timeline article:hover,.experience-timeline article:hover{background:transparent;border-color:transparent;transform:none}
+.education-timeline article:hover,.experience-timeline article:hover{background:transparent;border-bottom-color:var(--line);transform:none}
 .education-timeline article:after,.experience-timeline article:after{display:none}
 .experience-detail{background:var(--soft)}
 @media(max-width:720px){.education-timeline,.experience-timeline{margin-top:30px}}
