@@ -45,6 +45,7 @@ export function EditorialCaseHero({
       <p className="project-hero-subtitle">{subtitle}</p>
       <div className="project-hero-summary">
         {summary.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+        {rootSelector === '.procuresmart-page' && <p className="project-hero-disclaimer">Due to NDA constraints, the prototype database uses open-source public information and does not contain NHS source data.</p>}
       </div>
       <nav className="project-chapter-index" aria-label={`${title} chapters`}>
         {chapters.map((chapter, index) => <button type="button" key={chapter} onClick={() => jump(index)}><span>{String(index + 1).padStart(2, '0')}</span>{chapter}</button>)}

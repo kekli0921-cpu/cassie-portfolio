@@ -1,126 +1,138 @@
-import React, { useEffect } from 'react'
-import { ArrowUpRight, CheckCircle2, FileCheck2, Search, ShieldCheck, SlidersHorizontal, Sparkles, UserCheck } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { ArrowUpRight, Expand, FileCheck2, Search, SlidersHorizontal, X } from 'lucide-react'
 import './procuresmart.css'
-import { CaseFooter, CaseHeader } from './case-chrome.jsx'
+import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
 
 const prototypeUrl = 'https://procuresmart-health.vercel.app/need-definition'
 
-const evidence = [
-  ['01', 'Discovery overload', 'Clinicians face a large catalogue of similar products, with limited time to inspect every listing and supplier.'],
-  ['02', 'Multi-criteria decision burden', 'Clinical performance, safety, risk, delivery, cost and supporting evidence must be considered together.'],
-  ['03', 'Defensibility gap', 'A suitable product is not enough: internal review also needs a complete, credible and traceable evidence trail.']
+const mechanisms = [
+  ['01', 'FUNCTION CALLING', 'From clinical language to structured criteria', 'Function calling turns a plain-language need into explicit, editable criteria before the search begins.'],
+  ['02', 'TWO-STAGE SCREENING', 'Narrow broadly, then compare carefully', 'The catalogue is reduced first, then clinicians compare a focused shortlist against the priorities they confirmed.'],
+  ['03', 'PEER-EVIDENCE LOOP', 'Evidence informs the next decision', 'Peer-use signals and supporting sources enter comparison alongside cost, risk and delivery — without deciding for the clinician.']
 ]
 
-const flow = [
-  ['01', 'Need definition', 'Describe the clinical need in natural language — without translating it into catalogue terminology first.'],
-  ['02', 'Criteria confirmation', 'Review and edit the structured criteria before they influence the search.'],
-  ['03', 'Candidate shortlist', 'Reduce a broad catalogue to a focused set that matches the confirmed priorities.'],
-  ['04', 'Comparison and evidence', 'Compare trade-offs, inspect supporting sources and make the professional judgement.']
-]
-
-function PrototypeVisual() {
-  return <div className="ps-prototype-visual" aria-label="ProcureSmart workflow from clinical need to clinician decision">
-    <div className="ps-app-bar"><span>ProcureSmart</span><small>Decision support workspace</small></div>
-    <div className="ps-need-card">
-      <div className="ps-mini-label"><Sparkles size={13}/> AI-assisted need framing</div>
-      <p>“We need a reliable home blood-pressure monitor for older patients with limited dexterity.”</p>
-    </div>
-    <div className="ps-criteria-row">
-      <span>Easy-cuff fit</span><span>Validated accuracy</span><span>Home use</span>
-    </div>
-    <div className="ps-shortlist">
-      <div><b>3</b><span>candidates to review</span></div>
-      <div className="ps-product-bars"><i/><i/><i/></div>
-      <div className="ps-human-check"><UserCheck size={17}/><span>Clinician sign-off</span></div>
-    </div>
-  </div>
-}
+const chapters = ['Context', 'Strategy', 'Product flow', 'Usability testing']
 
 export default function ProcureSmartPage({ onHome, onContact, onNext }) {
+  const [contextVisualOpen, setContextVisualOpen] = useState(false)
+  const [strategyStage, setStrategyStage] = useState(1)
+  const [strategyVisual, setStrategyVisual] = useState(null)
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = contextVisualOpen || strategyVisual ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [contextVisualOpen, strategyVisual])
+
+  useEffect(() => {
+    if (!contextVisualOpen && !strategyVisual) return undefined
+    const closeOnEscape = (event) => {
+      if (event.key !== 'Escape') return
+      setContextVisualOpen(false)
+      setStrategyVisual(null)
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [contextVisualOpen, strategyVisual])
+
   return <div className="case-page case-redesign procuresmart-page">
     <CaseHeader onHome={onHome} onContact={onContact}/>
     <main>
-      <section className="ps-hero">
-        <div className="ps-hero-copy">
-          <p className="ps-eyebrow">HEALTHCARE UX · AI DECISION SUPPORT</p>
-          <h1>ProcureSmart<br/><em>Health</em></h1>
-          <p className="ps-hero-subtitle">From clinical need to an evidence-ready shortlist</p>
-          <p className="ps-hero-summary">An AI-assisted procurement decision-support workflow that helps NHS clinicians turn an ambiguous need into comparable, verifiable options — while keeping the final judgement human.</p>
-          <div className="ps-tags"><span>Information Architecture</span><span>Rapid Prototyping</span><span>Hackathon concept</span></div>
-          <a className="ps-prototype-link" href={prototypeUrl} target="_blank" rel="noreferrer">View prototype <ArrowUpRight size={17}/></a>
-        </div>
-        <div className="ps-hero-stage">
-          <PrototypeVisual/>
-          <blockquote>“Narrow the search before asking clinicians to judge.”</blockquote>
-        </div>
-      </section>
+      <EditorialCaseHero
+        rootSelector=".procuresmart-page"
+        eyebrow="HEALTHCARE UX · AI DECISION SUPPORT"
+        title="ProcureSmart Health"
+        subtitle="From clinical need to an evidence-ready shortlist"
+        summary={[
+          'An AI-assisted procurement decision-support workflow that turns a clinician’s natural-language need into editable criteria, narrows a broad catalogue through a two-stage screening model, and closes the loop with peer evidence.',
+          'Function calling structures the request; clinicians confirm the criteria, inspect evidence and retain responsibility for the final decision.'
+        ]}
+        chapters={chapters}
+        imageSrc="/projects/procuresmart-cover.svg"
+        imageAlt="Clinical need transformed into editable criteria and a clinician-reviewed shortlist"
+        result="AI frames the need. Clinicians own the decision."
+        resultLabel="Principle"
+        accent="#0b46b4"
+        accentSoft="#9fc0ff"
+        longTitle
+        diagram
+      />
 
       <section className="case-section ps-context">
         <div className="case-section-label">01 / CONTEXT</div>
-        <div className="ps-section-intro"><h2>The hard part is not buying.<br/>It is screening with confidence.</h2><p>Blue Garage × Goldsmiths Hackathon concept responding to an NHS procurement brief. The opportunity was to reduce the work between recognising a clinical need and preparing a defensible recommendation — without automating the decision itself.</p></div>
-        <div className="ps-current-flow" aria-label="Current clinical procurement flow">
-          {['Clinical need','Catalogue search','Supplier & quote review','Internal review','Procurement decision'].map((item, index) => <React.Fragment key={item}><div><span>0{index + 1}</span>{item}</div>{index < 4 && <i>→</i>}</React.Fragment>)}
-        </div>
-        <div className="ps-burdens"><article><Search/><h3>Too many similar options</h3><p>Catalogue breadth turns discovery into manual screening.</p></article><article><SlidersHorizontal/><h3>Interdependent criteria</h3><p>Clinical value cannot be separated from risk, delivery and cost.</p></article><article><FileCheck2/><h3>Approval-ready evidence</h3><p>The rationale must remain credible after the shortlist is made.</p></article></div>
+        <div className="ps-section-intro"><h2>The hard part is not buying.<br/>It is screening with confidence.</h2><p>ProcureSmart reduces the effort required to move from a recognised clinical need to a clear, evidence-ready recommendation. It structures the search and prepares comparable options, while clinicians retain responsibility for evaluation and the final decision.</p></div>
+        <div className="ps-burdens"><article className="ps-visual-card"><button type="button" onClick={() => setContextVisualOpen(true)} aria-label="Open visual: Current NHS procurement search platform"><Search/><h3>Too many similar options</h3><p>Catalogue breadth turns discovery into manual screening.</p><em>Open visual <Expand size={14}/></em></button></article><article><SlidersHorizontal/><h3>Interdependent criteria</h3><p>Clinical value cannot be separated from risk, delivery and cost.</p></article><article><FileCheck2/><h3>Approval-ready evidence</h3><p>The rationale must remain credible after the shortlist is made.</p></article></div>
+        <div className="ps-evidence-note"><span>Evidence base</span><p>Primary evidence comes from the NHS stakeholder brief and supplied interview material; secondary evidence comes from NHS procurement guidance. Design inferences remain to be validated through usability testing.</p></div>
       </section>
-
-      <section className="case-section case-soft ps-evidence">
-        <div className="case-section-label">02 / EVIDENCE</div>
-        <div className="ps-section-intro"><h2>Three pressures shape the decision.</h2><p>The evidence was organised by confidence level so that stakeholder input, desk research and design interpretation were not presented as equivalent.</p></div>
-        <div className="ps-evidence-grid">{evidence.map(([no,title,copy]) => <article key={no}><span>{no}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
-        <div className="ps-evidence-sources">
-          <article><b>Primary evidence</b><p>NHS stakeholder brief and supplied interview/video material.</p></article>
-          <article><b>Secondary evidence</b><p>NHS Supply Chain, NHS England and government procurement guidance.</p></article>
-          <article><b>Design inference</b><p>Workflow assumptions that still require task-based validation.</p></article>
-        </div>
-      </section>
-
       <section className="case-section ps-strategy">
-        <div className="case-section-label">03 / STRATEGY</div>
-        <div className="ps-section-intro"><h2>AI frames the need.<br/>Clinicians own the decision.</h2><p>The concept separates early-stage structuring from professional selection. This reduces cognitive load without hiding uncertainty or collapsing clinical trade-offs into a single automated answer.</p></div>
-        <div className="ps-funnel">
-          <article><span>STAGE 01</span><Sparkles/><h3>AI-assisted need framing</h3><p>Natural language becomes explicit, editable and confirmable screening criteria.</p></article>
-          <i>↓</i>
-          <article><span>STAGE 02</span><UserCheck/><h3>Clinician-led selection</h3><p>A narrowed candidate set supports comparison, evidence checking and final judgement.</p></article>
+        <div className="case-section-label">02 / STRATEGY</div>
+        <div className="ps-strategy-intro"><div className="ps-strategy-heading"><h2>Two-stage screening model</h2><h2 className="ps-strategy-range">From broad category to focused decision</h2></div><p>Instead of manually searching a large catalogue, the workflow clarifies the need first, then narrows the product range before clinicians compare options.</p></div>
+        <div className="ps-strategy-model" aria-label="Two-stage screening model, narrowing more than forty thousand products to thirty shortlisted products and three evidence-ready options">
+          <div className="ps-pyramid-panel">
+            <div className="ps-pyramid-stack">
+              <button type="button" aria-label="40,000 plus products" aria-pressed={strategyStage === 1} className={`ps-pyramid-tier ps-pyramid-top ${strategyStage === 1 ? 'is-active' : ''}`} onClick={() => setStrategyStage(1)}><strong>40000+</strong><span>Products</span></button>
+              <button type="button" aria-label="Stage 01: AI-assisted need framing" aria-pressed={strategyStage === 1} className={`ps-pyramid-transition ps-pyramid-transition-one ${strategyStage === 1 ? 'is-active' : ''}`} onClick={() => setStrategyStage(1)}></button>
+              <button type="button" aria-label="30 shortlisted products" aria-pressed="true" className="ps-pyramid-tier ps-pyramid-middle is-active" onClick={() => setStrategyStage(1)}><strong>30</strong><span>Shortlists</span></button>
+              <button type="button" aria-label="Stage 02: Clinician-led comparison" aria-pressed={strategyStage === 2} className={`ps-pyramid-transition ps-pyramid-transition-two ${strategyStage === 2 ? 'is-active' : ''}`} onClick={() => setStrategyStage(2)}></button>
+              <button type="button" aria-label="3 evidence-ready options" aria-pressed={strategyStage === 2} className={`ps-pyramid-tier ps-pyramid-base ${strategyStage === 2 ? 'is-active' : ''}`} onClick={() => setStrategyStage(2)}><strong>3</strong><span>Recommendation</span></button>
+            </div>
+          </div>
+
+          <div className="ps-stage-panel">
+            <article className={`ps-strategy-card-v2 ${strategyStage === 1 ? 'is-active' : ''}`}>
+              <button type="button" className="ps-stage-select" aria-pressed={strategyStage === 1} onClick={() => setStrategyStage(1)}>
+                <span className="ps-stage-card-label">01 / NEED DEFINITION</span>
+                <h3>AI-assisted need framing</h3>
+                <p>Natural language becomes explicit, editable criteria before the search begins.</p>
+              </button>
+              <button type="button" className="ps-stage-image-button" onClick={() => { setStrategyStage(1); setStrategyVisual({ src:'/procuresmart/strategy-need-definition.png', alt:'AI-extracted filters for a clinical procurement need', title:'Stage 1 — AI-extracted filters', caption:'Clinical requirements are translated into editable filters before the search begins.' }) }} aria-label="Open Stage 1 AI-extracted filters visual">
+                <img loading="lazy" width="676" height="1386" src="/procuresmart/strategy-need-definition.png" alt="AI-extracted filters for a clinical procurement need"/>
+                <span>Open visual <Expand size={14}/></span>
+              </button>
+            </article>
+
+            <article className={`ps-strategy-card-v2 ${strategyStage === 2 ? 'is-active' : ''}`}>
+              <button type="button" className="ps-stage-select" aria-pressed={strategyStage === 2} onClick={() => setStrategyStage(2)}>
+                <span className="ps-stage-card-label">02 / COMPARISON</span>
+                <h3>Clinician-led selection</h3>
+                <p>A focused shortlist supports evidence checking, trade-offs and final judgement.</p>
+              </button>
+              <button type="button" className="ps-stage-image-button" onClick={() => { setStrategyStage(2); setStrategyVisual({ src:'/procuresmart/strategy-evidence-comparison.png', alt:'Evidence comparison view for shortlisted products', title:'Stage 2 — Evidence comparison', caption:'Shortlisted products are compared side by side using evidence and commercial data.' }) }} aria-label="Open Stage 2 evidence comparison visual">
+                <img loading="lazy" width="2048" height="851" src="/procuresmart/strategy-evidence-comparison.png" alt="Evidence comparison view for shortlisted products"/>
+                <span>Open visual <Expand size={14}/></span>
+              </button>
+            </article>
+          </div>
         </div>
-        <div className="ps-responsibility">
-          <div><h3>AI assists</h3>{['Structure requirements','Reduce the candidate range','Surface relevant evidence','Prepare comparison material'].map(item => <p key={item}><CheckCircle2 size={16}/>{item}</p>)}</div>
-          <div><h3>Clinician decides</h3>{['Confirm clinical priorities','Weigh trade-offs','Verify evidence','Make the final decision'].map(item => <p key={item}><UserCheck size={16}/>{item}</p>)}</div>
-        </div>
-        <blockquote className="ps-principle">Reduce cognitive load <em>without hiding uncertainty.</em></blockquote>
       </section>
 
       <section className="case-section case-soft ps-product-flow">
-        <div className="case-section-label">04 / PRODUCT FLOW</div>
-        <div className="ps-section-intro"><h2>Four checkpoints, one traceable path.</h2><p>Each step keeps the clinician close to the reasoning and makes the system’s interpretation inspectable before the next action.</p></div>
+        <div className="case-section-label">03 / PRODUCT FLOW</div>
+        <div className="ps-section-intro"><h2>Three mechanisms make the shortlist defensible.</h2><p>The prototype combines structured need framing, two-stage narrowing and a peer-evidence loop while keeping the clinician in control.</p></div>
         <div className="ps-flow-layout">
-          <div className="ps-flow-list">{flow.map(([no,title,copy]) => <article key={no}><span>{no}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
-          <div className="ps-flow-demo"><PrototypeVisual/><a href={prototypeUrl} target="_blank" rel="noreferrer">Explore the live workflow <ArrowUpRight size={16}/></a></div>
+          <div className="ps-flow-demo">
+            <div className="ps-flow-demo-head">
+              <div><span>Interactive Prototype</span><h3>Start from describe your need!</h3></div>
+              <a href={prototypeUrl} target="_blank" rel="noreferrer">Open full screen <ArrowUpRight size={15}/></a>
+            </div>
+            <div className="ps-flow-prototype-scroll">
+              <div className="ps-flow-prototype-frame">
+                <iframe src={prototypeUrl} title="ProcureSmart Health interactive prototype" loading="lazy" allow="fullscreen"/>
+              </div>
+            </div>
+          </div>
+          <div className="ps-flow-guide">
+            <header><span>PRODUCT FLOW</span></header>
+            <div className="ps-flow-list">{mechanisms.map(([no,label,title,copy]) => <article key={no}><span>{no} / {label}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
+          </div>
         </div>
-        <div className="ps-scope-grid">
-          <article className="ps-built"><span>BUILT NOW</span><h3>Interactive decision workflow</h3><p>Need definition, criteria confirmation, candidate filtering and clinician-led comparison.</p></article>
-          <article className="ps-future"><span>FUTURE DIRECTION</span><h3>Assisted evidence preparation</h3><p>Further retrieval, comparison and approval-pack support are concepts for later validation — not implemented capabilities.</p></article>
-        </div>
-      </section>
-
-      <section className="case-section ps-trust">
-        <div className="case-section-label">05 / TRUST AND BOUNDARIES</div>
-        <div className="ps-section-intro"><h2>Decision support has to show its workings.</h2><p>In a high-stakes context, efficiency is only useful when sources, uncertainty and ownership of the final decision remain visible.</p></div>
-        <div className="ps-trust-grid">
-          <article><Search/><span>01</span><h3>Source traceability</h3><p>Recommendations connect back to their supporting material.</p></article>
-          <article><SlidersHorizontal/><span>02</span><h3>Editable criteria</h3><p>Clinicians can correct how their need has been interpreted.</p></article>
-          <article><ShieldCheck/><span>03</span><h3>Visible uncertainty</h3><p>Incomplete or inferred information is not presented as fact.</p></article>
-          <article><UserCheck/><span>04</span><h3>Human sign-off</h3><p>Selection and approval remain accountable human decisions.</p></article>
-        </div>
-        <div className="ps-boundary"><ShieldCheck size={25}/><p>ProcureSmart supports product discovery and comparison. <strong>It does not autonomously approve or purchase medical products.</strong></p></div>
       </section>
 
       <section className="case-section case-soft ps-testing">
-        <div className="case-section-label">06 / PLANNED USABILITY TESTING</div>
+        <div className="case-section-label">04 / PLANNED USABILITY TESTING</div>
         <div className="ps-section-intro"><h2>The next step is validation,<br/>not a victory lap.</h2><p>No usability study has been completed yet. This plan defines what must be tested before making claims about speed, trust or decision quality.</p></div>
         <div className="ps-test-plan">
           <article><span>PLANNED TASKS</span>{['Define a need in natural language','Correct generated criteria','Compare shortlisted products','Locate and verify evidence','Prepare material for internal review'].map(item => <p key={item}>{item}</p>)}</article>
@@ -129,16 +141,21 @@ export default function ProcureSmartPage({ onHome, onContact, onNext }) {
         <div className="ps-testing-placeholder"><span>TO BE COMPLETED AFTER USABILITY TESTING</span><div>{['Findings','Iteration decisions','Before / after','Final validation'].map(item => <i key={item}>{item}</i>)}</div></div>
       </section>
 
-      <section className="case-section ps-reflection">
-        <div className="case-section-label">07 / REFLECTION</div>
-        <div className="ps-reflection-grid">
-          <article><span>WHAT THE PROJECT ESTABLISHED</span><h2>A decision architecture, not an automated answer.</h2><p>A working route from an ambiguous clinical need to an evidence-oriented shortlist, expressed through an interactive prototype.</p></article>
-          <article><span>WHAT REMAINS UNPROVEN</span><h3>Accuracy, completeness and real-world fit</h3><p>Retrieval quality, evidence coverage, trust calibration, category transferability and alignment with live procurement processes still require validation.</p></article>
-          <article><span>NEXT VALIDATION</span><h3>Test the moments of correction</h3><p>Run realistic tasks with clinical and procurement stakeholders, then iterate around errors, hesitation and misplaced trust.</p></article>
-        </div>
-        <a className="ps-final-cta" href={prototypeUrl} target="_blank" rel="noreferrer">Open ProcureSmart Health prototype <ArrowUpRight size={18}/></a>
-      </section>
     </main>
     <CaseFooter onHome={onHome} onNext={onNext}/>
+    {contextVisualOpen && <div className="ps-lightbox" role="dialog" aria-modal="true" aria-label="Current NHS procurement search platform" onClick={() => setContextVisualOpen(false)}>
+      <button className="ps-lightbox-close" type="button" autoFocus onClick={() => setContextVisualOpen(false)}><X size={18}/> Close</button>
+      <figure className="ps-lightbox-content" onClick={(event) => event.stopPropagation()}>
+        <img src="/procuresmart/current-nhs-procurement-search-platform.png" alt="Current NHS procurement search platform showing medical product categories"/>
+        <figcaption><strong>Current NHS procurement search platform</strong></figcaption>
+      </figure>
+    </div>}
+    {strategyVisual && <div className="ps-lightbox" role="dialog" aria-modal="true" aria-label={strategyVisual.title} onClick={() => setStrategyVisual(null)}>
+      <button className="ps-lightbox-close" type="button" autoFocus onClick={() => setStrategyVisual(null)}><X size={18}/> Close</button>
+      <figure className="ps-lightbox-content" onClick={(event) => event.stopPropagation()}>
+        <img src={strategyVisual.src} alt={strategyVisual.alt}/>
+        <figcaption><strong>{strategyVisual.title}</strong><span>{strategyVisual.caption}</span></figcaption>
+      </figure>
+    </div>}
   </div>
 }

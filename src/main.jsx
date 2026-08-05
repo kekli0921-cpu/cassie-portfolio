@@ -5,8 +5,6 @@ import './styles.css'
 import { initAnalytics, trackEvent, trackPageView } from './analytics.js'
 import './case-redesign.css'
 import './read-along.css'
-import HumanFactorsPage from './human-factors.jsx'
-import BodyCodesPage from './bodycodes.jsx'
 import CalmoPage from './calmo.jsx'
 import ProcureSmartPage from './procuresmart.jsx'
 import { CaseFooter, CaseHeader, EditorialCaseHero } from './case-chrome.jsx'
@@ -16,24 +14,24 @@ import './llm-case.css'
 import './project-unified.css'
 
 const projects = [
-  { no: '01', title: 'LLM Prompt Design', subtitle: 'Does Giving an AI a Role Change Its Output?', type: 'Research / AI', year: '2026', image: '/projects/ai-role.png', tags: ['A/B Testing', 'Experimental Design', 'Quantitative Analysis', 'AI/LLM Prompt Research'], detail: <>Ran a controlled A/B experiment to test whether prompting an AI with a defined Information Architecture (IA) Expert role improves its response quality.<br/><br/>Collected outputs under both conditions, evaluated outputs across three dimensions, ran Mann-Whitney U tests to analyse results statistically.<br/><br/>Found expert-persona prompts had significantly better-structured outputs, but varied widely among users. Suggest LLMs offer more personalised options, like an appropriate role based on input and task type, to reduce interaction cost and improve efficiency.</> },
-  { no: '02', title: 'CALMO', subtitle: 'A Transition Support System for Retired Police Dogs', type: 'Product / UI', year: '2026', image: '/projects/calmo.png', award: 'UX Design Award · Nominated', tags: ['Double Diamond', 'Persona & Journey Mapping', 'Competitive Analysis', 'UI Design'], detail: <>Retired working dogs often struggle emotionally when transitioning into home life, and new adopters failed to read or respond to their stress signals.<br/><br/>Followed a double-diamond design process, through research, problem framing, and prototype iteration, to ultimately design CALMO.<br/><br/>Through a smart pod and companion app, CALMO monitors dogs’ condition in real-time. It helps dogs reduce stress non-invasively by offering dynamic transition progress; builds adopter confidence by explaining dog behaviour; and bridges the gap between working and domestic life for retired police dogs.</> },
-  { no: '03', title: 'Google Read Along', subtitle: 'Interaction Analysis and UX Redesign', type: 'UX Redesign', year: '2026', image: '/projects/readalong.png', tags: ['Interaction Analysis', 'Cognitive Psychology', 'System Mapping', 'UX Optimise'], detail: <>Google Read Along is a reading app that uses speech recognition to help children practise independently.<br/><br/>Its current interaction logic creates friction across five categories: silence, misrecognised words, skipped reading, forced page transitions, and ambiguous manual controls.<br/><br/>Combined Self-Determination Theory (user autonomy) and Grounding Theory (shared understanding between user and system), redesigning each interaction so children could self-correct and stay in control, enhancing their confidence and engagement.</> },
-  { no: '04', title: 'BodyCodes', subtitle: 'Industry expansion strategy design, From Sizing Tool to Fit-Data Infrastructure', type: 'Service Design', year: '2026', image: '/projects/bodycodes.png', hiddenHome: true, tags: ['Service Design', 'System Mapping', 'Service Blueprinting', 'Business Strategy'], detail: <>BodyCodes is a questionnaire-based sizing system that creates a reusable fit identity without body scans, photos or new hardware.<br/><br/>I focused on the corporate-uniform sector, mapping the workflow between employees, procurement teams and manufacturers. The research exposed repeated size collection, fragmented order coordination and a missing post-delivery feedback loop.<br/><br/>I repositioned BodyCodes from a consumer sizing tool into privacy-conscious B2B2C fit-data infrastructure, supported by a service blueprint, governance model, staged pilot and transparent validation framework.</> },
-  { no: '05', title: 'Improving UX Through Human Factors', subtitle: 'Three evidence-based experiments', type: 'Research', year: '2025', image: '/projects/human-factors.png', hiddenHome: true, tags: ['Multi-biosensor Research', 'EEG', 'Eye Tracking', 'EMG'], detail: <>Three lab experiments tested whether physiological data actually matches what users say they feel — a core assumption in UX research.<br/><br/>Biosensors (EMG, ECG, skin temperature) during a racing game found background sound did not raise baseline arousal, but amplified emotional intensity at key moments and boosted enjoyment. EEG/ECG comparing meditation with high-arousal music showed meditation produced calmer but slower responses, while music produced faster but less stable ones.<br/><br/>Eye-tracking on Bionic Reading found smoother scan paths and lower effort, but comprehension accuracy dropped, showing that easier reading is not necessarily deeper reading.</> },
-  { no: '06', title: 'ProcureSmart Health', subtitle: 'AI-assisted clinical procurement decision support', type: 'Healthcare UX / AI', year: '2026', image: '/projects/procuresmart-cover.svg', hiddenHome: true, tags: ['Healthcare UX', 'AI Decision Support', 'Information Architecture'], detail: <>ProcureSmart Health helps clinicians turn an ambiguous procurement need into explicit criteria, a focused candidate set and a traceable evidence trail.<br/><br/>Designed as a Blue Garage × Goldsmiths Hackathon concept responding to an NHS procurement brief, the workflow uses AI to structure the search while keeping comparison, evidence verification and final judgement clinician-led.</> }
+  { route: 'case-study', no: '01', title: 'LLM Prompt Design', subtitle: 'Does Giving an AI a Role Change Its Output?', type: 'Research / AI', year: '2026', image: '/projects/ai-role.png', tags: ['A/B Testing', 'Experimental Design', 'Quantitative Analysis', 'AI/LLM Prompt Research'], detail: <>Ran a controlled A/B experiment to test whether prompting an AI with a defined Information Architecture (IA) Expert role improves its response quality.<br/><br/>Collected outputs under both conditions, evaluated outputs across three dimensions, ran Mann-Whitney U tests to analyse results statistically.<br/><br/>Found expert-persona prompts had significantly better-structured outputs, but varied widely among users. Suggest LLMs offer more personalised options, like an appropriate role based on input and task type, to reduce interaction cost and improve efficiency.</> },
+  { route: 'calmo', no: '02', title: 'CALMO', subtitle: 'A Transition Support System for Retired Police Dogs', type: 'Product / UI', year: '2026', image: '/projects/calmo.png', award: 'UX Design Award · Nominated', tags: ['Double Diamond', 'Persona & Journey Mapping', 'Competitive Analysis', 'UI Design'], detail: <>Retired working dogs often struggle emotionally when transitioning into home life, and new adopters failed to read or respond to their stress signals.<br/><br/>Followed a double-diamond design process, through research, problem framing, and prototype iteration, to ultimately design CALMO.<br/><br/>Through a smart pod and companion app, CALMO monitors dogs’ condition in real-time. It helps dogs reduce stress non-invasively by offering dynamic transition progress; builds adopter confidence by explaining dog behaviour; and bridges the gap between working and domestic life for retired police dogs.</> },
+  { route: 'read-along', no: '03', title: 'Google Read Along', subtitle: 'Interaction Analysis and UX Redesign', type: 'UX Redesign', year: '2026', image: '/projects/readalong.png', tags: ['Interaction Analysis', 'Cognitive Psychology', 'System Mapping', 'UX Optimise'], detail: <>Google Read Along is a reading app that uses speech recognition to help children practise independently.<br/><br/>Its current interaction logic creates friction across five categories: silence, misrecognised words, skipped reading, forced page transitions, and ambiguous manual controls.<br/><br/>Combined Self-Determination Theory (user autonomy) and Grounding Theory (shared understanding between user and system), redesigning each interaction so children could self-correct and stay in control, enhancing their confidence and engagement.</> },
+  { route: 'procuresmart', no: '06', title: 'ProcureSmart Health', subtitle: 'AI-assisted clinical procurement decision support', type: 'Healthcare UX / AI', year: '2026', hiddenHome: true, image: '/projects/procuresmart.jpg', tags: ['Healthcare UX', 'AI Decision Support', 'Information Architecture'], detail: <>ProcureSmart Health helps clinicians turn an ambiguous procurement need into explicit criteria, a focused candidate set and a traceable evidence trail.<br/><br/>The workflow uses AI to structure and narrow the search, while clinicians remain responsible for comparing options, checking evidence and making the final decision.</> }
 ]
 
 const siteNav = [['Projects', 'projects'], ['About', 'about'], ['Contact', 'contact']]
-const projectRoutes = ['case-study', 'calmo', 'read-along', 'bodycodes', 'human-factors', 'procuresmart']
+const visibleProjectRoutes = projects.filter(project => !project.hiddenHome).map(project => project.route)
+const getNextVisibleProject = currentRoute => {
+  const currentIndex = visibleProjectRoutes.indexOf(currentRoute)
+  return visibleProjectRoutes[(currentIndex + 1) % visibleProjectRoutes.length]
+}
 const analyticsPages = {
   home: { title: 'Kexin Li — Portfolio', path: '/' },
   about: { title: 'About — Kexin Li', path: '/about' },
   'case-study': { title: 'LLM Prompt Design — Kexin Li', path: '/projects/llm-prompt-design' },
   calmo: { title: 'CALMO — Kexin Li', path: '/projects/calmo' },
   'read-along': { title: 'Google Read Along — Kexin Li', path: '/projects/google-read-along' },
-  bodycodes: { title: 'BodyCodes — Kexin Li', path: '/projects/bodycodes' },
-  'human-factors': { title: 'Human Factors — Kexin Li', path: '/projects/human-factors' },
   procuresmart: { title: 'ProcureSmart Health — Kexin Li', path: '/projects/procuresmart-health' },
 }
 const skillSets = {
@@ -94,26 +92,49 @@ const experiences = [
   ['Oct 2018 – Oct 2020', 'Editor', 'Furniture Magazine (Core Academic Journal) | China', 'Managed the full editorial workflow for an academic journal, including article review, graphic design, and visual layout.', 'Editorial design · Visual layout · Content review · Publication design']
 ]
 
-function CaseChart({ title, ai = false }) { return <div className="case-chart"><h3>{title}</h3><p>Condition A vs. Condition B</p><svg viewBox="0 0 520 220" role="img" aria-label={title}><line x1="55" y1="180" x2="500" y2="180" stroke="currentColor" opacity=".25"/><line x1="55" y1="35" x2="55" y2="180" stroke="currentColor" opacity=".25"/>{['Visual Hierarchy','Structural Coherence','Actionability'].map((label, i) => { const x = 130 + i * 130; const a = ai ? [132,145,118][i] : [126,120,105][i]; const b = ai ? [118,126,108][i] : [106,112,82][i]; return <g key={label}><text x={x} y="205" textAnchor="middle" fontSize="10" fill="currentColor">{label}</text><line x1={x-18} y1={a-28} x2={x-18} y2={a+25} stroke="#76629d" strokeWidth="2"/><rect x={x-29} y={a-12} width="22" height="30" rx="5" fill="#d7c9ec" stroke="#76629d"/><line x1={x-29} y1={a+3} x2={x-7} y2={a+3} stroke="#1f201c" strokeWidth="2"/><line x1={x+18} y1={b-28} x2={x+18} y2={b+25} stroke="#e67046" strokeWidth="2"/><rect x={x+7} y={b-14} width="22" height="32" rx="5" fill="#f3c5ac" stroke="#e67046"/><line x1={x+7} y1={b+2} x2={x+29} y2={b+2} stroke="#1f201c" strokeWidth="2"/></g> })}</svg><div className="chart-legend"><span><i className="legend-a"/>Condition A</span><span><i className="legend-b"/>Condition B</span></div></div> }
+function CaseChart({ title, ai = false }) { return <div className="case-chart"><h3>{title}</h3><p>Condition A vs. Condition B</p><svg viewBox="0 0 520 220" role="img" aria-label={title}><line x1="55" y1="180" x2="500" y2="180" stroke="currentColor" opacity=".25"/><line x1="55" y1="35" x2="55" y2="180" stroke="currentColor" opacity=".25"/>{['Visual Hierarchy','Structural Coherence','Actionability'].map((label, i) => { const x = 130 + i * 130; const a = ai ? [132,145,118][i] : [126,120,105][i]; const b = ai ? [118,126,108][i] : [106,112,82][i]; return <g key={label}><text x={x} y="205" textAnchor="middle" fontSize="10" fill="currentColor">{label}</text><line x1={x-18} y1={a-28} x2={x-18} y2={a+25} stroke="#9d8db8" strokeWidth="2"/><rect x={x-29} y={a-12} width="22" height="30" rx="5" fill="#e3dced" stroke="#9d8db8"/><line x1={x-29} y1={a+3} x2={x-7} y2={a+3} stroke="#1f201c" strokeWidth="2"/><line x1={x+18} y1={b-28} x2={x+18} y2={b+25} stroke="#5e4b86" strokeWidth="2"/><rect x={x+7} y={b-14} width="22" height="32" rx="5" fill="#bbaed0" stroke="#5e4b86"/><line x1={x+7} y1={b+2} x2={x+29} y2={b+2} stroke="#1f201c" strokeWidth="2"/></g> })}</svg><div className="chart-legend"><span><i className="legend-a"/>Condition A</span><span><i className="legend-b"/>Condition B</span></div></div> }
 
 function CasePlaceholder({ label, className = '' }) { return <div className={`case-placeholder ${className}`}><span>{label}</span><small>Upload visual here</small></div> }
-const caseCaptions = { '2.png': <>Fogg Behaviour Model<br/><em>B = MAT (Behaviour = Motivation × Ability × Trigger)</em></>, '3.png': <>DeLone &amp; McLean's Information Systems Success Model<br/><em>Quality → Use → Value</em></>, '4.png': <>Human Scoring Comparison<br/><em>Condition A vs. Condition B</em></>, '5.png': <>AI Scoring Comparison<br/><em>Condition A vs. Condition B</em></>, '6.png': <>Human Expert Scoring Results</>, '7.png': <>AI Scoring Results</> }
-function CaseImage({ src, alt, className = '', caption = null }) { const label = caseCaptions[src] || caption; return <figure className={`case-image ${className}`}>{label && <figcaption>{label}</figcaption>}<img src={`/case-study/${src}`} alt={alt} /></figure> }
+const caseCaptions = { '2.png': <>Fogg Behaviour Model<br/><em className="llm-formula">B=MAT (Behaviour=Motivation × Ability × Trigger)</em></>, '3.png': <>DeLone &amp; McLean's Information Systems Success Model<br/><em className="llm-formula">Quality → Use → Value</em></>, '4.png': <>Human Scoring Comparison<br/><em>Condition A vs. Condition B</em></>, '5.png': <>AI Scoring Comparison<br/><em>Condition A vs. Condition B</em></>, '6.png': <>Human Expert Scoring Results</>, '7.png': <>AI Scoring Results</> }
+function CaseImage({ src, alt, className = '', caption = null, loading = 'lazy', zoomable = true }) {
+  const [isZoomed, setIsZoomed] = useState(false)
+  const label = caseCaptions[src] || caption
+  useEffect(() => {
+    if (!isZoomed) return undefined
+    const closeOnEscape = (event) => event.key === 'Escape' && setIsZoomed(false)
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [isZoomed])
+  const image = <img src={`/case-study/${src}`} alt={alt} loading={loading} decoding="async" />
+  return <>
+    <figure className={`case-image ${className}${zoomable ? ' case-image-zoomable' : ''}`}>
+      {label && <figcaption>{label}</figcaption>}
+      {zoomable ? <button type="button" className="case-image-trigger" onClick={() => setIsZoomed(true)} aria-label={`Enlarge ${alt}`}>{image}</button> : image}
+    </figure>
+    {zoomable && isZoomed && <div className="case-image-lightbox" role="dialog" aria-modal="true" aria-label={`${alt} enlarged`} onClick={() => setIsZoomed(false)}>
+      <div className="case-image-lightbox-dialog" onClick={(event) => event.stopPropagation()}>
+        <button type="button" className="case-image-lightbox-close" onClick={() => setIsZoomed(false)} aria-label="Close enlarged image">×</button>
+        <div className="case-image-lightbox-title">{label || alt}</div>
+        <img src={`/case-study/${src}`} alt={alt} loading="eager" decoding="async" />
+      </div>
+    </div>}
+  </>
+}
 
-function ModelDiagram({ kind }) { const fogg = kind === 'fogg'; return <div className="model-diagram"><div className="diagram-head"><span>{fogg ? "Fogg Behaviour Model" : "DeLone & McLean's Information Systems Success Model"}</span><strong>{fogg ? 'B = MAT' : 'Quality → Use → Value'}</strong></div><div className="diagram-layers"><div className="diagram-outcome">OUTCOME LAYER<br/><b>{fogg ? 'Target Behaviour / Conversion' : 'High-Quality Decision Support'}</b></div><div className="diagram-peak">PEAK · ACTION LAYER<br/><b>{fogg ? 'Trigger — Actionability' : 'Net Benefits — Actionability'}</b></div><div className="diagram-base">FOUNDATION · BASE LAYER<br/><b>{fogg ? 'Ability — VH + SC' : 'Information Quality — VH + SC'}</b></div></div></div> }
+function ModelDiagram({ kind }) { const fogg = kind === 'fogg'; return <div className="model-diagram"><div className="diagram-head"><span>{fogg ? "Fogg Behaviour Model" : "DeLone & McLean's Information Systems Success Model"}</span><strong className="llm-formula llm-formula-compact">{fogg ? 'B=MAT' : 'Quality→Use→Value'}</strong></div><div className="diagram-layers"><div className="diagram-outcome">OUTCOME LAYER<br/><b>{fogg ? 'Target Behaviour / Conversion' : 'High-Quality Decision Support'}</b></div><div className="diagram-peak">PEAK · ACTION LAYER<br/><b>{fogg ? 'Trigger — Actionability' : 'Net Benefits — Actionability'}</b></div><div className="diagram-base">FOUNDATION · BASE LAYER<br/><b>{fogg ? 'Ability — VH + SC' : 'Information Quality — VH + SC'}</b></div></div></div> }
 
 function CaseStudyPage({ onHome, onContact, onNext }) {
   const chapters = [
     ['01', 'Context', 'llm-context'],
-    ['02', 'Experiment setting', 'llm-experiment'],
+    ['02', 'Experiment', 'llm-experiment'],
     ['03', 'Process', 'llm-process'],
-    ['04', 'Theory framework', 'llm-framework'],
-    ['05', 'Analysis result', 'llm-evidence'],
-    ['06', 'UX implications', 'llm-implications']
+    ['04', 'Framework', 'llm-framework'],
+    ['05', 'Results', 'llm-evidence'],
+    ['06', 'Implications', 'llm-implications']
   ]
   const jumpTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-  return <div className="case-page case-redesign llm-case-page llm-editorial-page">
+   return <div className="case-page case-redesign llm-case-page llm-editorial-page">
     <CaseHeader onHome={onHome} onContact={onContact}/>
     <main className="llm-editorial-main">
       <section className="case-hero llm-editorial-hero">
@@ -131,8 +152,8 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
           </nav>
         </div>
         <div className="llm-hero-visual">
-          <CaseImage src="1.png" alt="General Prompt versus IA Expert Role"/>
-          <p className="llm-hero-result"><span>Key result</span>Only Actionability reached statistical significance.</p>
+          <CaseImage src="1.png" alt="General Prompt versus IA Expert Role" loading="eager"/>
+          <p className="llm-hero-result"><span>Key result</span>A small prompt change — a persona prefix — made AI output noticeably clearer to act on.</p>
         </div>
       </section>
 
@@ -140,14 +161,17 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
         <div className="llm-section-marker"><span>01 /</span><small>Context</small></div>
         <div className="llm-section-content">
           <div className="llm-context-grid">
-            <div className="llm-reading-copy">
+            <div className="llm-context-brief">
+              <span className="llm-context-kicker">Project brief</span>
               <h2>The Problem: Cognitive Friction in LLM Outputs</h2>
-              <p>Large Language Models (LLMs) are increasingly used to synthesise unstructured data, such as audio transcripts and meeting notes.</p>
-              <p>However, their <strong>default outputs are often dense and poorly structured, creating cognitive friction and limiting practical usability.</strong></p>
-              <p>This highlights the need to examine whether targeted prompt interventions can improve the usability of LLM generated outputs when processing audio transcripts.</p>
+              <div className="llm-context-copy">
+                <p>Large Language Models (LLMs) are increasingly used to synthesise unstructured data, such as audio transcripts and meeting notes. Yet their <strong>default outputs are often dense and poorly structured, creating cognitive friction and limiting practical usability.</strong></p>
+                <p>This study examines whether a targeted prompt intervention can make LLM-generated outputs easier to understand and use.</p>
+              </div>
             </div>
             <aside className="llm-research-question">
-              <h3>Research question</h3>
+              <span className="llm-context-kicker">Research question</span>
+              <h3>Can a role change the output?</h3>
               <p>When processing unstructured audio transcripts, does an <strong>expert persona prompt</strong> significantly improve the generated output's <strong>Visual Hierarchy, Structural Coherence, and Actionability</strong> compared to a default prompt?</p>
             </aside>
           </div>
@@ -155,7 +179,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
       </section>
 
       <section id="llm-experiment" className="case-section llm-editorial-section">
-        <div className="llm-section-marker"><span>02 /</span><small>Experiment setting</small></div>
+        <div className="llm-section-marker"><span>02 /</span><small>Experiment</small></div>
         <div className="llm-section-content">
           <h2>A single-variable A/B comparison</h2>
           <p className="llm-editorial-lede">20 real academic transcript excerpts (tutorials, lectures, group discussions) were each run under both conditions on the same model and platform, producing 20 per condition.</p>
@@ -171,6 +195,7 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
               <small>Same prompt with expert persona prefix</small>
             </article>
           </div>
+          <p className="llm-control-note"><span>Controlled comparison</span>Same model, same transcripts, same task — only the persona prefix changed.</p>
         </div>
       </section>
 
@@ -178,90 +203,95 @@ function CaseStudyPage({ onHome, onContact, onNext }) {
         <div className="llm-section-marker"><span>03 /</span><small>Process</small></div>
         <div className="llm-section-content">
           <h2>Four-stage blind evaluation</h2>
-          <p className="llm-editorial-lede">To keep evaluation unbiased, the process ran in four stages.</p>
+          <p className="llm-editorial-lede">Every output was anonymised, randomised and independently rated before the conditions were compared.</p>
           <div className="process-grid llm-process-line">
-            {[["01","Collect","All raw outputs under both conditions","Gemini 3 in Thinking mode"],["02","Anonymise","Removing wording that revealed which condition produced them",""],["03","Randomise","Blind-code the anonymised set before scoring",""],["04","Rate","5 participants and 3 AI models scored every output across three dimensions","A dual validation check between human and machine judgement."]].map(([no,title,body,note]) => <article key={no}><span>{no}</span><h3>{title}</h3><p>{body}</p>{note && <small>{note}</small>}</article>)}
+            {[["01","Collection","Collect","All raw outputs under both conditions","Gemini 3 in Thinking mode"],["02","Anonymisation","Anonymise","Remove wording that revealed which condition produced each output",""],["03","Randomisation","Randomise","Blind-code the anonymised set before scoring",""],["04","Evaluation","Rate","Five participants and three AI models scored every output across three dimensions","Dual validation between human and machine judgement"]].map(([no,label,title,body,note]) => <article key={no}><span>{no} / {label}</span><h3>{title}</h3><p>{body}</p>{note && <small>{note}</small>}</article>)}
           </div>
         </div>
       </section>
 
       <section id="llm-framework" className="case-section llm-editorial-section">
-        <div className="llm-section-marker"><span>04 /</span><small>Theory framework</small></div>
+        <div className="llm-section-marker"><span>04 /</span><small>Framework</small></div>
         <div className="llm-section-content">
           <h2>Three dimensions, one causal chain</h2>
-          <div className="llm-framework-intro">
-            <span>01 / Evaluation dimensions</span>
-            <p>We evaluated LLM output quality across three dimensions, each grounded in existing theory.</p>
+          <div className="llm-framework-intro llm-dimension-intro">
+            <span>Three Evaluation dimensions</span>
+            <p>Evaluated LLM output quality across three dimensions, each grounded in existing theory.</p>
           </div>
           <div className="dimension-grid llm-dimension-list">
-            <article><h3>Visual Hierarchy (VH)</h3><p>Clear formatting that supports scanning and reduces extraneous cognitive load</p><small>* Sweller, 1988; Mayer, 2009</small></article>
-            <article><h3>Structural Coherence (SC)</h3><p>Logical chunking that helps readers extract key ideas efficiently</p><small>* Miller, 1956</small></article>
-            <article><h3>Actionability</h3><p>The extent to which content points users toward concrete next steps</p><small>* Pirolli and Card, 2005</small></article>
+            <article><h3>Visual Hierarchy</h3><p>For Perception: Clear formatting that supports scanning and reduces extraneous cognitive load</p><small>* Sweller, 1988; Mayer, 2009</small></article>
+            <article><h3>Structural Coherence</h3><p>For Comprehension: Logical chunking that helps readers extract key ideas efficiently</p><small>* Miller, 1956</small></article>
+            <article><h3>Actionability</h3><p>For Action: The extent to which content points users toward concrete next steps</p><small>* Pirolli and Card, 2005</small></article>
           </div>
-          <p className="llm-causal-statement">Rather than treating these as three separate criteria, framed them as a causal chain: from <strong>perception</strong> to <strong>comprehension</strong> to <strong>action</strong>.</p>
           <div className="llm-models">
-            <div className="llm-framework-intro llm-model-intro">
-              <span>02 / Supporting models</span>
+            <div className="llm-framework-intro llm-model-intro llm-supporting-models-intro">
+              <span>Supporting models</span>
               <p>Two established models supported this framing from different angles.</p>
             </div>
             <article className="llm-model-row">
-              <div><p><strong>Fogg's Behaviour Model (B = MAT)</strong>, well structured and visually organised content enhances user ability by reducing cognitive load, while actionability functions as a trigger that facilitates decision-making.</p></div>
-              <CaseImage src="2.png" alt="Fogg Behaviour Model"/>
+              <div><h3>Fogg Behaviour Model</h3><p>Clear structure improves ability by reducing cognitive load; actionability operates as the trigger that helps users move forward.</p></div>
+              <CaseImage src="2.png" alt="Fogg Behaviour Model" zoomable/>
             </article>
             <article className="llm-model-row">
-              <div><p><strong>DeLone &amp; McLean Information Systems Success Model</strong>, where hierarchy and coherence define information quality while actionability defines its realised value.</p></div>
-              <CaseImage src="3.png" alt="DeLone and McLean model"/>
+              <div><h3>DeLone &amp; McLean Model</h3><p>Hierarchy and coherence support information quality, while actionability determines whether that information produces practical value.</p></div>
+              <CaseImage src="3.png" alt="DeLone and McLean model" zoomable/>
             </article>
           </div>
-          <div className="llm-editorial-note">
-            <p>These dimensions form a trajectory from <strong>perception</strong> to <strong>comprehension</strong> to <strong>action</strong>.</p>
-            <p>As the behavioural trigger in this chain, <strong>actionability</strong> is expected to play a more central role in determining overall utility.</p>
-            <p>This study empirically tests these three dimensions separately within this causal framework.</p>
-          </div>
+          <p className="llm-framework-takeaway"><span>Framework takeaway</span>Actionability connects well-structured information to practical value.</p>
         </div>
       </section>
 
       <section id="llm-evidence" className="case-section llm-editorial-section llm-evidence-section">
-        <div className="llm-section-marker"><span>05 /</span><small>Analysis result</small></div>
+        <div className="llm-section-marker"><span>05 /</span><small>Results</small></div>
         <div className="llm-section-content">
-          <h2>Data Analysis and Results</h2>
+          <h2>What changed — and what did not</h2>
           <p className="llm-key-finding">Expert-persona prompts produced their clearest improvement in <strong>actionability</strong>.</p>
 
-          <article className="llm-evidence-block">
-            <header><span>Analysis</span><h3>Analytical Approach: Two-tailed Mann-Whitney U tests</h3></header>
-            <p>Two-tailed Mann-Whitney U tests (α = .05) were conducted to compare Condition A (standard prompt) and Condition B (expert prompt) across three dimensions. Each response was rated by five human scorers and three AI models; computed means of per outputs' each dimension before analysis (n = 20 per group).</p>
+          <div className="llm-result-summary" aria-label="Summary of statistical results">
+            <article><span>Actionability</span><strong>Significant</strong><p>p=.028, r=.408</p></article>
+            <article><span>Visual hierarchy</span><strong>Marginal</strong><p>p=.052, r=.360</p></article>
+            <article><span>Structural coherence</span><strong>Not significant</strong><p>p=.369, r=.173</p></article>
+          </div>
+
+          <article className="llm-evidence-block llm-method-block">
+            <header><span>01 / Method</span><h3>Two-tailed Mann-Whitney U tests</h3></header>
+            <p>Condition A and Condition B were compared across all three dimensions at <span className="llm-formula llm-formula-compact">α=.05</span>. Five human participants and three AI models rated each response; output-level means were analysed with <span className="llm-formula llm-formula-compact">n=20</span> per group.</p>
           </article>
 
           <article className="llm-evidence-block">
-            <header><span>Pattern</span><h3>Descriptive Stats: Humans detected Condition B's superiority</h3></header>
-            <p>Human scores showed a consistent positive trend favouring Condition B across all dimensions. The largest gap appeared in Actionability (Mdn A = 2.50, Mdn B = 3.30), followed by Visual Hierarchy (3.80 vs. 4.10) and Structural Coherence (3.80 vs. 4.00). AI scores were notably higher and more compressed (Mdn range: 3.67-4.67), with minimal inter-group separation, suggesting an effect that limited their discriminative sensitivity.</p>
+            <header><span>02 / Pattern</span><h3>Human raters detected the strongest change</h3></header>
+            <p>Human scores favoured Condition B across all dimensions. The largest difference appeared in Actionability, rising from <span className="llm-formula llm-formula-compact">Mdn 2.50</span> to <span className="llm-formula llm-formula-compact">Mdn 3.30</span>. AI scores were higher and more compressed, with less separation between conditions.</p>
             <div className="chart-grid"><CaseImage src="4.png" alt="Human scoring comparison"/><CaseImage src="5.png" alt="AI scoring comparison"/></div>
           </article>
 
           <article className="llm-evidence-block">
-            <header><span>Significance</span><h3>Mann-Whitney Output: The superiority in Actionability is more obvious</h3></header>
-            <p>Only Actionability reached significance (U = 118.5, p = .028, r = .408). The medium effect size indicates that the improvement is not only statistically significant but also practically meaningful. Visual Hierarchy showed a marginal trend toward significance (U = 128.0, p = .052, r = .360); Structural Coherence was non-significant (n.s.) (U = 165.5, p = .369, r = .173).</p>
+            <header><span>03 / Significance</span><h3>Only actionability reached statistical significance</h3></header>
+            <p>Actionability reached significance with a medium effect size <span className="llm-formula llm-formula-compact">(U=118.5, p=.028, r=.408)</span>. Visual Hierarchy was marginal; Structural Coherence was not significant.</p>
             <CaseImage src="6.png" alt="Human expert scoring results" className="case-table-placeholder"/>
-            <p>In contrast to human raters, AI detected no significant differences across any dimension (all p &gt; .05), suggesting that AI lacks the sensitivity required to capture the subtle UX quality improvements identified by human experts.</p>
+            <p>AI raters detected no significant differences across any dimension, suggesting lower sensitivity to the subtle UX improvements identified by people.</p>
             <CaseImage src="7.png" alt="AI scoring results" className="case-table-placeholder"/>
           </article>
 
-          <div className="llm-editorial-conclusion">
-            <p>Compared with Condition A, Condition B (expert prompt) significantly outperformed on Actionability (Mdn: 2.50 → 3.30, r = .408) and Visual Hierarchy (p = .052); Structural Coherence is non-significant (p=.369).</p>
-            <p>The rank-ordered effect sizes (Actionability r = .408 &gt; Visual Hierarchy r = .360 &gt; Structural Coherence r = .173) are aligned with the theoretical predictions of Fogg's B = MAT model and the DeLone &amp; McLean framework, offering preliminary support for a hierarchical causal relationship among the three dimensions.</p>
-            <p>AI raters showed low discriminability across all dimensions.</p>
-          </div>
         </div>
       </section>
 
       <section id="llm-implications" className="case-section llm-editorial-section llm-implications-section">
-        <div className="llm-section-marker"><span>06 /</span><small>UX implications</small></div>
+        <div className="llm-section-marker"><span>06 /</span><small>Implications</small></div>
         <div className="llm-section-content">
+          <h2>What this means for AI interfaces</h2>
+          <p className="llm-editorial-lede">The study points to three practical decisions for designing clearer, more adaptable AI-generated output.</p>
           <ol className="llm-implication-list">
-            <li><span>01</span><p>The <em>persona prefix</em> is a low-cost, flexible approach for improving AI-assisted workflows, worth treating as a genuine <em>UX design decision</em>.</p></li>
-            <li><span>02</span><p>The fact that Actionability moved the most, while Visual Hierarchy and Structural Coherence barely shifted, suggests that <em>well-organised output</em> is not the same as usable output: even well-structured content can still leave people unsure what to do next, and <em>clearer action guidance</em> is required to help users move forward.</p></li>
-            <li><span>03</span><p>Ratings on Actionability also varied the most between people, hinting that a single fixed output format may not work well for everyone. Future AI interfaces could let users choose among <em>flexible output formats</em>.</p></li>
+            <li><span>01</span><p>Treat the <em>persona prefix</em> as a low-cost UX design decision, not only a prompting technique.</p></li>
+            <li><span>02</span><p>Well-structured output is not necessarily usable; AI should make the <em>next action explicit</em>.</p></li>
+            <li><span>03</span><p>Because users responded differently, interfaces should offer <em>flexible output formats</em>.</p></li>
           </ol>
+          <aside className="llm-design-direction">
+            <span>Reflection</span>
+            <div className="llm-reflection-copy">
+              <p><strong>For Project:</strong> this suggests that giving users a Role option when interacting with AI could help optimise output quality.</p>
+              <p><strong>For myself:</strong> it showed me how to use research and experimentation to support and validate design decisions, rather than relying on intuition alone.</p>
+            </div>
+          </aside>
         </div>
       </section>
     </main>
@@ -451,10 +481,9 @@ function ReadAlongCasePage({ onHome, onContact, onNext }) {
         subtitle="Interaction Analysis and UX Redesign"
         summary={[
           'Google Read Along is a reading app that uses speech recognition to help children practise independently.',
-          'Classify its current interaction frictions as: how it handles silence, misrecognised words, skipped reading, forced page transitions, and ambiguous manual controls.',
-          'Combined Self-Determination Theory and Grounding Theory , redesigned each interaction so children could self-correct and stay in control, enhancing their confidence and engagement.'
+          'After mapping five interaction frictions, I combined Self-Determination Theory and Grounding Theory to redesign each response so children could self-correct and remain in control.'
         ]}
-        chapters={['Overview', 'System mapping', 'Five friction types', 'Solutions']}
+        chapters={['Context & goal', 'How it works', 'Where it breaks', 'Redesign decisions', 'Validation & limitations', 'Reflection']}
         imageSrc="/read-along/1.png"
         imageAlt="Google Read Along interaction analysis and system map"
         result="Five interaction frictions mapped to five autonomy-preserving solutions."
@@ -648,7 +677,10 @@ function App() {
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
   const cursorTarget = useRef({ x: 0, y: 0 })
   const cursorFrame = useRef(null)
-  const [page, setPage] = useState('home')
+  const [page, setPage] = useState(() => {
+    const previewPage = new URLSearchParams(window.location.search).get('page')
+    return [...visibleProjectRoutes, 'about'].includes(previewPage) ? previewPage : 'home'
+  })
   useEffect(() => { window.scrollTo(0, 0) }, [page])
   useEffect(() => {
     if (page !== 'home') return undefined
@@ -675,8 +707,8 @@ function App() {
     elements.forEach(element => observer.observe(element))
     return () => observer.disconnect()
   }, [page])
-  const go = (id) => { if (id === 'about') { setPage('about'); window.scrollTo(0, 0); return } if (id === 'case-study') { setPage('case-study'); window.scrollTo(0, 0); return } if (id === 'calmo') { setPage('calmo'); window.scrollTo(0, 0); return } if (id === 'read-along') { setPage('read-along'); window.scrollTo(0, 0); return } if (id === 'bodycodes') { setPage('bodycodes'); window.scrollTo(0, 0); return } if (id === 'human-factors') { setPage('human-factors'); window.scrollTo(0, 0); return } if (id === 'procuresmart') { setPage('procuresmart'); window.scrollTo(0, 0); return } setPage('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 0) }
-  const openProjectPage = (index) => go(projectRoutes[index])
+  const go = (id) => { if (id === 'about') { setPage('about'); window.scrollTo(0, 0); return } if (id === 'case-study') { setPage('case-study'); window.scrollTo(0, 0); return } if (id === 'calmo') { setPage('calmo'); window.scrollTo(0, 0); return } if (id === 'read-along') { setPage('read-along'); window.scrollTo(0, 0); return } if (id === 'procuresmart') { setPage('procuresmart'); window.scrollTo(0, 0); return } setPage('home'); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 0) }
+  const openProjectPage = (index) => go(projects[index].route)
   const parallax = (xFactor, yFactor) => ({ '--px': `${cursor.x * xFactor}px`, '--py': `${cursor.y * yFactor}px` })
   const copyEmail = async () => { await navigator.clipboard.writeText('kekli0921@gmail.com'); setCopied(true); setTimeout(() => setCopied(false), 1700) }
   const animateCursor = () => { cursorFrame.current = null; setCursor(current => { const next = { x: current.x + (cursorTarget.current.x - current.x) * .16, y: current.y + (cursorTarget.current.y - current.y) * .16 }; if (Math.abs(next.x - cursorTarget.current.x) > .05 || Math.abs(next.y - cursorTarget.current.y) > .05) cursorFrame.current = requestAnimationFrame(animateCursor); return next }) }
@@ -684,12 +716,10 @@ function App() {
   const resetCursor = () => { cursorTarget.current = { x: 0, y: 0 }; if (!cursorFrame.current) cursorFrame.current = requestAnimationFrame(animateCursor) }
 
   if (page === 'about') return <AboutPage go={go} onHome={() => { setPage('home'); window.scrollTo(0, 0) }} />
-  if (page === 'case-study') return <CaseStudyPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('calmo')} />
-  if (page === 'calmo') return <CalmoPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('read-along')} />
-  if (page === 'read-along') return <ReadAlongCasePage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('bodycodes')} />
-  if (page === 'bodycodes') return <BodyCodesPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('human-factors')} />
-  if (page === 'human-factors') return <HumanFactorsPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('procuresmart')} />
-  if (page === 'procuresmart') return <ProcureSmartPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go('case-study')} />
+  if (page === 'case-study') return <CaseStudyPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go(getNextVisibleProject('case-study'))} />
+  if (page === 'calmo') return <CalmoPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go(getNextVisibleProject('calmo'))} />
+  if (page === 'read-along') return <ReadAlongCasePage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go(getNextVisibleProject('read-along'))} />
+  if (page === 'procuresmart') return <ProcureSmartPage onHome={() => { setPage('home'); window.scrollTo(0, 0) }} onContact={() => go('contact')} onNext={() => go(getNextVisibleProject('procuresmart'))} />
 
   return <main className="home-page">
     <SiteHeader onHome={() => go('top')} onNavigate={go} />
@@ -710,7 +740,7 @@ function App() {
     </section>
 
     <section id="projects" className="projects section">
-      <div className="project-head home-reveal"><div className="section-kicker">SELECTED PROJECTS</div><p>Three investigations in interaction, trust, behaviour and better systems.</p></div>
+      <div className="project-head home-reveal"><div className="section-kicker">SELECTED PROJECTS</div><p>Four investigations in interaction, trust, behaviour and better systems.</p></div>
       <div className="project-list">{projects.map((p, index) => p.hiddenHome ? null : <article className={`project-card home-reveal${openProject === index ? ' is-open' : ''}`} key={p.title}>
         <button className="project-main" onClick={(event) => { if (openProject === index && event.target.closest('.project-title h3')) { openProjectPage(index); return } setOpenProject(openProject === index ? null : index) }} aria-expanded={openProject === index}>
           <div className="project-title"><h3><strong>{p.title}</strong><span className="project-subtitle">{p.subtitle}</span></h3><div><p>{p.type}</p>{p.award && <small>{p.award}</small>}</div></div>

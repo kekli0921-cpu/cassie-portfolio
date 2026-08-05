@@ -563,9 +563,8 @@ export default function CalmoPage({ onHome, onContact, onNext }) {
         title="CALMO"
         subtitle="A Transition Support System for Retired Police Dogs"
         summary={[
-          'Retired police dogs move from a highly structured working life into a domestic environment, yet the emotional transition is often treated as an adoption event rather than a gradual process.',
-          'CALMO combines a non-contact smart pod, a companion app and professional guidance to help adopters understand behavioural signals, respond with confidence and support each dog at its own pace.',
-          'The concept evolved through research, usability testing and a professional trainer interview — from a universal calming product into a personalised transition system.'
+          'Retired police dogs move from a highly structured working life into a domestic environment. CALMO treats that emotional transition as a gradual process rather than a single adoption event.',
+          'A non-contact smart pod, companion app and professional guidance help adopters interpret behavioural signals, respond with confidence and support each dog at its own pace.'
         ]}
         chapters={['Overview', 'Discovering the gap', 'Defining the transition', 'Designing the system', 'Testing & iteration', 'Final design & prototype', 'Responsibility & reflection']}
         imageSrc="/projects/calmo.png"
