@@ -225,6 +225,10 @@
   line-height:1.18;
   letter-spacing:-.02em;
 }
+.project-title h3 .project-subtitle-line{
+  display:block;
+  white-space:nowrap;
+}
 
 /* Project-page title and subtitle hierarchy */
 .case-project-subtitle,
